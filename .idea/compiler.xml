@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="store-order-facade" />
+        <module name="store-common" />
+        <module name="store-order-service" />
+        <module name="store-user-facade" />
+        <module name="store-online-service" />
+        <module name="store-cms-web" />
+        <module name="store-product-service" />
+        <module name="store-system-facade" />
+        <module name="store-os-web" />
+        <module name="store-support-facade" />
+        <module name="store-online-facade" />
+        <module name="store-product-facade" />
+        <module name="store-support-service" />
+        <module name="store-system-service" />
+        <module name="store-user-service" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value="-encoding utf-8" />
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="store-cms-web" options="-parameters" />
+      <module name="store-common" options="-parameters" />
+      <module name="store-online-facade" options="-parameters" />
+      <module name="store-online-service" options="-parameters" />
+      <module name="store-order-facade" options="-parameters" />
+      <module name="store-order-service" options="-parameters" />
+      <module name="store-os-web" options="-parameters" />
+      <module name="store-product-facade" options="-parameters" />
+      <module name="store-product-service" options="-parameters" />
+      <module name="store-support-facade" options="-parameters" />
+      <module name="store-support-service" options="-parameters" />
+      <module name="store-system-facade" options="-parameters" />
+      <module name="store-system-service" options="-parameters" />
+      <module name="store-user-facade" options="-parameters" />
+      <module name="store-user-service" options="-parameters" />
+    </option>
+  </component>
+</project>

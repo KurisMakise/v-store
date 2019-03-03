@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="store.product.mapper.ProductAttributeMapper">
+  <resultMap id="BaseResultMap" type="store.product.entity.ProductAttribute">
+    <constructor>
+      <idArg column="attribute_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="product_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="stock" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="sales_volume" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="page_views" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="comment_number" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="comment_total" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="comment_average" javaType="java.lang.Long" jdbcType="DECIMAL" />
+      <arg column="favorite_number" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="question_number" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    attribute_id, product_id, stock, sales_volume, page_views, comment_number, comment_total, 
+    comment_average, favorite_number, question_number
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from os_product_attribute
+    where attribute_id = #{attributeId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from os_product_attribute
+    where attribute_id = #{attributeId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="store.product.entity.ProductAttribute">
+    insert into os_product_attribute (attribute_id, product_id, stock, 
+      sales_volume, page_views, comment_number, 
+      comment_total, comment_average, favorite_number, 
+      question_number)
+    values (#{attributeId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{stock,jdbcType=INTEGER}, 
+      #{salesVolume,jdbcType=INTEGER}, #{pageViews,jdbcType=INTEGER}, #{commentNumber,jdbcType=INTEGER}, 
+      #{commentTotal,jdbcType=INTEGER}, #{commentAverage,jdbcType=DECIMAL}, #{favoriteNumber,jdbcType=INTEGER}, 
+      #{questionNumber,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="store.product.entity.ProductAttribute">
+    insert into os_product_attribute
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="attributeId != null">
+        attribute_id,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+      <if test="salesVolume != null">
+        sales_volume,
+      </if>
+      <if test="pageViews != null">
+        page_views,
+      </if>
+      <if test="commentNumber != null">
+        comment_number,
+      </if>
+      <if test="commentTotal != null">
+        comment_total,
+      </if>
+      <if test="commentAverage != null">
+        comment_average,
+      </if>
+      <if test="favoriteNumber != null">
+        favorite_number,
+      </if>
+      <if test="questionNumber != null">
+        question_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="attributeId != null">
+        #{attributeId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="salesVolume != null">
+        #{salesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="pageViews != null">
+        #{pageViews,jdbcType=INTEGER},
+      </if>
+      <if test="commentNumber != null">
+        #{commentNumber,jdbcType=INTEGER},
+      </if>
+      <if test="commentTotal != null">
+        #{commentTotal,jdbcType=INTEGER},
+      </if>
+      <if test="commentAverage != null">
+        #{commentAverage,jdbcType=DECIMAL},
+      </if>
+      <if test="favoriteNumber != null">
+        #{favoriteNumber,jdbcType=INTEGER},
+      </if>
+      <if test="questionNumber != null">
+        #{questionNumber,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="store.product.entity.ProductAttribute">
+    update os_product_attribute
+    <set>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="stock != null">
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="salesVolume != null">
+        sales_volume = #{salesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="pageViews != null">
+        page_views = #{pageViews,jdbcType=INTEGER},
+      </if>
+      <if test="commentNumber != null">
+        comment_number = #{commentNumber,jdbcType=INTEGER},
+      </if>
+      <if test="commentTotal != null">
+        comment_total = #{commentTotal,jdbcType=INTEGER},
+      </if>
+      <if test="commentAverage != null">
+        comment_average = #{commentAverage,jdbcType=DECIMAL},
+      </if>
+      <if test="favoriteNumber != null">
+        favorite_number = #{favoriteNumber,jdbcType=INTEGER},
+      </if>
+      <if test="questionNumber != null">
+        question_number = #{questionNumber,jdbcType=INTEGER},
+      </if>
+    </set>
+    where attribute_id = #{attributeId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="store.product.entity.ProductAttribute">
+    update os_product_attribute
+    set product_id = #{productId,jdbcType=BIGINT},
+      stock = #{stock,jdbcType=INTEGER},
+      sales_volume = #{salesVolume,jdbcType=INTEGER},
+      page_views = #{pageViews,jdbcType=INTEGER},
+      comment_number = #{commentNumber,jdbcType=INTEGER},
+      comment_total = #{commentTotal,jdbcType=INTEGER},
+      comment_average = #{commentAverage,jdbcType=DECIMAL},
+      favorite_number = #{favoriteNumber,jdbcType=INTEGER},
+      question_number = #{questionNumber,jdbcType=INTEGER}
+    where attribute_id = #{attributeId,jdbcType=BIGINT}
+  </update>
+</mapper>

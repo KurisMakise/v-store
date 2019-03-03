@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="store.product.mapper.ProductSpecificationMapper">
+  <resultMap id="BaseResultMap" type="store.product.entity.ProductSpecification">
+    <constructor>
+      <idArg column="product_spec_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="product_spec_number" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="product_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="spec" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="stock" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="sales_volume" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="price" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="score" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="default_status" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="status" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="create_by" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_by" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    product_spec_id, product_spec_number, product_id, spec, stock, sales_volume, price, 
+    score, default_status, status, create_time, create_by, update_time, update_by
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from os_product_specification
+    where product_spec_id = #{productSpecId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from os_product_specification
+    where product_spec_id = #{productSpecId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="store.product.entity.ProductSpecification">
+    insert into os_product_specification (product_spec_id, product_spec_number, product_id, 
+      spec, stock, sales_volume, 
+      price, score, default_status, 
+      status, create_time, create_by, 
+      update_time, update_by)
+    values (#{productSpecId,jdbcType=BIGINT}, #{productSpecNumber,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, 
+      #{spec,jdbcType=VARCHAR}, #{stock,jdbcType=INTEGER}, #{salesVolume,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{score,jdbcType=INTEGER}, #{defaultStatus,jdbcType=TINYINT}, 
+      #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="store.product.entity.ProductSpecification">
+    insert into os_product_specification
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="productSpecId != null">
+        product_spec_id,
+      </if>
+      <if test="productSpecNumber != null">
+        product_spec_number,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="spec != null">
+        spec,
+      </if>
+      <if test="stock != null">
+        stock,
+      </if>
+      <if test="salesVolume != null">
+        sales_volume,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="defaultStatus != null">
+        default_status,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="updateBy != null">
+        update_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="productSpecId != null">
+        #{productSpecId,jdbcType=BIGINT},
+      </if>
+      <if test="productSpecNumber != null">
+        #{productSpecNumber,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="spec != null">
+        #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null">
+        #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="salesVolume != null">
+        #{salesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="defaultStatus != null">
+        #{defaultStatus,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="store.product.entity.ProductSpecification">
+    update os_product_specification
+    <set>
+      <if test="productSpecNumber != null">
+        product_spec_number = #{productSpecNumber,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="spec != null">
+        spec = #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="stock != null">
+        stock = #{stock,jdbcType=INTEGER},
+      </if>
+      <if test="salesVolume != null">
+        sales_volume = #{salesVolume,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="defaultStatus != null">
+        default_status = #{defaultStatus,jdbcType=TINYINT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateBy != null">
+        update_by = #{updateBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where product_spec_id = #{productSpecId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="store.product.entity.ProductSpecification">
+    update os_product_specification
+    set product_spec_number = #{productSpecNumber,jdbcType=BIGINT},
+      product_id = #{productId,jdbcType=BIGINT},
+      spec = #{spec,jdbcType=VARCHAR},
+      stock = #{stock,jdbcType=INTEGER},
+      sales_volume = #{salesVolume,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      score = #{score,jdbcType=INTEGER},
+      default_status = #{defaultStatus,jdbcType=TINYINT},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where product_spec_id = #{productSpecId,jdbcType=BIGINT}
+  </update>
+</mapper>
