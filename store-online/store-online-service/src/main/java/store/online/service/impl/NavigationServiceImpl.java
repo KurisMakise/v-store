@@ -9,5 +9,5 @@ import store.online.service.INavigationService;
  * @description
  */
 @Service
-public class NavigationServiceImpl implements INavigationService {
+public class NavigationServiceImpl {
 }

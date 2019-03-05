@@ -20,6 +20,7 @@ import java.util.List;
  * @createTime 2019/2/27
  * @description
  */
+
 @Service
 public class AdvertDetailServiceImpl implements IAdvertDetailService {
     @Autowired
@@ -48,9 +49,9 @@ public class AdvertDetailServiceImpl implements IAdvertDetailService {
             advertDetailQueryWrapper
                     .eq("advert_id", advertId)
                     .eq("status", StatusEnum.SHOW.getStatus())
-                    .gt("begin_time", date)
-                    .lt("end_time", date)
-                    .apply(" limit", advert.getDefultNumber());
+//                    .gt("begin_time", date)
+//                    .lt("end_time", date)
+                    .apply(false, " limit", advert.getDefultNumber());
             return advertDetailMapper.selectList(advertDetailQueryWrapper);
         }
         return null;

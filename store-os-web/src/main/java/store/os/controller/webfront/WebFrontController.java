@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import store.online.common.enums.AdvertTypeEnum;
 import store.online.common.enums.NavigationBarTypeEnum;
 import store.online.entity.AdvertDetail;
@@ -46,7 +47,7 @@ public class WebFrontController {
         List<AdvertDetail> indexHotAdvertImgs = advertDetailService.listByAdvertId(AdvertTypeEnum.INDEX_HOT_ADVERT.getType());
         model.addAttribute(AdvertTypeEnum.INDEX_HOT_ADVERT.getCode(), indexHotAdvertImgs);
 
-        return "/modules/webfront/index";
+        return "modules/webfront/index";
     }
 
 }

@@ -1,8 +1,15 @@
 package store.online.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.extension.activerecord.Model;
+
 import java.util.Date;
 
-public class Navigation {
+@TableName("os_navigation")
+public class Navigation extends Model<Navigation> {
+    @TableId("navigation_id")
     private Long navigationId;
 
     private String code;
@@ -13,10 +20,13 @@ public class Navigation {
 
     private Integer number;
 
+    @TableField("show_number")
     private Integer showNumber;
 
+    @TableField("create_time")
     private Date createTime;
 
+    @TableField("create_by")
     private String createBy;
 
     private Date updateTime;

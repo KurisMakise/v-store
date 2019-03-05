@@ -1,8 +1,14 @@
 package store.online.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.util.Date;
 
+@TableName("os_advert")
 public class Advert {
+    @TableId("advert_id")
     private Long advertId;
 
     private String name;

@@ -1,10 +1,17 @@
 package store.online.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.util.Date;
 
+@TableName("os_advert_detail")
 public class AdvertDetail {
+    @TableId("advert_detail_id")
     private Long advertDetailId;
 
+    @TableField("advert_id")
     private Long advertId;
 
     private String title;
@@ -17,18 +24,24 @@ public class AdvertDetail {
 
     private String picImg;
 
+    @TableField("create_time")
     private Date createTime;
 
+    @TableField("create_by")
     private String createBy;
 
+    @TableField("update_time")
     private Date updateTime;
 
+    @TableField("update_by")
     private String updateBy;
 
     private String remarks;
 
+    @TableField("begin_time")
     private Date beginTime;
 
+    @TableField("end_time")
     private Date endTime;
 
     private String content;

@@ -47,7 +47,7 @@ public class NavigationBarServiceImpl implements INavigationBarService {
             navigationBarQueryWrapper
                     .eq("navigation_id", navigationId)
                     .eq("status", StatusEnum.SHOW.getStatus())
-                    .apply(" limit {0}", navigation.getShowNumber());
+                    .apply(false, " limit {0}", navigation.getShowNumber());
             return navigationBarMapper.selectList(navigationBarQueryWrapper);
         }
         return null;

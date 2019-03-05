@@ -1,8 +1,13 @@
 package store.online.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.util.Date;
 
+@TableName("os_navigation_bar")
 public class NavigationBar {
+    @TableId("navigation_bar_id")
     private Long navigationBarId;
 
     private Long navigationId;

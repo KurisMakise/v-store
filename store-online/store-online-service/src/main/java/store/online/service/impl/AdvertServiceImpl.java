@@ -1,5 +1,6 @@
 package store.online.service.impl;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import org.springframework.stereotype.Service;
 import store.online.service.IAdvertService;
 

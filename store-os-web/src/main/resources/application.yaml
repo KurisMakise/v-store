@@ -1,10 +1,21 @@
 mybatis:
-  type-aliases-package: store.os.entity
-  mapper-locations: classpath:/mybatis/os/sqlMap/*Mapper.xml
-
+  type-aliases-package: store.*.entity
+  mapper-locations: classpath:mybatis/**/sqlMap/**Mapper.xml
 spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/morning?characterEncoding=utf-8&useSSL=false
     username: root
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
+  mvc:
+    servlet:
+      path: /store
+    view:
+      prefix: /WEB-INF/views/
+      suffix: .jsp
+server:
+  port: 8080
+  error:
+    path: /WEB-INF/views/common/404.jsp
+logging:
+  config: classpath:log4j2.yaml

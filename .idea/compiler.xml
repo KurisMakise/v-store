@@ -23,6 +23,29 @@
         <module name="store-user-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="store-administrator" target="1.8" />
+      <module name="store-cms-web" target="1.8" />
+      <module name="store-common" target="1.8" />
+      <module name="store-online" target="1.8" />
+      <module name="store-online-facade" target="1.8" />
+      <module name="store-online-service" target="1.8" />
+      <module name="store-order" target="1.8" />
+      <module name="store-order-facade" target="1.8" />
+      <module name="store-order-service" target="1.8" />
+      <module name="store-product" target="1.8" />
+      <module name="store-product-facade" target="1.8" />
+      <module name="store-product-service" target="1.8" />
+      <module name="store-support" target="1.8" />
+      <module name="store-support-facade" target="1.8" />
+      <module name="store-support-service" target="1.8" />
+      <module name="store-system" target="1.8" />
+      <module name="store-system-facade" target="1.8" />
+      <module name="store-system-service" target="1.8" />
+      <module name="store-user" target="1.8" />
+      <module name="store-user-facade" target="1.8" />
+      <module name="store-user-service" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_STRING" value="-encoding utf-8" />
