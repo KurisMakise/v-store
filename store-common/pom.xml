@@ -15,4 +15,43 @@
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+        </dependency>
+
+        <!-- RSA加密工具 -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.56</version>
+            <!-- Bouncy Castle用于 Java 平台的开放源码的轻量级密码术包，它支持大量的密码术算法。 -->
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.11</version>
+            <!-- Commons codec是项目中用来处理常用的编码方法的工具类包,例如DES、SHA1、MD5、Base64、URL、Soundx等等. -->
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>        <!-- Commons IO是针对开发IO流功能的工具类库. -->
+            <version>2.6</version>
+        </dependency>
+
+        <!-- Commons项目中用来处理Java基本对象方法的工具类包 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.8.1</version>
+        </dependency>
+    </dependencies>
 </project>

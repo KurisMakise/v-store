@@ -26,8 +26,9 @@ public enum StatusEnum {
     UN_DEFAULT(0, "不默认"),
 
     SHELVE(1, "上架"),
-    OFF_SHELVE(0, "下架");
+    OFF_SHELVE(0, "下架"),
 
+    ALL(-1, "全部");
 
     private int status;
 

@@ -1,9 +1,14 @@
 package store.product.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.math.BigDecimal;
 import java.util.Date;
 
+@TableName("os_product")
 public class Product {
+    @TableId
     private Long productId;
 
     private Long productNumber;

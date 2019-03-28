@@ -49,8 +49,8 @@ public class AdvertDetailServiceImpl implements IAdvertDetailService {
             advertDetailQueryWrapper
                     .eq("advert_id", advertId)
                     .eq("status", StatusEnum.SHOW.getStatus())
-//                    .gt("begin_time", date)
-//                    .lt("end_time", date)
+                    .gt("begin_time", date)
+                    .lt("end_time", date)
                     .apply(false, " limit", advert.getDefultNumber());
             return advertDetailMapper.selectList(advertDetailQueryWrapper);
         }

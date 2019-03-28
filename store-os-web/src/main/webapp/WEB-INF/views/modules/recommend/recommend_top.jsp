@@ -2,8 +2,8 @@
 <%@ include file="/WEB-INF/layouts/base.jsp"%>
 
 <!--     主产品区置顶推荐 begin       -->
-<c:if test="${not empty categorys}">
-  <c:forEach items="${categorys}" var="category" >
+<c:if test="${not empty categories}">
+  <c:forEach items="${categories}" var="category" >
     <div class="row">
       <div class="col-md-12 col-sm-12">
         <div class="home-brick-box home-brick-row-2-box xm-plain-box">

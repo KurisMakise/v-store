@@ -20,6 +20,44 @@
     recommend_product_id, recommend_id, product_id, sort, status, begin_time, end_time, 
     create_time, create_by, update_time, update_by
   </sql>
+
+  <select id="getHotComment" resultType="store.product.pojo.vo.ProductVO">
+      SELECT
+        user_name as userName,
+        comment_id as commentId,
+        content
+      FROM os_comment c
+      WHERE
+          c.product_id = #{productId}
+      AND c.type = #{commentType}
+      AND c.status = #{status}
+      ORDER BY
+          rand()
+      limit 1
+  </select>
+
+  <select id="listByRecommendId" resultType="store.product.pojo.vo.ProductVO" >
+      SELECT
+          recommend_product_id AS recommendProductId,
+          p.product_id AS productId,
+          product_number AS productNumber,
+          name,
+          show_price AS showPrice,
+          introduce,
+          pic_img AS picImg,
+          comment_number AS commentNumber
+      FROM
+          os_product_recommend r
+      LEFT JOIN os_product p ON p.product_id = r.product_id
+      LEFT JOIN os_product_attribute a ON a.product_id = p.product_id
+      WHERE
+          r.recommend_id = #{recommendId}
+      AND r.status = #{status}
+<!-- AND r.begin_time &lt;= #{date}
+      AND r.end_time &gt;= #{date} -->
+      ORDER BY r.sort
+      limit #{showNumber}
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />

@@ -15,8 +15,59 @@
   <sql id="Base_Column_List">
     cart_id, product_spec_number, user_id, buy_number, create_time, update_time, check_status
   </sql>
+
+  <resultMap id="shoppingCartResultMap" type="store.product.pojo.vo.ShoppingCartVO">
+    <id property="cartId" column="cartId" />
+    <result property="productSpecNumber" column="productSpecNumber" />
+    <result property="userId" column="userId" />
+    <result property="buyNumber" column="buyNumber" />
+    <result property="checkStatus" column="checkStatus" />
+    <result property="stock" column="stock" />
+    <result property="salesVolume" column="salesVolume" />
+    <result property="price" column="price" />
+    <result property="score" column="score" />
+    <result property="name" column="name" />
+    <result property="picImg" column="picImg" />
+    <result property="productNumber" column="productNumber" />
+    <collection property="specificationName" ofType="String">
+      <result column="specAttrName" />
+    </collection>
+  </resultMap>
+
+
+  <select id="list" resultMap="shoppingCartResultMap">
+        SELECT
+            c.cart_id AS cartId,
+			c.product_spec_number AS productSpecNumber,
+			c.user_id AS userId,
+			c.buy_number AS buyNumber,
+			c.check_status AS checkStatus,
+			s.stock,
+			s.sales_volume AS salesVolume,
+			s.price,
+			s.score,
+			p.name,
+			p.pic_img AS picImg,
+			p.product_number AS productNumber,
+			a.name  AS specAttrName
+		FROM
+		    os_shopping_cart c
+		LEFT JOIN os_product_specification s ON c.product_spec_number = s.product_spec_number
+		LEFT JOIN os_product p ON s.product_id = p.product_id
+		LEFT JOIN os_product_spec_rel r ON s.product_spec_number = r.product_spec_number
+		LEFT JOIN os_specification_attribute a ON r.spec_attr_id = a.spec_attr_id
+	    <where>
+            <if test="userId != null">
+                c.user_id = #{userId}
+            </if>
+            <if test="checkStatus != -1">
+                AND c.check_status = #{checkStatus}
+            </if>
+        </where>
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from os_shopping_cart
     where cart_id = #{cartId,jdbcType=BIGINT}

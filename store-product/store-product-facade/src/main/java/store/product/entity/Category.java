@@ -1,7 +1,11 @@
 package store.product.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.util.Date;
 
+@TableName("os_category")
 public class Category {
     /**
      *
@@ -10,6 +14,7 @@ public class Category {
      *
      * @mbg.generated Wed Feb 27 20:00:00 CST 2019
      */
+    @TableId
     private Long categoryId;
 
     /**

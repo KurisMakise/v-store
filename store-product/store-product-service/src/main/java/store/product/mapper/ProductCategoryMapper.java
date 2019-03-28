@@ -1,13 +1,23 @@
 package store.product.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import store.product.entity.ProductCategory;
+import store.product.pojo.vo.ProductVO;
 
-public interface ProductCategoryMapper {
-    int deleteByPrimaryKey(Long productCategoryId);
+import java.util.List;
 
-    int insert(ProductCategory record);
+public interface ProductCategoryMapper extends BaseMapper<ProductCategory> {
+    /**
+     *
+     * @param categoryIds 分类ID
+     * @param showInShelve 状态
+     * @param showInTop 是否置顶
+     * @param showNumber 显示数量
+     */
+    List<ProductVO> listTopProductByCategoryId(List<Long> categoryIds,int showInShelve,int showInTop,int showNumber);
 
-    int insertSelective(ProductCategory record);
+
+    List<ProductVO> listNavByCategoryId(List<Long> categoryIds, int status,int showInNav,int showNumber);
 
     ProductCategory selectByPrimaryKey(Long productCategoryId);
 

@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import store.online.common.enums.AdvertTypeEnum;
 import store.online.common.enums.NavigationBarTypeEnum;
 import store.online.entity.AdvertDetail;
@@ -15,6 +14,10 @@ import store.online.service.IAdvertDetailService;
 import store.online.service.INavigationBarService;
 
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 /**
  * @creator violet
@@ -28,13 +31,13 @@ public class WebFrontController {
 
     @Autowired
     private IAdvertDetailService advertDetailService;
-
     @Autowired
     private INavigationBarService navigationBarService;
 
     @ApiOperation(value = "商城首页", notes = "商城首页展示页面")
     @GetMapping("/index")
     public String index(Model model) {
+
         //首页-广告栏-左部导航栏
         List<NavigationBar> indexAdvertLeft = navigationBarService.listByNavigationId(NavigationBarTypeEnum.INDEX_ADVERT_LEFT.getType());
         model.addAttribute(NavigationBarTypeEnum.INDEX_ADVERT_LEFT.getCode(), indexAdvertLeft);
@@ -49,5 +52,4 @@ public class WebFrontController {
 
         return "modules/webfront/index";
     }
-
 }

@@ -1,8 +1,13 @@
 package store.product.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.util.Date;
 
+@TableName("os_kind_attribute")
 public class KindAttribute {
+    @TableId
     private Long kindAttrId;
 
     private Long kindId;

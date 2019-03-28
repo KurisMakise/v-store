@@ -140,7 +140,7 @@ $(function() {
 	$('.topbar-cart').hover(function() {
 		$('.site-topbar .cart-menu').css('display', 'block');
 		$.ajax({
-			url : baselocation + "/cart/topbar",
+			url : baselocation + "/cart/topBar",
 			type : 'get',
 			dataType : 'text',
 			beforeSend : function() {

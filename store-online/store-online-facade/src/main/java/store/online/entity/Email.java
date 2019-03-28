@@ -1,8 +1,13 @@
 package store.online.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.util.Date;
 
+@TableName("os_email")
 public class Email {
+    @TableId
     private Long emailId;
 
     private Long emailSign;
@@ -19,9 +24,9 @@ public class Email {
 
     private String newEmail;
 
-    private Boolean status;
+    private Integer status;
 
-    private Boolean sendStatus;
+    private Integer sendStatus;
 
     private String captcha;
 
@@ -29,7 +34,7 @@ public class Email {
 
     private String emailContent;
 
-    public Email(Long emailId, Long emailSign, String userEmail, Byte emailType, Date createTime, Date startTime, Date endTime, String newEmail, Boolean status, Boolean sendStatus, String captcha, String emailSubject) {
+    public Email(Long emailId, Long emailSign, String userEmail, Byte emailType, Date createTime, Date startTime, Date endTime, String newEmail, Integer status, Integer sendStatus, String captcha, String emailSubject) {
         this.emailId = emailId;
         this.emailSign = emailSign;
         this.userEmail = userEmail;
@@ -44,7 +49,7 @@ public class Email {
         this.emailSubject = emailSubject;
     }
 
-    public Email(Long emailId, Long emailSign, String userEmail, Byte emailType, Date createTime, Date startTime, Date endTime, String newEmail, Boolean status, Boolean sendStatus, String captcha, String emailSubject, String emailContent) {
+    public Email(Long emailId, Long emailSign, String userEmail, Byte emailType, Date createTime, Date startTime, Date endTime, String newEmail, Integer status, Integer sendStatus, String captcha, String emailSubject, String emailContent) {
         this.emailId = emailId;
         this.emailSign = emailSign;
         this.userEmail = userEmail;
@@ -128,19 +133,19 @@ public class Email {
         this.newEmail = newEmail == null ? null : newEmail.trim();
     }
 
-    public Boolean getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Boolean status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
-    public Boolean getSendStatus() {
+    public Integer getSendStatus() {
         return sendStatus;
     }
 
-    public void setSendStatus(Boolean sendStatus) {
+    public void setSendStatus(Integer sendStatus) {
         this.sendStatus = sendStatus;
     }
 

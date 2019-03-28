@@ -1,6 +1,6 @@
-mybatis:
+mybatis-plus:
   type-aliases-package: store.*.entity
-  mapper-locations: classpath:mybatis/**/sqlMap/**Mapper.xml
+  mapper-locations: classpath*:/mybatis/**/sqlMap/*Mapper.xml
 spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/morning?characterEncoding=utf-8&useSSL=false
@@ -9,7 +9,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
   mvc:
     servlet:
-      path: /store
+      path:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
@@ -17,5 +17,9 @@ server:
   port: 8080
   error:
     path: /WEB-INF/views/common/404.jsp
+
 logging:
-  config: classpath:log4j2.yaml
+  config: classpath:log4j2.xml
+#  <mvc:annotation-driven enable-matrix-variables="true" />
+#  <mvc:default-servlet-handler/>
+

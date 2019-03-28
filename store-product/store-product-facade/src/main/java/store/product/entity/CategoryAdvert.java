@@ -1,8 +1,13 @@
 package store.product.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.util.Date;
 
+@TableName("os_category_advert")
 public class CategoryAdvert {
+    @TableId
     private Long categoryAdvertId;
 
     private Long categoryId;

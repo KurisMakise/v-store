@@ -90,7 +90,7 @@
         </div>
         <div class="section-body clearfix">
           <ul class="clearfix J_optionList options ">
-            <li data-type="shipment" class="J_option selected" data-value="1"> 快递配送（免运费） </li>
+            <li data-type="shipment" class="J_option selected" data-amount="10" data-value="1"> 快递配送（免运费） </li>
             <li data-type="shipment" class="J_option hide" data-amount="10" data-value="2"> 快递配送（运费 10 元） </li>
           </ul>
           <div class="service-self-tip" id="J_serviceSelfTip"></div>
@@ -182,16 +182,16 @@
     </div>
   </div>
 </div>
-<myfooter> 
-  <!-- layer javascript --> 
-  <script src="${ctxsta}/common/layer/layer.js"></script> 
-  <!-- 地址选择 --> 
-  <script src="${ctxsta}/os/area/js/area.js"></script> 
-  <script src="${ctxsta}/os/area/js/location.js"></script> 
-  <script src="${ctxsta}/os/area/js/select2.js"></script> 
-  <script src="${ctxsta}/os/area/js/select2_locale_zh-CN.js"></script> 
-  <script src="${ctxsta}/os/js/address.js"></script> 
-  <script src="${ctxsta}/os/js/checkout.js"></script> 
+<myfooter>
+  <!-- layer javascript -->
+  <script src="${ctxsta}/common/layer/layer.js"></script>
+  <!-- 地址选择 -->
+  <script src="${ctxsta}/os/area/js/area.js"></script>
+  <script src="${ctxsta}/os/area/js/location.js"></script>
+  <script src="${ctxsta}/os/area/js/select2.js"></script>
+  <script src="${ctxsta}/os/area/js/select2_locale_zh-CN.js"></script>
+  <script src="${ctxsta}/os/js/address.js"></script>
+  <script src="${ctxsta}/os/js/checkout.js"></script>
 </myfooter>
 </body>
 </html>

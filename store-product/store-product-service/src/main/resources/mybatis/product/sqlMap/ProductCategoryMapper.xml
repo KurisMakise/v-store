@@ -14,10 +14,89 @@
     product_category_id, product_id, category_id, create_time, create_by
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from os_product_category
     where product_category_id = #{productCategoryId,jdbcType=BIGINT}
+  </select>
+
+  <select id="listTopProductByCategoryId"  resultType="store.product.pojo.vo.ProductVO">
+    SELECT
+        p.product_number as productNumber,
+        p.name,
+        p.introduce,
+        p.show_price as showPrice,
+        p.pic_img as picImg,
+        l.label_name as labelName,
+        a.comment_number as commentNumber
+    FROM
+        os_product p
+    LEFT JOIN
+        os_product_category c ON p.product_id = c.product_id
+    LEFT JOIN
+        os_product_attribute a ON p.product_id = a.product_id
+    LEFT JOIN
+        os_label l ON p.product_id = p.label_id = l.label_id
+    WHERE
+        c.category_id in
+        <foreach collection="categoryIds" open="(" close=")" separator="," item="categoryId">
+            #{categoryId}
+        </foreach>
+    AND p.show_in_shelve = #{showInShelve}
+    AND p.show_in_top = #{showInTop}
+    ORDER by
+      rand()
+    LIMIT #{showNumber}
+  </select>
+
+  <select id="listNavByCategoryId" resultType="store.product.pojo.vo.ProductVO">
+    SELECT
+     p.product_id AS productId,
+	        product_number AS productNumber,
+	        name,
+	        show_price AS showPrice,
+	        introduce,
+	        pic_img AS picImg
+    FROM
+        os_product_category c
+    LEFT JOIN os_product p ON p.product_id = c.product_id
+    WHERE
+        c.category_id IN
+        <foreach collection="categoryIds" open="(" close=")" separator="," item="category" >
+            #{category}
+        </foreach>
+    AND p.show_in_nav = #{showInNav}
+    AND p.show_in_shelve = #{status}
+    limit #{showNumber}
+  </select>
+  <select id="listTopProductByCategory" resultType="store.product.pojo.vo.ProductVO">
+    SELECT
+        p.product_id AS productId,
+        product_number AS productNumber,
+        name,
+        show_price AS showPrice,
+        introduce,
+        pic_img AS picImg,
+        comment_number AS commentNumber,
+        label_name AS labelName
+    FROM
+       os_product_category c
+    LEFT JOIN os_product p ON c.product_id = p.product_id
+    LEFT JOIN os_product_attribute a ON c.product_id = a.product_id
+    LEFT JOIN os_label l ON l.label_id = p.label_id
+    WHERE
+        l.status = #{status}
+    AND
+       c.category_id IN
+        <foreach collection="categoryIds" item="categoryId" open="(" close=")" separator=",">
+         #{categoryId}
+       </foreach>
+    AND p.show_in_top = #{showInTop}
+    AND p.show_in_shelve = #{status}
+    ORDER BY
+        rand()
+    limit
+        #{showNumber}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from os_product_category

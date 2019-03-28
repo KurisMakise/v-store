@@ -1,9 +1,9 @@
 package store.common.support.page;
 
 /**
- * @creator violet
- * @createTime 2019/2/27
- * @description
+ * creator violet
+ * createTime 2019/2/27
+ * description
  */
 public class PageInfo {
 

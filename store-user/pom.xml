@@ -20,4 +20,11 @@
         <module>store-user-service</module>
     </modules>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.violet</groupId>
+            <artifactId>store-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 </project>

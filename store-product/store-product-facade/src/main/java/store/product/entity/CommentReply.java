@@ -1,8 +1,13 @@
 package store.product.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.util.Date;
 
+@TableName("os_comment_reply")
 public class CommentReply {
+    @TableId
     private Long commentReplyId;
 
     private Long commentId;

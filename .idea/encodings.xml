@@ -16,6 +16,7 @@
     <file url="file://$PROJECT_DIR$/store-os-web" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/store-product" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/store-product/store-product-facade" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/store-product/store-product-facade/src/main/java/store/product/service/ICategoryRecommendService.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/store-product/store-product-service" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/store-support" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/store-support/store-support-facade" charset="UTF-8" />
