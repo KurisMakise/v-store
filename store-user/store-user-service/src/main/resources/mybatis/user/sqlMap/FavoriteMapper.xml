@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="store.user.mapper.FavoriteMapper">
+  <resultMap id="BaseResultMap" type="store.user.entity.Favorite">
+    <constructor>
+      <idArg column="favorite_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="user_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="product_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="product_number" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="pic_img" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="show_price" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="status" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="create_by" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    favorite_id, user_id, product_id, product_number, name, pic_img, show_price, status, 
+    create_time, create_by
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from os_favorite
+    where favorite_id = #{favoriteId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from os_favorite
+    where favorite_id = #{favoriteId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="store.user.entity.Favorite">
+    insert into os_favorite (favorite_id, user_id, product_id, 
+      product_number, name, pic_img, 
+      show_price, status, create_time, 
+      create_by)
+    values (#{favoriteId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, 
+      #{productNumber,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{picImg,jdbcType=VARCHAR}, 
+      #{showPrice,jdbcType=DECIMAL}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{createBy,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="store.user.entity.Favorite">
+    insert into os_favorite
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="favoriteId != null">
+        favorite_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="productNumber != null">
+        product_number,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="picImg != null">
+        pic_img,
+      </if>
+      <if test="showPrice != null">
+        show_price,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="favoriteId != null">
+        #{favoriteId,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="productNumber != null">
+        #{productNumber,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="picImg != null">
+        #{picImg,jdbcType=VARCHAR},
+      </if>
+      <if test="showPrice != null">
+        #{showPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="store.user.entity.Favorite">
+    update os_favorite
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=BIGINT},
+      </if>
+      <if test="productNumber != null">
+        product_number = #{productNumber,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="picImg != null">
+        pic_img = #{picImg,jdbcType=VARCHAR},
+      </if>
+      <if test="showPrice != null">
+        show_price = #{showPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where favorite_id = #{favoriteId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="store.user.entity.Favorite">
+    update os_favorite
+    set user_id = #{userId,jdbcType=BIGINT},
+      product_id = #{productId,jdbcType=BIGINT},
+      product_number = #{productNumber,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      pic_img = #{picImg,jdbcType=VARCHAR},
+      show_price = #{showPrice,jdbcType=DECIMAL},
+      status = #{status,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR}
+    where favorite_id = #{favoriteId,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="store.web.mapper.EmailMapper">
+  <resultMap id="BaseResultMap" type="store.web.entity.Email">
+    <constructor>
+      <idArg column="email_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="email_sign" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="user_email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="email_type" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="start_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="end_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="new_email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="status" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="send_status" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="captcha" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="email_subject" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="store.web.entity.Email">
+    <constructor>
+      <idArg column="email_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="email_sign" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="user_email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="email_type" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="start_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="end_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="new_email" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="status" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="send_status" javaType="java.lang.Boolean" jdbcType="BIT" />
+      <arg column="captcha" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="email_subject" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="email_content" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    email_id, email_sign, user_email, email_type, create_time, start_time, end_time, 
+    new_email, status, send_status, captcha, email_subject
+  </sql>
+  <sql id="Blob_Column_List">
+    email_content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from os_email
+    where email_id = #{emailId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from os_email
+    where email_id = #{emailId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="store.web.entity.Email">
+    insert into os_email (email_id, email_sign, user_email, 
+      email_type, create_time, start_time, 
+      end_time, new_email, status, 
+      send_status, captcha, email_subject, 
+      email_content)
+    values (#{emailId,jdbcType=BIGINT}, #{emailSign,jdbcType=BIGINT}, #{userEmail,jdbcType=VARCHAR}, 
+      #{emailType,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{startTime,jdbcType=TIMESTAMP}, 
+      #{endTime,jdbcType=TIMESTAMP}, #{newEmail,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, 
+      #{sendStatus,jdbcType=BIT}, #{captcha,jdbcType=VARCHAR}, #{emailSubject,jdbcType=VARCHAR}, 
+      #{emailContent,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="store.web.entity.Email">
+    insert into os_email
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="emailId != null">
+        email_id,
+      </if>
+      <if test="emailSign != null">
+        email_sign,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="emailType != null">
+        email_type,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+      <if test="newEmail != null">
+        new_email,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="sendStatus != null">
+        send_status,
+      </if>
+      <if test="captcha != null">
+        captcha,
+      </if>
+      <if test="emailSubject != null">
+        email_subject,
+      </if>
+      <if test="emailContent != null">
+        email_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="emailId != null">
+        #{emailId,jdbcType=BIGINT},
+      </if>
+      <if test="emailSign != null">
+        #{emailSign,jdbcType=BIGINT},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="emailType != null">
+        #{emailType,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newEmail != null">
+        #{newEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="sendStatus != null">
+        #{sendStatus,jdbcType=BIT},
+      </if>
+      <if test="captcha != null">
+        #{captcha,jdbcType=VARCHAR},
+      </if>
+      <if test="emailSubject != null">
+        #{emailSubject,jdbcType=VARCHAR},
+      </if>
+      <if test="emailContent != null">
+        #{emailContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="store.web.entity.Email">
+    update os_email
+    <set>
+      <if test="emailSign != null">
+        email_sign = #{emailSign,jdbcType=BIGINT},
+      </if>
+      <if test="userEmail != null">
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="emailType != null">
+        email_type = #{emailType,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newEmail != null">
+        new_email = #{newEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="sendStatus != null">
+        send_status = #{sendStatus,jdbcType=BIT},
+      </if>
+      <if test="captcha != null">
+        captcha = #{captcha,jdbcType=VARCHAR},
+      </if>
+      <if test="emailSubject != null">
+        email_subject = #{emailSubject,jdbcType=VARCHAR},
+      </if>
+      <if test="emailContent != null">
+        email_content = #{emailContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where email_id = #{emailId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="store.web.entity.Email">
+    update os_email
+    set email_sign = #{emailSign,jdbcType=BIGINT},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      email_type = #{emailType,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      new_email = #{newEmail,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      send_status = #{sendStatus,jdbcType=BIT},
+      captcha = #{captcha,jdbcType=VARCHAR},
+      email_subject = #{emailSubject,jdbcType=VARCHAR},
+      email_content = #{emailContent,jdbcType=LONGVARCHAR}
+    where email_id = #{emailId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="store.web.entity.Email">
+    update os_email
+    set email_sign = #{emailSign,jdbcType=BIGINT},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      email_type = #{emailType,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP},
+      new_email = #{newEmail,jdbcType=VARCHAR},
+      status = #{status,jdbcType=BIT},
+      send_status = #{sendStatus,jdbcType=BIT},
+      captcha = #{captcha,jdbcType=VARCHAR},
+      email_subject = #{emailSubject,jdbcType=VARCHAR}
+    where email_id = #{emailId,jdbcType=BIGINT}
+  </update>
+</mapper>

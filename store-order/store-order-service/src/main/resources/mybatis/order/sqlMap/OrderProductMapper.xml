@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="store.order.mapper.OrderProductMapper">
+  <resultMap id="BaseResultMap" type="store.order.entity.OrderProduct">
+    <constructor>
+      <idArg column="order_product_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="order_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="product_number" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="pic_img" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="product_spec_number" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="product_spec_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="price" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
+      <arg column="score" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="buy_number" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="product_score" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="product_amount" javaType="java.lang.Long" jdbcType="DECIMAL" />
+      <arg column="comment_status" javaType="java.lang.Byte" jdbcType="TINYINT" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_product_id, order_id, product_number, name, pic_img, product_spec_number, product_spec_name, 
+    price, score, buy_number, product_score, product_amount, comment_status
+  </sql>
+
+  <insert id="insertProducts" >
+    INSERT INTO  os_order_product(
+        order_id,
+        product_number,
+        name,
+        pic_img,
+        product_spec_number,
+        product_spec_name,
+        price,
+        score,
+        buy_number,
+        product_score,
+        product_amount
+    )
+    VALUES
+    <foreach collection="orderShoppingCartVOS"  separator="," item="orderShoppingCart">
+              (
+                #{orderId},
+                #{orderShoppingCart.productNumber},
+                #{orderShoppingCart.name},
+                #{orderShoppingCart.picImg},
+                #{orderShoppingCart.productSpecNumber},
+                #{orderShoppingCart.productSpecName},
+                #{orderShoppingCart.price},
+                #{orderShoppingCart.score},
+                #{orderShoppingCart.buyNumber},
+                #{orderShoppingCart.productScore},
+                #{orderShoppingCart.productAmount}
+              )
+    </foreach>
+  </insert>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from os_order_product
+    where order_product_id = #{orderProductId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from os_order_product
+    where order_product_id = #{orderProductId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="store.order.entity.OrderProduct">
+    insert into os_order_product (order_product_id, order_id, product_number, 
+      name, pic_img, product_spec_number, 
+      product_spec_name, price, score, 
+      buy_number, product_score, product_amount, 
+      comment_status)
+    values (#{orderProductId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{productNumber,jdbcType=BIGINT}, 
+      #{name,jdbcType=VARCHAR}, #{picImg,jdbcType=VARCHAR}, #{productSpecNumber,jdbcType=BIGINT}, 
+      #{productSpecName,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, #{score,jdbcType=INTEGER}, 
+      #{buyNumber,jdbcType=INTEGER}, #{productScore,jdbcType=INTEGER}, #{productAmount,jdbcType=DECIMAL}, 
+      #{commentStatus,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="store.order.entity.OrderProduct">
+    insert into os_order_product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderProductId != null">
+        order_product_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="productNumber != null">
+        product_number,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="picImg != null">
+        pic_img,
+      </if>
+      <if test="productSpecNumber != null">
+        product_spec_number,
+      </if>
+      <if test="productSpecName != null">
+        product_spec_name,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="buyNumber != null">
+        buy_number,
+      </if>
+      <if test="productScore != null">
+        product_score,
+      </if>
+      <if test="productAmount != null">
+        product_amount,
+      </if>
+      <if test="commentStatus != null">
+        comment_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderProductId != null">
+        #{orderProductId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="productNumber != null">
+        #{productNumber,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="picImg != null">
+        #{picImg,jdbcType=VARCHAR},
+      </if>
+      <if test="productSpecNumber != null">
+        #{productSpecNumber,jdbcType=BIGINT},
+      </if>
+      <if test="productSpecName != null">
+        #{productSpecName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="buyNumber != null">
+        #{buyNumber,jdbcType=INTEGER},
+      </if>
+      <if test="productScore != null">
+        #{productScore,jdbcType=INTEGER},
+      </if>
+      <if test="productAmount != null">
+        #{productAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="commentStatus != null">
+        #{commentStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="store.order.entity.OrderProduct">
+    update os_order_product
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="productNumber != null">
+        product_number = #{productNumber,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="picImg != null">
+        pic_img = #{picImg,jdbcType=VARCHAR},
+      </if>
+      <if test="productSpecNumber != null">
+        product_spec_number = #{productSpecNumber,jdbcType=BIGINT},
+      </if>
+      <if test="productSpecName != null">
+        product_spec_name = #{productSpecName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="buyNumber != null">
+        buy_number = #{buyNumber,jdbcType=INTEGER},
+      </if>
+      <if test="productScore != null">
+        product_score = #{productScore,jdbcType=INTEGER},
+      </if>
+      <if test="productAmount != null">
+        product_amount = #{productAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="commentStatus != null">
+        comment_status = #{commentStatus,jdbcType=TINYINT},
+      </if>
+    </set>
+    where order_product_id = #{orderProductId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="store.order.entity.OrderProduct">
+    update os_order_product
+    set order_id = #{orderId,jdbcType=BIGINT},
+      product_number = #{productNumber,jdbcType=BIGINT},
+      name = #{name,jdbcType=VARCHAR},
+      pic_img = #{picImg,jdbcType=VARCHAR},
+      product_spec_number = #{productSpecNumber,jdbcType=BIGINT},
+      product_spec_name = #{productSpecName,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      score = #{score,jdbcType=INTEGER},
+      buy_number = #{buyNumber,jdbcType=INTEGER},
+      product_score = #{productScore,jdbcType=INTEGER},
+      product_amount = #{productAmount,jdbcType=DECIMAL},
+      comment_status = #{commentStatus,jdbcType=TINYINT}
+    where order_product_id = #{orderProductId,jdbcType=BIGINT}
+  </update>
+</mapper>

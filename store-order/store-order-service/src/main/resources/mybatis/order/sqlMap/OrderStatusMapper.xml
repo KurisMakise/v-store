@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="store.order.mapper.OrderStatusMapper">
+  <resultMap id="BaseResultMap" type="store.order.entity.OrderStatus">
+    <constructor>
+      <idArg column="order_status_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="order_id" javaType="java.lang.Long" jdbcType="BIGINT" />
+      <arg column="order_status" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="create_by" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="create_status" javaType="java.lang.Byte" jdbcType="TINYINT" />
+      <arg column="remarks" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    order_status_id, order_id, order_status, create_time, create_by, create_status, remarks
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from os_order_status
+    where order_status_id = #{orderStatusId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from os_order_status
+    where order_status_id = #{orderStatusId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="store.order.entity.OrderStatus">
+    insert into os_order_status (order_status_id, order_id, order_status, 
+      create_time, create_by, create_status, 
+      remarks)
+    values (#{orderStatusId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, #{orderStatus,jdbcType=TINYINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{createStatus,jdbcType=TINYINT}, 
+      #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="store.order.entity.OrderStatus">
+    insert into os_order_status
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderStatusId != null">
+        order_status_id,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="createBy != null">
+        create_by,
+      </if>
+      <if test="createStatus != null">
+        create_status,
+      </if>
+      <if test="remarks != null">
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderStatusId != null">
+        #{orderStatusId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createStatus != null">
+        #{createStatus,jdbcType=TINYINT},
+      </if>
+      <if test="remarks != null">
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="store.order.entity.OrderStatus">
+    update os_order_status
+    <set>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createBy != null">
+        create_by = #{createBy,jdbcType=VARCHAR},
+      </if>
+      <if test="createStatus != null">
+        create_status = #{createStatus,jdbcType=TINYINT},
+      </if>
+      <if test="remarks != null">
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_status_id = #{orderStatusId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="store.order.entity.OrderStatus">
+    update os_order_status
+    set order_id = #{orderId,jdbcType=BIGINT},
+      order_status = #{orderStatus,jdbcType=TINYINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      create_status = #{createStatus,jdbcType=TINYINT},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where order_status_id = #{orderStatusId,jdbcType=BIGINT}
+  </update>
+</mapper>

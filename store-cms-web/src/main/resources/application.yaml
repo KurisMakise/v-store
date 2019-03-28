@@ -1,0 +1,14 @@
+server:
+  port: 9090
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  datasource:
+    username: root
+    password: root
+    url: jdbc:mysql://127.0.0.1:3306/morning?characterEncoding=utf-8&useSSL=false
+mybatis:
+  mapper-locations: classpath:/mybatis/web/sqlMap/*.xml
+  type-aliases-package: store.web.entity
