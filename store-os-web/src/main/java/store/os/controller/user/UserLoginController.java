@@ -11,12 +11,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import store.common.base.BaseController;
 import store.common.constant.CommonReturnCode;
-import store.common.enums.StatusEnum;
 import store.common.exception.ValidationException;
 import store.common.util.RSAUtils;
 import store.common.util.RegexUtils;
-import store.online.common.enums.EmailReturnCode;
-import store.online.entity.Email;
+import store.online.common.enums.NavigationBarTypeEnum;
+import store.online.entity.NavigationBar;
 import store.online.service.IEmailService;
 import store.online.service.INavigationBarService;
 import store.os.common.result.OsResult;
@@ -28,6 +27,7 @@ import store.user.entity.UserLoginLog;
 import store.user.service.IUserService;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -59,12 +59,15 @@ public class UserLoginController extends BaseController {
     @GetMapping("/login")
     public String login(Model model) {
         Map<String, Object> publicKeyMap = RSAUtils.getPublicKeyMap();
+        model.addAttribute("publicKeyMap", publicKeyMap);
 
+        List<NavigationBar> navigationBars = navigationBarService.listByNavigationId(NavigationBarTypeEnum.LOGIN_TOP.getType());
+        model.addAttribute(NavigationBarTypeEnum.LOGIN_TOP.getCode(), navigationBars);
         return "/modules/user/user_login";
     }
 
     @ApiOperation("用户登录")
-    @PostMapping("/post")
+    @PostMapping("/login")
     @ResponseBody
     public Object login(@RequestParam String loginName, @RequestParam String loginPassword) {
         //服务器端，使用RSAUtils工具类对密文进行加密
@@ -102,14 +105,36 @@ public class UserLoginController extends BaseController {
         }
     }
 
+    @ApiOperation("完善个人信息")
+    @PostMapping("/perfect")
+    public Object perfectUser(@RequestParam String email, @RequestParam String realName, @RequestParam String telephone) {
+        if (!RegexUtils.isTelephone(telephone)) {
+            return new OsResult(CommonReturnCode.BAD_PARAM.getCode(), "请输入正确手机号");
+        }
+        if (StringUtils.isEmpty(realName)) {
+            return new OsResult(CommonReturnCode.BAD_PARAM, "请输入真是姓名");
+        }
+        if (StringUtils.isEmpty(email)) {
+            return new OsResult(CommonReturnCode.BAD_PARAM, "邮箱为空，请联系管理员");
+        }
+        try {
+            Integer count = userService.perfectUser(email, realName, telephone);
+            return new OsResult(CommonReturnCode.SUCCESS, count);
+        } catch (ValidationException e) {
+            logger.error(e.getMessage(), e);
+            return new OsResult(e.getCode(), e.getMessage());
+        }
+    }
+
     @ApiOperation("注册界面")
     @GetMapping("/register")
     public String register(Model model) {
-
+        List<NavigationBar> navigationTop = navigationBarService.listByNavigationId(NavigationBarTypeEnum.LOGIN_TOP.getType());
+        model.addAttribute(NavigationBarTypeEnum.LOGIN_TOP.getCode(), navigationTop);
         return "/modules/user/user_register";
     }
 
-    @ApiOperation("注册")
+    @ApiOperation("用户注册")
     @PostMapping("/register")
     @ResponseBody
     public Object register(User user, String registerCode) {
@@ -129,41 +154,6 @@ public class UserLoginController extends BaseController {
             logger.error(e.getMessage(), e);
             return new OsResult(e.getCode(), e.getMessage());
         }
-
-    }
-
-    @ApiOperation(value = "邮箱激活", notes = "根据电子邮箱/验证码/邮箱标致激活帐号")
-    @PostMapping("/emailActive")
-    @ResponseBody
-    public Object emailActive(@RequestParam String email, @RequestParam String captcha,
-                              @RequestParam String emailSign) {
-
-
-        //邮箱是否存在
-        Email emailBySign = emailService.getEmailBySign(emailSign);
-        if (emailBySign == null) {
-            return new OsResult(EmailReturnCode.SEND_EMAIL_NOT_EXIST);
-        }
-        //验证码和邮箱地址是否正确
-        if (!SingletonLoginUtils.validate(captcha) || !emailBySign.getUserEmail().equals(email)) {
-            return new OsResult(EmailReturnCode.CAPTCHA_ERROR);
-        }
-
-        //验证时间是否过期
-        if (emailBySign.getEndTime().before(new Date())) {
-            return new OsResult(EmailReturnCode.CAPTCHA_OVERDUE);
-        }
-
-        //验证是否失效
-        if (emailBySign.getStatus().equals(StatusEnum.INVALID.getStatus())) {
-            return new OsResult(EmailReturnCode.EMAIL_INVALID);
-        }
-
-        //激活帐号
-        Integer count = userService.activeEmail(email);
-        //更新链接已失效
-        emailService.updateEmailStatus(emailBySign.getEmailId(), StatusEnum.INVALID.getStatus());
-        return new OsResult(CommonReturnCode.SUCCESS, count);
     }
 
 
@@ -173,27 +163,18 @@ public class UserLoginController extends BaseController {
         return "modules/user/user_forget_password";
     }
 
-    @ApiOperation("找回密码")
-    @PutMapping("/forgetPassword")
-    public Object forgetPassword(@RequestParam String oldPassoword, @RequestParam String newPassword) {
-
-        return new OsResult(CommonReturnCode.SUCCESS);
-    }
 
     @ApiOperation("重置密码")
     @PutMapping("/resetPassword")
     public Object resetPassword(@RequestParam String email, @RequestParam String captcha,
                                 @RequestParam String emailSign, @RequestParam String loingPassword) {
-
-
         return new OsResult(CommonReturnCode.SUCCESS);
     }
 
     @ApiOperation("退出登录")
     @GetMapping("/logout")
     public String logout() {
-        Subject subject = SecurityUtils.getSubject();
-        subject.logout();
-        return "/index";
+        SecurityUtils.getSubject().logout();
+        return "redirect:/index";
     }
 }

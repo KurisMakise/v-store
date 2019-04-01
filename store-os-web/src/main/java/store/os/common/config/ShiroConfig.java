@@ -1,6 +1,7 @@
 package store.os.common.config;
 
 
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.SecurityManager;
@@ -30,47 +31,34 @@ public class ShiroConfig {
 
     //shiro过滤器
     @Bean
-    public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
+    public ShiroFilterFactoryBean shiroFilter() {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
-        shiroFilterFactoryBean.setSecurityManager(securityManager);
+        shiroFilterFactoryBean.setSecurityManager(securityManager());
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         //配置不会被拦截的连接 顺序判断
-        filterChainDefinitionMap.put("/", "anon");
+        filterChainDefinitionMap.put("/static/**", "anon");
+        filterChainDefinitionMap.put("/index", "anon");
+        filterChainDefinitionMap.put("/pass/kaptcha", "anon");
         //配置退出过滤器，退出代码Shiro已经实现
-        filterChainDefinitionMap.put("/logout", "logout");
+//        filterChainDefinitionMap.put("/pass/logout", "logout");
         //过滤链定义，从上向下顺序执行，一般将/**放最下面
 
         //配置记住我过滤器或认证通过可以访问的地址(当上次登录时，记住我以后，在下次访问/或/index时，可以直接访问，不需要登陆)
-        filterChainDefinitionMap.put("/index", "user");
-        filterChainDefinitionMap.put("/", "user");
+//        filterChainDefinitionMap.put("/index", "user");
         //authc:所有url都必须通过认证才可以访问,anon:所有都可以匿名访问
-        filterChainDefinitionMap.put("/**", "authc");
+        filterChainDefinitionMap.put("/uc/**", "authc");
 
         //不设置会自动寻找Web工程目录下的"/login.jsp"页面
-        shiroFilterFactoryBean.setLoginUrl("/login");
-        //登录蔡成功后要跳转的链接
+        shiroFilterFactoryBean.setLoginUrl("/pass/login");
+        //登录成功后要跳转的链接
         shiroFilterFactoryBean.setSuccessUrl("/index");
         //未授权页面
         shiroFilterFactoryBean.setUnauthorizedUrl("/403");
+
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
 
-    //自定义Realm
-    @Bean
-    public ShiroRealm shiroRealm() {
-        ShiroRealm shiroRealm = new ShiroRealm();
-        shiroRealm.setCachingEnabled(true);
-        //启用身份验证缓存，即缓存AuthenticationInfo信息，默认false
-        shiroRealm.setAuthenticationCachingEnabled(true);
-        //缓存AuthenticationInfo信息的缓存名称 在ehcache-shiro.xml中有对应缓存的配置
-        shiroRealm.setAuthenticationCacheName("authenticationCache");
-        //启用授权缓存，即缓存AuthorizationInfo信息，默认false
-        shiroRealm.setAuthorizationCachingEnabled(true);
-        //缓存AuthorizationInfo信息的缓存名称  在ehcache-shiro.xml中有对应缓存的配置
-        shiroRealm.setAuthorizationCacheName("authorizationCache");
-        return shiroRealm;
-    }
 
     //安全管理
     @Bean
@@ -87,6 +75,32 @@ public class ShiroConfig {
         //securityManager.setSessionManager(sessionManager());
 
         return securityManager;
+    }
+
+    //自定义Realm
+    @Bean
+    public ShiroRealm shiroRealm() {
+        ShiroRealm shiroRealm = new ShiroRealm();
+        shiroRealm.setCachingEnabled(true);
+        //启用身份验证缓存，即缓存AuthenticationInfo信息，默认false
+        shiroRealm.setAuthenticationCachingEnabled(true);
+        //缓存AuthenticationInfo信息的缓存名称 在ehcache-shiro.xml中有对应缓存的配置
+        shiroRealm.setAuthenticationCacheName("authenticationCache");
+        //启用授权缓存，即缓存AuthorizationInfo信息，默认false
+        shiroRealm.setAuthorizationCachingEnabled(true);
+        //缓存AuthorizationInfo信息的缓存名称  在ehcache-shiro.xml中有对应缓存的配置
+        shiroRealm.setAuthorizationCacheName("authorizationCache");
+        shiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        return shiroRealm;
+    }
+
+    @Bean
+    public HashedCredentialsMatcher hashedCredentialsMatcher() {
+        HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
+        hashedCredentialsMatcher.setHashAlgorithmName("MD5");//散列算法:这里使用MD5算法;
+        hashedCredentialsMatcher.setHashIterations(2);//散列的次数，比如散列两次，相当于 md5(md5(""));
+        hashedCredentialsMatcher.setStoredCredentialsHexEncoded(true);//storedCredentialsHexEncoded默认是true,此时用的是密码加密用的是Hex编码;false时用Base64编码
+        return hashedCredentialsMatcher;
     }
 
     //记住我

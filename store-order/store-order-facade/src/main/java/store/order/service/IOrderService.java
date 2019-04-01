@@ -1,5 +1,7 @@
 package store.order.service;
 
+import store.common.base.BasePageDTO;
+import store.common.support.page.PageInfo;
 import store.order.entity.Order;
 import store.order.entity.OrderShipment;
 import store.order.pojo.vo.OrderShoppingCartVO;
@@ -9,11 +11,34 @@ import java.util.List;
 /**
  * author  violet
  * createTime 2019/3/23 19:47
- * description TODO
+ * description 订单服务
  * version 1.0
  */
 public interface IOrderService {
 
+    /**
+     * @param order                订单
+     * @param orderShipment        收货地址
+     * @param orderShoppingCartVOS 购物车
+     * @param userId               用户Id
+     * @return 插入结果
+     */
     Long insertOrder(Order order, OrderShipment orderShipment, List<OrderShoppingCartVO> orderShoppingCartVOS, Long userId);
 
+    /**
+     * @param userId   用户Id
+     * @param type     排序类型
+     * @param pageInfo 分页信息
+     * @param search   搜索条件
+     * @return 订单列表
+     */
+    BasePageDTO<Order> list(Long userId, Integer type, PageInfo pageInfo, String search);
+
+    /**
+     *
+     * @param userId 用户ID
+     * @param orderNumber 订单编号
+     * @return 订单
+     */
+    Order getOrder(Long userId, Long orderNumber);
 }

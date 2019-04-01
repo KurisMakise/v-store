@@ -22,15 +22,13 @@ public class SingletonLoginUtils {
         throw new AssertionError();
     }
 
-
     /**
      * @return 获取登录用户
      */
     public static AuthorizingUser getUser() {
         try {
             Subject subject = SecurityUtils.getSubject();
-            AuthorizingUser user = (AuthorizingUser) subject.getPrincipal();
-            return user;
+            return (AuthorizingUser) subject.getPrincipal();
         } catch (UnavailableSecurityManagerException e) {
             logger.error("SingletonLoginUtils.getUser{0}", e);
         }
@@ -44,24 +42,22 @@ public class SingletonLoginUtils {
         return getUser().getUserId();
     }
 
-
-
     /**
      * @param registerCode 验证码
      * @return 校验结果
      */
     public static boolean validate(String registerCode) {
         // 获取session中验证码
-        Object captcha = ServletUtils.getAttribute(Constants.KAPTCHA_SESSION_KEY);
+        Object kaptcha = ServletUtils.getAttribute(Constants.KAPTCHA_SESSION_KEY);
 
-        if (registerCode == null)
+        if (registerCode == null || kaptcha == null)
             return false;
 
-        boolean result = registerCode.equalsIgnoreCase(captcha.toString());
+        boolean result = registerCode.equalsIgnoreCase(kaptcha.toString());
 
-        if(result)
-            ServletUtils.getRequest().getSession().removeAttribute(Constants.KAPTCHA_SESSION_KEY);
+        if (result)
+            ServletUtils.removeAttribute(Constants.KAPTCHA_SESSION_KEY);
 
-        return false;
+        return result;
     }
 }

@@ -46,7 +46,7 @@ public class UserUtils {
 	
 	/**
 	 * 加密用户手机号码,隐藏中间4位
-	 * @return
+	 *
 	 */
 	public static String encryptTelephone(String telephone) {
 		String regex = "(\\d{3})\\d{4}(\\d{4})";
@@ -55,7 +55,7 @@ public class UserUtils {
 	
 	/**
 	 * 加密用户电子邮箱
-	 * @return
+	 *
 	 */
 	public static String encryptEmail(String email) {
 		String regex = "(\\w{2})(\\w+)(\\w{1})(@\\w+)";

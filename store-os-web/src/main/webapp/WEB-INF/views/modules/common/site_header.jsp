@@ -10,7 +10,7 @@
           <!--     轮播top菜单导航begin       -->
           <div class="site-category">
             <ul class="site-category-list clearfix">
-              <c:forEach items="${categorys}" var="category">
+              <c:forEach items="${categories}" var="category">
                 <li class="category-item"> <a class="title" href="${ctx}/list?categoryId=${category.categoryId}">${category.name}<i class="glyphicon glyphicon-chevron-right"></i></a>
                   <c:choose>
                     <c:when test="${fn:length(category.products)<=6}">

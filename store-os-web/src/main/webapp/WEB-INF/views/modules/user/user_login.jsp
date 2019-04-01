@@ -72,7 +72,8 @@
 <script src="${ctxsta}/common/jquery/jquery-2.1.4.min.js"></script> 
 <script src="${ctxsta}/common/bootstrap/js/bootstrap.min.js"></script> 
 <script src="${ctxsta}/common/security/security.js"></script> 
-<script src="${ctxsta}/os/user/js/register.js"></script> 
+<script src="${ctxsta}/os/user/js/register.js"></script>
+<script src="${ctxsta}/os/js/zySearch.js"></script>
 <script src="${ctxsta}/os/js/base.js"></script>
 </body>
 </html>

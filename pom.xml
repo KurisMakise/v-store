@@ -115,7 +115,7 @@
           <dependencies>
             <dependency>
               <groupId>mysql</groupId>
-              <artifactId>mysql-connector-java</artifactId>
+              <artifactId>Integernector-java</artifactId>
             </dependency>
           </dependencies>
         </plugin>

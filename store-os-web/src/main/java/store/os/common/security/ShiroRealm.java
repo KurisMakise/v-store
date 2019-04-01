@@ -8,6 +8,8 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import store.common.enums.StatusEnum;
+import store.common.util.RSAUtils;
+import store.user.common.util.PasswordUtils;
 import store.user.entity.User;
 import store.user.service.IUserService;
 
@@ -32,7 +34,6 @@ public class ShiroRealm extends AuthorizingRealm {
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         return null;
     }
-
     /**
      * 认证回调函数, 登录时调用
      * Shiro登录认证(原理：用户提交 用户名和密码  --- shiro 封装令牌 ---- realm 通过用户名将密码查询返回 ---- shiro 自动去比较查询出密码和用户输入密码是否一致---- 进行登陆控制
@@ -58,7 +59,7 @@ public class ShiroRealm extends AuthorizingRealm {
         BeanUtils.copyProperties(user, authorizingUser);
 
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(
-                authorizingUser, //用户
+                authorizingUser, //用户名
                 user.getLoginPassword(), //密码
                 ByteSource.Util.bytes(authorizingUser.getCredentialSalt()),//salt=username+salt
                 getName()  //realm name

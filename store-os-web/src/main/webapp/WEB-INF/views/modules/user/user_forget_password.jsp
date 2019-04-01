@@ -56,7 +56,7 @@
             <div class="f-fl item-ifo">
               <input type="text" name="registerCode" maxlength="4" class="txt03 f-r3 f-fl required btn_Pswpart1" tabindex="4" style="width:167px" id="randCode" data-valid="isNonEmpty" data-error="验证码不能为空" />
               <span class="ie8 icon-close close hide"></span>
-              <label class="f-size12 c-999 f-fl f-pl10"> <img src="${ctx}/pass/captcha-image.jpg" id="kaptchaImage" /> </label>
+              <label class="f-size12 c-999 f-fl f-pl10"> <img src="${ctx}/pass/kaptcha" id="kaptchaImage" /> </label>
               <label class="icon-sucessfill blank hide" style="left:380px"></label>
               <label class="focusa">看不清？<a href="javascript:;" class="c-blue" onclick="$(this).parent().prev().prev().find('img').click()">换一张</a></label>
               <label class="focus valid" style="left:370px"></label>

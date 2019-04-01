@@ -1,9 +1,9 @@
 package store.common.enums;
 
 /**
- * @creator violet
- * @createTime 0109/0/08
- * @description
+ * creator violet
+ * createTime 0109/0/08
+ * description
  */
 public enum StatusEnum {
 
@@ -30,7 +30,7 @@ public enum StatusEnum {
 
     ALL(-1, "全部");
 
-    private int status;
+    private Integer status;
 
     private String stateInfo;
 
@@ -39,7 +39,7 @@ public enum StatusEnum {
         this.stateInfo = stateInfo;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 

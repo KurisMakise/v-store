@@ -20,24 +20,26 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * @creator violet
- * @createTime 2019/2/27
- * @description
+ * creator violet
+ * createTime 2019/2/27
+ * description
  */
 
 @Controller
 @Api(value = "商城首页")
 public class WebFrontController {
 
-    @Autowired
-    private IAdvertDetailService advertDetailService;
-    @Autowired
-    private INavigationBarService navigationBarService;
+    private final IAdvertDetailService advertDetailService;
+    private final INavigationBarService navigationBarService;
+
+    public WebFrontController(IAdvertDetailService advertDetailService, INavigationBarService navigationBarService) {
+        this.advertDetailService = advertDetailService;
+        this.navigationBarService = navigationBarService;
+    }
 
     @ApiOperation(value = "商城首页", notes = "商城首页展示页面")
     @GetMapping("/index")
     public String index(Model model) {
-
         //首页-广告栏-左部导航栏
         List<NavigationBar> indexAdvertLeft = navigationBarService.listByNavigationId(NavigationBarTypeEnum.INDEX_ADVERT_LEFT.getType());
         model.addAttribute(NavigationBarTypeEnum.INDEX_ADVERT_LEFT.getCode(), indexAdvertLeft);

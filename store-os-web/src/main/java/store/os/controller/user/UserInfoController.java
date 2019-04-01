@@ -5,10 +5,13 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import store.common.base.BasePageDTO;
 import store.common.constant.CommonReturnCode;
+import store.common.support.page.PageInfo;
 import store.os.common.result.OsResult;
 import store.os.controller.common.util.SingletonLoginUtils;
 import store.user.entity.Address;
+import store.user.entity.Favorite;
 import store.user.pojo.vo.UserVO;
 import store.user.service.IAddressService;
 import store.user.service.IFavoriteService;
@@ -44,22 +47,32 @@ public class UserInfoController {
 
     @ApiOperation("收藏的商品")
     @GetMapping("/favorite")
-    public String favorite(Model model, @RequestParam int page, @RequestParam int limit) {
+    public String favorite(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) {
+        PageInfo pageInfo = new PageInfo(limit, page);
+        BasePageDTO<Favorite> favoriteBasePageDTO = favoriteService.listByUserId(SingletonLoginUtils.getUserId(), pageInfo);
+
+        model.addAttribute("favorites", favoriteBasePageDTO.getList());
+        model.addAttribute("pageInfo", favoriteBasePageDTO.getPageInfo());
 
         return "/modules/usercenter/user_favorite";
     }
 
     @ApiOperation("删除收藏")
-    @PutMapping("/delete/favorite/{productNumber}")
+    @DeleteMapping("/favorite/{productNumber}")
     @ResponseBody
     public Object deleteFavorite(@PathVariable Long productNumber) {
-
-        return new OsResult(CommonReturnCode.SUCCESS);
+        Integer count = favoriteService.deleteByProductNumber(productNumber, SingletonLoginUtils.getUserId());
+        return new OsResult(CommonReturnCode.SUCCESS, count);
     }
 
     @ApiOperation("收货地址页面")
     @GetMapping("/address")
-    public String address(Model model, @RequestParam int page, @RequestParam int limit) {
+    public String address(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "12") int limit) {
+        PageInfo pageInfo = new PageInfo(limit, page);
+        BasePageDTO<Address> addressBasePageDTO = addressService.listByUserId(SingletonLoginUtils.getUserId(), pageInfo);
+
+        model.addAttribute("addresses", addressBasePageDTO.getList());
+        model.addAttribute("pageInfo", addressBasePageDTO.getPageInfo());
 
         return "/modules/usercenter/user_address";
     }
@@ -68,23 +81,28 @@ public class UserInfoController {
     @PostMapping("/address")
     @ResponseBody
     public Object addressCreate(Address address) {
-        return new OsResult(CommonReturnCode.SUCCESS);
+        int count = addressService.insertAddress(address, SingletonLoginUtils.getUserId());
+        return new OsResult(CommonReturnCode.SUCCESS, count);
     }
 
     @ApiOperation("修改收货地址")
-    @GetMapping("/address/{address}")
+    @PutMapping("/address/{addressId}")
     @ResponseBody
-    public Object addressUpdate(@PathVariable Address address) {
-        return new OsResult(CommonReturnCode.SUCCESS);
+    public Object addressUpdate(@RequestParam Address address, @PathVariable Long addressId) {
+        address.setAddressId(addressId);
+        int count = addressService.updateAddress(address, SingletonLoginUtils.getUserId());
+        if (count == 0) {
+            return new OsResult(CommonReturnCode.UNKNOWN.getCode(), "更新收货地址失败，请联系管理员");
+        } else {
+            return new OsResult(CommonReturnCode.SUCCESS, count);
+        }
     }
 
     @ApiOperation("删除收货地址")
-    @RequestMapping(value = "/address/{address}",method = RequestMethod.DELETE)
+    @DeleteMapping("/address/{addressId}")
     @ResponseBody
-    public Object deleteUpdate(@PathVariable Address address) {
-
-        return new OsResult(CommonReturnCode.SUCCESS);
+    public Object addressDelete(@PathVariable Long addressId) {
+        int count = addressService.deleteByAddressId(addressId, SingletonLoginUtils.getUserId());
+        return new OsResult(CommonReturnCode.SUCCESS, count);
     }
-
-
 }

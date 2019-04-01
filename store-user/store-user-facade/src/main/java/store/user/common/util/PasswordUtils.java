@@ -9,7 +9,7 @@ public class PasswordUtils {
     /**
      * 迭代次数
      */
-    private static final int ITERATIONS = 6;
+    private static final int ITERATIONS = 2;
     /**
      * 盐值数位
      */

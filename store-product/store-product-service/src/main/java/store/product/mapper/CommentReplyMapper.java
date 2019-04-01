@@ -5,8 +5,6 @@ import store.product.entity.CommentReply;
 public interface CommentReplyMapper {
     int deleteByPrimaryKey(Long commentReplyId);
 
-    int insert(CommentReply record);
-
     int insertSelective(CommentReply record);
 
     CommentReply selectByPrimaryKey(Long commentReplyId);

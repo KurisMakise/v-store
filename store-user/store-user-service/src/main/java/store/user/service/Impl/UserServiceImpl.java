@@ -15,6 +15,7 @@ import store.user.pojo.vo.UserVO;
 import store.user.service.IUserService;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * author  violet
@@ -33,8 +34,31 @@ public class UserServiceImpl implements IUserService {
 
 
     @Override
+    public Integer perfectUser(String email, String realName, String telephone) throws ValidationException {
+        User userByLoginName = userMapper.getByLoginName(email);
+        if (telephone.equals(userByLoginName.getTelephone())) {
+            throw new ValidationException(CommonReturnCode.BAD_PARAM.getCode(), "手机号已被注册");
+        }
+        UpdateWrapper<User> userUpdateWrapper = new UpdateWrapper<>();
+        userUpdateWrapper.eq("email", email);
+        userByLoginName.setRealName(realName);
+        userByLoginName.setTelephone(telephone);
+        userByLoginName.setUpdateTime(new Date());
+        userByLoginName.setUpdateBy(email);
+        return userMapper.update(userByLoginName, userUpdateWrapper);
+    }
+
+    @Override
+    public User getByLoginName(String loginName) {
+        return userMapper.getByLoginName(loginName);
+    }
+
+    @Override
     public UserVO getUserVOById(Long userId) {
-        return null;
+        UserVO userVO = userMapper.getUserVOById(userId);
+        userVO.setEmail(UserUtils.encryptEmail(userVO.getEmail()));
+        userVO.setTelephone(UserUtils.encryptTelephone(userVO.getTelephone()));
+        return userVO;
     }
 
     @Override
@@ -56,8 +80,8 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public User getUserByLoginName(String userName) {
-        return null;
+    public User getUserByLoginName(String loginName) {
+        return userMapper.getByLoginName(loginName);
     }
 
     @Override
@@ -70,11 +94,12 @@ public class UserServiceImpl implements IUserService {
         //验证邮箱是否存在或使用
         QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
         userQueryWrapper.eq("email", user.getEmail());
+
         User userEmail = userMapper.selectOne(userQueryWrapper);
-        if (userEmail != null && userEmail.getEmailIsActive().equals(StatusEnum.ACTIVATED.getStatus())) {
+        if (userEmail != null && StatusEnum.ACTIVATED.getStatus().equals(userEmail.getEmailIsActive())) {
             throw new ValidationException(CommonReturnCode.BAD_PARAM.getCode(), "邮箱已被注册");
         }
-        if (userEmail != null && user.getEmailIsActive().equals(StatusEnum.NONACTIVATED.getStatus())) {
+        if (userEmail != null) {
             userMapper.deleteById(userEmail.getUserId());//未被激活删除用户
         }
         user.setCreateBy(user.getUserName());
@@ -82,7 +107,7 @@ public class UserServiceImpl implements IUserService {
         user.setPicImg(UserUtils.getPicImg());
         user.setUserNumber(UserUtils.getUserNumber());
         user.setRegisterTime(new Date());
-        user.setLoginPassword(PasswordUtils.getMd5(user.getLoginPassword(), user.getUserNumber(), PasswordUtils.getSalt()));
+        user.setLoginPassword(PasswordUtils.getMd5(user.getLoginPassword(), user.getUserNumber(), user.getSalt()));
         return userMapper.insert(user);
     }
 }

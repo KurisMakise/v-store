@@ -2,8 +2,8 @@
 <%@ include file="/WEB-INF/layouts/base.jsp"%>
 
 <!--     主产品区热门分类 begin       -->
-<c:if test="${not empty categorys}">
-  <c:forEach items="${categorys}" var="category" varStatus="productCategoryStat">
+<c:if test="${not empty categories}">
+  <c:forEach items="${categories}" var="category" varStatus="productCategoryStat">
     <div class="row J_recommend_hot">
       <div class="col-md-12 col-sm-12">
         <div class="home-brick-box home-brick-row-2-box xm-plain-box" id="category-${productCategoryStat.index}">
@@ -11,7 +11,7 @@
             <h2 class="title">${category.name}</h2>
             <div class="more J_brickNav">
               <ul class="tab-list J_brickTabSwitch">
-                <c:forEach items="${category.childrenCategorys}" var="childrenCategory">
+                <c:forEach items="${category.childrenCategories}" var="childrenCategory">
                   <li>${childrenCategory.name}</li>
                 </c:forEach>
               </ul>
@@ -28,7 +28,7 @@
               </div>
               <div class="span16">
                 <div class="tab-container" id="category-${productCategoryStat.index}-content">
-                  <c:forEach items="${category.childrenCategorys}" var="category" varStatus="categoryStat">
+                  <c:forEach items="${category.childrenCategories}" var="category" varStatus="categoryStat">
                     <ul class="brick-list">
                       <c:forEach items="${category.products}" var="product" varStatus="productStat">
                         <c:if test="${!productStat.last}">

@@ -5,8 +5,6 @@ import store.web.entity.Email;
 public interface EmailMapper {
     int deleteByPrimaryKey(Long emailId);
 
-    int insert(Email record);
-
     int insertSelective(Email record);
 
     Email selectByPrimaryKey(Long emailId);

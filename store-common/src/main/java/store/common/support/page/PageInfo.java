@@ -7,58 +7,105 @@ package store.common.support.page;
  */
 public class PageInfo {
 
-    private int total;
+    /**
+     * 总记录
+     */
+    private long total;
 
-    private int totalPage;
+    /**
+     * 总页数
+     */
+    private long totalPage;
 
-    private int offset;
+    /**
+     * 偏移量，从第几条开始
+     */
+    private long offset;
 
-    private int limit;
+    /**
+     * 每页显示记录
+     */
+    private long limit;
 
-    private int current;
+    /**
+     * 当前页面
+     */
+    private long current;
 
+    /**
+     * 排序字段
+     */
     private String sort;
 
+    /**
+     * 排序类型 asc desc
+     */
     private String order;
 
-    public int getTotal() {
+    public PageInfo(long limit, long current) {
+        this.current = current < 1 ? 1 : current;
+        this.limit = limit < 1 ? 1 : limit;
+        this.offset = (this.current - 1) * this.limit;
+    }
+
+    public PageInfo(long limit, long current, String sort, String order) {
+        this.current = current < 1 ? 1 : current;
+        this.limit = limit < 1 ? 1 : limit;
+        this.offset = (this.current - 1) * this.limit;
+        this.sort = sort;
+        this.order = order;
+    }
+
+    private void count() {
+        long totalPageTmp = this.total / this.limit;
+        long remain = this.total % this.limit == 0 ? 0 : 1;
+        this.totalPage = totalPageTmp + remain;
+    }
+
+    public long getTotal() {
         return total;
     }
 
-    public void setTotal(int total) {
-        this.total = total;
+    public void setTotal(long total) {
+        this.total = total < 0 ? 0 : total;
+        count();
     }
 
-    public int getTotalPage() {
+    public long getTotalPage() {
         return totalPage;
     }
 
-    public void setTotalPage(int totalPage) {
+    public void setTotalPage(long totalPage) {
         this.totalPage = totalPage;
     }
 
-    public int getOffset() {
+    public long getOffset() {
         return offset;
     }
 
-    public void setOffset(int offset) {
-        this.offset = offset;
+    public void setOffset(long offset) {
+        this.offset = offset < 1 ? 1 : offset;
+        current();
     }
 
-    public int getLimit() {
+    private void current() {
+        this.current = this.offset / this.limit + 1;
+    }
+
+    public long getLimit() {
         return limit;
     }
 
-    public void setLimit(int limit) {
-        this.limit = limit;
+    public void setLimit(long limit) {
+        this.limit = limit < 1 ? 1 : limit;
     }
 
-    public int getCurrent() {
+    public long getCurrent() {
         return current;
     }
 
-    public void setCurrent(int current) {
-        this.current = current;
+    public void setCurrent(long current) {
+        this.current = current < 0 ? 0 : current;
     }
 
     public String getSort() {

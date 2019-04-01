@@ -15,9 +15,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * @creator violet
- * @createTime 2019/3/6
- * @description
+ * creator violet
+ * createTime 2019/3/6
+ * description
  */
 public class InterceptorWeb implements HandlerInterceptor {
 
@@ -51,7 +51,7 @@ public class InterceptorWeb implements HandlerInterceptor {
 
         // 导航栏商品列表
         List<CategoryVO> category = categoryService.listNav(CategoryConstantEnum.CATEGORY_NAV_PRODUCT.getValue(), CategoryConstantEnum.CATEGORY_NAV_NUMBER.getValue());
-        request.setAttribute("categorys", category);
+        request.setAttribute("categories", category);
 
         return true;
     }

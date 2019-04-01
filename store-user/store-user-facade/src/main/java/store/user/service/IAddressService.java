@@ -14,14 +14,13 @@ import java.util.List;
  */
 public interface IAddressService {
 
-    int insertAddress(Address address);
+    int insertAddress(Address address, Long userId);
 
-    int updateAddress(Address address);
+    int updateAddress(Address address, Long userId);
 
-    int deleteByAddressId(Long addressId);
+    int deleteByAddressId(Long addressId, Long userId);
 
     BasePageDTO<Address> listByUserId(Long userId, PageInfo pageInfo);
-
 
     List<Address> listAddress(Long userId);
 

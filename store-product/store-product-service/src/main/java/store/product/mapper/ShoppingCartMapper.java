@@ -12,8 +12,6 @@ public interface ShoppingCartMapper extends BaseMapper<ShoppingCart> {
 
     int deleteByPrimaryKey(Long cartId);
 
-    int insert(ShoppingCart record);
-
     int insertSelective(ShoppingCart record);
 
     ShoppingCart selectByPrimaryKey(Long cartId);

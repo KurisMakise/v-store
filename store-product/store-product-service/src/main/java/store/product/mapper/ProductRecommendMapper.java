@@ -1,12 +1,13 @@
 package store.product.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import store.product.entity.ProductRecommend;
 import store.product.pojo.vo.ProductVO;
 
 import java.util.Date;
 import java.util.List;
 
-public interface ProductRecommendMapper {
+public interface ProductRecommendMapper extends BaseMapper<ProductRecommend> {
     /**
      * @param recommendId 推荐id
      * @param showNumber  显示数量
@@ -26,8 +27,6 @@ public interface ProductRecommendMapper {
     ProductVO getHotComment(long productId,int commentType,int status);
 
     int deleteByPrimaryKey(Long recommendProductId);
-
-    int insert(ProductRecommend record);
 
     int insertSelective(ProductRecommend record);
 

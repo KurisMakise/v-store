@@ -1,11 +1,10 @@
 package store.product.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import store.product.entity.CategoryAdvert;
 
-public interface CategoryAdvertMapper {
+public interface CategoryAdvertMapper extends BaseMapper<CategoryAdvert> {
     int deleteByPrimaryKey(Long categoryAdvertId);
-
-    int insert(CategoryAdvert record);
 
     int insertSelective(CategoryAdvert record);
 

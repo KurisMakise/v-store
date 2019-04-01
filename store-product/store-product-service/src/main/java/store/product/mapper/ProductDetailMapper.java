@@ -5,8 +5,6 @@ import store.product.entity.ProductDetail;
 public interface ProductDetailMapper {
     int deleteByPrimaryKey(Long productDetailId);
 
-    int insert(ProductDetail record);
-
     int insertSelective(ProductDetail record);
 
     ProductDetail selectByPrimaryKey(Long productDetailId);

@@ -1,5 +1,6 @@
 package store.user.service;
 
+import store.common.exception.ValidationException;
 import store.user.entity.User;
 import store.user.entity.UserLoginLog;
 import store.user.pojo.vo.UserVO;
@@ -12,13 +13,17 @@ import store.user.pojo.vo.UserVO;
  */
 public interface IUserService {
 
+    Integer perfectUser(String email, String realName, String telephone) throws ValidationException;
+
+    User getByLoginName(String loginName);
+
     UserVO getUserVOById(Long userId);
 
     Integer updatePasswordByEmail(String password, String email);
 
     Integer activeEmail(String email);
 
-    User getUserByLoginName(String userName);
+    User getUserByLoginName(String loginName);
 
     Integer updateLogById(Long userId, UserLoginLog userLoginLog);
 

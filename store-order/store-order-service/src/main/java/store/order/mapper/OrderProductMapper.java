@@ -10,15 +10,5 @@ public interface OrderProductMapper extends BaseMapper<OrderProduct> {
 
     int insertProducts(List<OrderShoppingCartVO> orderShoppingCartVOS, long orderId);
 
-    int deleteByPrimaryKey(Long orderProductId);
 
-    int insert(OrderProduct record);
-
-    int insertSelective(OrderProduct record);
-
-    OrderProduct selectByPrimaryKey(Long orderProductId);
-
-    int updateByPrimaryKeySelective(OrderProduct record);
-
-    int updateByPrimaryKey(OrderProduct record);
 }

@@ -1,8 +1,6 @@
 package store.os.common.config;
 
-import org.sitemesh.webapp.SiteMeshFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.boot.web.servlet.ServletListenerRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -34,7 +32,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(interceptorWeb())
                 .addPathPatterns("/index", "/list", "/search", "/detail/*", "/question/askList",
                         "/comment/list", "/buy/checkout", "/buy/confirm", "/cart/*", "/uc/**");
-
         registry.addInterceptor(interceptorLogin())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/", "/pass/**", "/static/**", "/uploads/**", "/common/**");

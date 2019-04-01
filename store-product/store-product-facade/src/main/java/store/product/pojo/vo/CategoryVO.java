@@ -7,9 +7,9 @@ import store.product.service.ICategoryService;
 import java.util.List;
 
 /**
- * @creator violet
- * @createTime 2019/2/27
- * @description
+ * creator violet
+ * createTime 2019/2/27
+ * description
  */
 public class CategoryVO implements BaseVO {
     /**
@@ -46,6 +46,19 @@ public class CategoryVO implements BaseVO {
      * 类目广告列表
      */
     private List<CategoryAdvertVO> categoryAdverts;
+
+    /**
+     * 子级类目列表
+     */
+    private List<CategoryVO> childrenCategories;
+
+    public List<CategoryVO> getChildrenCategories() {
+        return childrenCategories;
+    }
+
+    public void setChildrenCategories(List<CategoryVO> childrenCategories) {
+        this.childrenCategories = childrenCategories;
+    }
 
     public Long getCategoryId() {
         return categoryId;

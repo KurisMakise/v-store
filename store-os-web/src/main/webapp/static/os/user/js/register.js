@@ -598,7 +598,7 @@ $(function() {
 		if (!verifyCheck._click()) return;
 		$.ajax({
 			type : "POST",
-			url : baselocation + '/pass/emailActive',
+			url : baselocation + '/pass/email/verify',
 			data : {
 				captcha : captcha,
 				email : email,
@@ -626,7 +626,7 @@ $(function() {
 		if (!verifyCheck._click()) return;
 		$.ajax({
 			type : "POST",
-			url : baselocation + '/pass/perfectUser',
+			url : baselocation + '/pass/perfect',
 			data : {
 				email : email,
 				realName : realName,
@@ -810,7 +810,7 @@ function closeClause() {
  */
 $(function() {
 	$('#kaptchaImage').click(function() {
-		$(this).attr('src', baselocation + '/pass/captcha-image.jpg?' + Math.floor(Math.random() * 100));
+		$(this).attr('src', baselocation + '/pass/kaptcha?' + Math.floor(Math.random() * 100));
 	})
 });
 

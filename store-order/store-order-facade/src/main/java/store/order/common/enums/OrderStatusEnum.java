@@ -20,9 +20,9 @@ public enum OrderStatusEnum {
 
     TAKE_DELIVERY(6, "确认收货"),
 
-    AUTOMATICALLY_CANCEL_ORDER(11, "自动取消订单"),
+    AUTOMATICALLY_CANCEL_ORDER(9, "自动取消订单"),
 
-    MANUALLY_CANCEL_ORDER(12, "手动取消订单");
+    MANUALLY_CANCEL_ORDER(10, "手动取消订单");
 
 
     private Integer status;

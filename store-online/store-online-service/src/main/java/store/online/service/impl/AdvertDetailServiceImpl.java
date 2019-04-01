@@ -16,18 +16,21 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @creator violet
- * @createTime 2019/2/27
- * @description
+ * creator violet
+ * createTime 2019/2/27
+ * description
  */
 
 @Service
 public class AdvertDetailServiceImpl implements IAdvertDetailService {
-    @Autowired
-    private AdvertMapper advertMapper;
+    private final AdvertMapper advertMapper;
 
-    @Autowired
-    private AdvertDetailMapper advertDetailMapper;
+    private final AdvertDetailMapper advertDetailMapper;
+
+    public AdvertDetailServiceImpl(AdvertMapper advertMapper, AdvertDetailMapper advertDetailMapper) {
+        this.advertMapper = advertMapper;
+        this.advertDetailMapper = advertDetailMapper;
+    }
 
     @Override
     public Integer insertAdvertDetail(AdvertDetail advertDetail, String userName) {

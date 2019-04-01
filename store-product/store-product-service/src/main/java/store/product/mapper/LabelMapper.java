@@ -1,11 +1,10 @@
 package store.product.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import store.product.entity.Label;
 
-public interface LabelMapper {
+public interface LabelMapper extends BaseMapper<Label> {
     int deleteByPrimaryKey(Integer labelId);
-
-    int insert(Label record);
 
     int insertSelective(Label record);
 

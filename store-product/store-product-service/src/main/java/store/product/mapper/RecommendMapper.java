@@ -6,8 +6,6 @@ import store.product.entity.Recommend;
 public interface RecommendMapper extends BaseMapper<Recommend> {
     int deleteByPrimaryKey(Long recommendId);
 
-    int insert(Recommend record);
-
     int insertSelective(Recommend record);
 
     Recommend selectByPrimaryKey(Long recommendId);

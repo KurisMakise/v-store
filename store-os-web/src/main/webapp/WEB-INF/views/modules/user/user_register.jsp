@@ -86,7 +86,7 @@
               <div class="f-fl item-ifo">
                 <input type="text" name="registerCode" maxlength="4" class="txt03 f-r3 f-fl required btn_part1" tabindex="4" style="width:167px" id="randCode" data-valid="isNonEmpty" data-error="验证码不能为空" />
                 <span class="ie8 icon-close close hide"></span>
-                <label class="f-size12 c-999 f-fl f-pl10"> <img src="${ctx}/pass/captcha-image.jpg" id="kaptchaImage" /> </label>
+                <label class="f-size12 c-999 f-fl f-pl10"> <img src="${ctx}/pass/kaptcha" id="kaptchaImage" /> </label>
                 <label class="icon-sucessfill blank hide" style="left:380px"></label>
                 <label class="focusa">看不清？<a href="javascript:;" class="c-blue" onclick="$(this).parent().prev().prev().find('img').click()">换一张</a></label>
                 <label class="focus valid" style="left:370px"></label>
@@ -114,7 +114,7 @@
             <div class="item col-xs-12"> <span class="intelligent-label f-fl"><b class="ftx04">*</b>验证码：</span>
               <div class="f-fl item-ifo">
                 <input type="text" maxlength="6" name="emailCaptcha" id="verifyNo" class="txt03 f-r3 f-fl required btn_part2" tabindex="4" style="width:167px" data-valid="isNonEmpty" data-error="验证码不能为空" />
-                <span class="btn btn-gray f-r3 f-ml5 f-size13" id="time_box" disabled style="width:97px;display:none;">发送验证码</span> <span class="btn btn-gray f-r3 f-ml5 f-size13" id="verifyYz" data-type="/pass/sendEmailRegister" data-emailSign="" style="width:97px;">发送验证码</span> <span class="ie8 icon-close close hide" style="right:130px"></span>
+                <span class="btn btn-gray f-r3 f-ml5 f-size13" id="time_box" disabled style="width:97px;display:none;">发送验证码</span> <span class="btn btn-gray f-r3 f-ml5 f-size13" id="verifyYz" data-type="/pass/email/register" data-emailSign="" style="width:97px;">发送验证码</span> <span class="ie8 icon-close close hide" style="right:130px"></span>
                 <label class="icon-sucessfill blank hide"></label>
                 <label class="focus"><span>请查收电子邮箱邮件，并填写邮件中的验证码（此验证码3分钟内有效）</span></label>
                 <label class="focus valid"></label>
@@ -183,7 +183,8 @@
 </footer>
 <script src="${ctxsta}/common/jquery/jquery-2.1.4.min.js"></script> 
 <script src="${ctxsta}/common/bootstrap/js/bootstrap.min.js"></script> 
-<script src="${ctxsta}/os/user/js/register.js"></script> 
+<script src="${ctxsta}/os/user/js/register.js"></script>
+<script src="${ctxsta}/os/js/zySearch.js"></script>
 <script src="${ctxsta}/os/js/base.js"></script>
 </body>
 </html>
