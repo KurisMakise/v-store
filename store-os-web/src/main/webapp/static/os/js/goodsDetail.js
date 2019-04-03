@@ -141,12 +141,13 @@ $(function() {
 				$('#goodsDetailBtnBox').css('display', 'block');
 				$('#goodsDetailBtnBoxForInform').css('display', 'none');
 			} else {
-				_val += _val != "" ? "," : "";
+				_val += _val != "" ? ", " : "";
 				_val += v;
 			}
 		})
 		if (!!defaultstats) {
-			if (typeof (sys_item[_val]) == "undefined") {
+			_val = "["+_val+"]";
+ 			if (typeof (sys_item[_val]) == "undefined") {
 				$('#goodsDetailBtnBox').css('display', 'none');
 				$('#goodsDetailBtnBoxForInform').css('display', 'block');
 			} else {

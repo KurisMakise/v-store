@@ -4,14 +4,13 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import store.common.base.BaseController;
 import store.common.base.BasePageDTO;
 import store.common.support.page.PageInfo;
+import store.order.common.enums.OrderTypeEnum;
 import store.order.entity.Order;
+import store.order.pojo.vo.OrderVO;
 import store.order.service.IOrderService;
 import store.os.controller.common.util.SingletonLoginUtils;
 
@@ -39,14 +38,15 @@ public class UserOrderController extends BaseController {
     public String list(Model model,
                        @RequestParam(defaultValue = "1") Integer page,
                        @RequestParam(defaultValue = "6") Integer limit,
-                       @RequestParam(defaultValue = "0") Integer type,
-                       @RequestParam String search) {
+                       @RequestParam(defaultValue = "1") Integer type,
+                       @RequestParam(required = false) String search) {
         PageInfo pageInfo = new PageInfo(limit, page);
-        BasePageDTO<Order> orderBasePageDTO = orderService.list(SingletonLoginUtils.getUserId(), type, pageInfo, search);
+        BasePageDTO<OrderVO> orderBasePageDTO = orderService.listOrderPage(SingletonLoginUtils.getUserId(), OrderTypeEnum.typeOf(type).getTypeValue(), pageInfo, search);
 
-        model.addAttribute("orders", orderBasePageDTO.getList());
+        model.addAttribute("orderVOs", orderBasePageDTO.getList());
         model.addAttribute("pageInfo", orderBasePageDTO.getPageInfo());
-
+        model.addAttribute("type", type);
+        model.addAttribute("search", search);
         return "/modules/usercenter/user_order";
     }
 

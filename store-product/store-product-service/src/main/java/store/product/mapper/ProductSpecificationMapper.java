@@ -1,15 +1,13 @@
 package store.product.mapper;
 
-import store.product.entity.ProductSpecification;
+import store.product.pojo.vo.ProductSpecificationVO;
+import store.product.pojo.vo.SpecificationVO;
+
+import java.util.List;
 
 public interface ProductSpecificationMapper {
-    int deleteByPrimaryKey(Long productSpecId);
 
-    int insertSelective(ProductSpecification record);
+    List<ProductSpecificationVO> listProductSpecVO(Long productId, Integer status);
 
-    ProductSpecification selectByPrimaryKey(Long productSpecId);
-
-    int updateByPrimaryKeySelective(ProductSpecification record);
-
-    int updateByPrimaryKey(ProductSpecification record);
+    List<SpecificationVO> listSpecVO(Integer status);
 }

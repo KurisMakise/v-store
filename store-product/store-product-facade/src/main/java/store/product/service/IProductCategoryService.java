@@ -5,9 +5,9 @@ import store.common.support.page.PageInfo;
 import store.product.pojo.vo.ProductVO;
 
 /**
- * @creator violet
- * @createTime 2019/2/27
- * @description
+ * creator violet
+ * createTime 2019/2/27
+ * description
  */
 public interface IProductCategoryService {
     /**
@@ -27,4 +27,5 @@ public interface IProductCategoryService {
      * @return
      */
     BasePageDTO<ProductVO> listBySearch(String search, PageInfo pageInfo);
+
 }

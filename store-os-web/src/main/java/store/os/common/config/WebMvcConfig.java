@@ -1,5 +1,6 @@
 package store.os.common.config;
 
+import org.sitemesh.config.ConfigurableSiteMeshFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,9 +11,9 @@ import store.os.common.intercepter.InterceptorLogin;
 import store.os.common.intercepter.InterceptorWeb;
 
 /**
- * @creator violet
- * @createTime 2019/3/6
- * @description
+ * creator violet
+ * createTime 2019/3/6
+ * description
  */
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
@@ -28,7 +29,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        /**所有文件夹及里面的子文件夹;/*是所有文件夹，不含子文件夹 */
+        //所有文件夹及里面的子文件夹;/*是所有文件夹，不含子文件夹
         registry.addInterceptor(interceptorWeb())
                 .addPathPatterns("/index", "/list", "/search", "/detail/*", "/question/askList",
                         "/comment/list", "/buy/checkout", "/buy/confirm", "/cart/*", "/uc/**");
@@ -39,8 +40,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     //添加过滤器
     @Bean
-    public FilterRegistrationBean filterRegister() {
-        FilterRegistrationBean filter = new FilterRegistrationBean();
+    public FilterRegistrationBean<ConfigurableSiteMeshFilter> filterRegister() {
+        FilterRegistrationBean<ConfigurableSiteMeshFilter> filter = new FilterRegistrationBean<>();
         filter.setFilter(new WebSiteMeshFilter());
         return filter;
     }

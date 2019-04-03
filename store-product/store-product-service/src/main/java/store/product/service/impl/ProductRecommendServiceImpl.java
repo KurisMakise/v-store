@@ -51,9 +51,9 @@ public class ProductRecommendServiceImpl implements IProductRecommendService {
             for (ProductVO product : productVOS) {
                 ProductVO hotComment = productRecommendMapper.getHotComment(product.getProductId(), type, StatusEnum.SHOW.getStatus());
                 if (hotComment != null) {
-                    product.setUserName(hotComment.getUserName());
-                    product.setCommentId(hotComment.getCommentId());
-                    product.setContent(hotComment.getContent());
+//                    product.setUserName(hotComment.getUserName());
+//                    product.setCommentId(hotComment.getCommentId());
+//                    product.setContent(hotComment.getContent());
                 }
             }
             return productVOS;

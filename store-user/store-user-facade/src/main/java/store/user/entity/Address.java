@@ -32,13 +32,13 @@ public class Address {
 
     private String userAdress;
 
-    private Integer userZipcode;
+    private String userZipcode;
 
     private Date createTime;
 
     private Date updateTime;
 
-    public Address(Long addressId, Long userId, String userName, String userTag, String userPhone, Integer provinceId, String provinceName, Integer cityId, String cityName, Integer districtId, String districtName, String userAdress, Integer userZipcode, Date createTime, Date updateTime) {
+    public Address(Long addressId, Long userId, String userName, String userTag, String userPhone, Integer provinceId, String provinceName, Integer cityId, String cityName, Integer districtId, String districtName, String userAdress, String userZipcode, Date createTime, Date updateTime) {
         this.addressId = addressId;
         this.userId = userId;
         this.userName = userName;
@@ -156,11 +156,11 @@ public class Address {
         this.userAdress = userAdress == null ? null : userAdress.trim();
     }
 
-    public Integer getUserZipcode() {
+    public String getUserZipcode() {
         return userZipcode;
     }
 
-    public void setUserZipcode(Integer userZipcode) {
+    public void setUserZipcode(String userZipcode) {
         this.userZipcode = userZipcode;
     }
 

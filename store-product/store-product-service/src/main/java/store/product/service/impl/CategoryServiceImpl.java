@@ -16,6 +16,7 @@ import store.product.pojo.vo.ProductVO;
 import store.product.service.ICategoryService;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -98,8 +99,38 @@ public class CategoryServiceImpl implements ICategoryService {
 
     @Override
     public List<Category> listUpperByProductId(Long productId, Integer status) {
-        return null;
+        List<Category> categories = categoryMapper.selectList(null);
+        Category category = categoryMapper.getCategory(productId, status);
+        List<Category> upperCategories = upperCategory(category.getCategoryId(), new ArrayList<>(), categories);
+        Collections.reverse(upperCategories);
+        return upperCategories;
     }
+
+
+    /**
+     * 递归查询父目录
+     *
+     * @param parentId   父目录Id
+     * @param container  存放分类
+     * @param categories 分类列表
+     * @return 父目录列表
+     */
+    private List<Category> upperCategory(Long parentId, List<Category> container, List<Category> categories) {
+        if (parentId == null)
+            return container;
+        for (Category category : categories) {
+            if (parentId.equals(category.getCategoryId())) {
+                if (container.indexOf(category) == -1) { //防止无限循环
+                    container.add(category);
+                    upperCategory(category.getParentId(), container, categories);
+                } else {
+                    return container;
+                }
+            }
+        }
+        return container;
+    }
+
 
     @Override
     public BasePageDTO<Category> listParentByPage(PageInfo pageInfo, String search, Long parentId) {

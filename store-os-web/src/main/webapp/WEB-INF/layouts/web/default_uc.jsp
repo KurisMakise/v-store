@@ -64,9 +64,9 @@
             </div>
             <div class="box-bd">
               <ul class="uc-nav-list">
-                <li><a href="" target="_blank">个人信息</a></li>
-                <li><a href="" target="_blank">修改密码</a></li>
-                <li><a href="" target="_blank">社区VIP认证</a></li>
+                <li><a href="">个人信息</a></li>
+                <li><a href="">修改密码</a></li>
+                <li><a href="">社区VIP认证</a></li>
               </ul>
             </div>
           </div>

@@ -1,15 +1,17 @@
 package store.product.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import store.product.entity.ProductImage;
+import store.product.pojo.vo.ProductImageVO;
 
-public interface ProductImageMapper {
-    int deleteByPrimaryKey(Long picImgId);
+import java.util.List;
 
-    int insertSelective(ProductImage record);
+public interface ProductImageMapper extends BaseMapper<ProductImage> {
 
-    ProductImage selectByPrimaryKey(Long picImgId);
-
-    int updateByPrimaryKeySelective(ProductImage record);
-
-    int updateByPrimaryKey(ProductImage record);
+    /**
+     *
+     * @param productId 商品ID
+     * @return 商品展示图
+     */
+    List<ProductImageVO> getProductImageVO(Long productId);
 }

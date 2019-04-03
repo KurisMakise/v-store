@@ -1,15 +1,13 @@
 package store.product.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import store.product.entity.ProductParameter;
+import store.product.pojo.vo.ProductParameterVO;
 
-public interface ProductParameterMapper {
-    int deleteByPrimaryKey(Long productParameterId);
+import java.util.List;
 
-    int insertSelective(ProductParameter record);
+public interface ProductParameterMapper extends BaseMapper<ProductParameter> {
 
-    ProductParameter selectByPrimaryKey(Long productParameterId);
+    List<ProductParameterVO> listProductParameterVO(Long productId, Integer status);
 
-    int updateByPrimaryKeySelective(ProductParameter record);
-
-    int updateByPrimaryKey(ProductParameter record);
 }

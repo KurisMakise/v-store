@@ -5,6 +5,7 @@ import store.common.support.page.PageInfo;
 import store.order.entity.Order;
 import store.order.entity.OrderShipment;
 import store.order.pojo.vo.OrderShoppingCartVO;
+import store.order.pojo.vo.OrderVO;
 
 import java.util.List;
 
@@ -30,13 +31,12 @@ public interface IOrderService {
      * @param type     排序类型
      * @param pageInfo 分页信息
      * @param search   搜索条件
-     * @return 订单列表
+     * @return 订单分页列表
      */
-    BasePageDTO<Order> list(Long userId, Integer type, PageInfo pageInfo, String search);
+    BasePageDTO<OrderVO> listOrderPage(Long userId, String type, PageInfo pageInfo, String search);
 
     /**
-     *
-     * @param userId 用户ID
+     * @param userId      用户ID
      * @param orderNumber 订单编号
      * @return 订单
      */

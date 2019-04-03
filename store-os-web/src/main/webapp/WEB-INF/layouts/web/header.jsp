@@ -18,10 +18,10 @@
         <c:if test="${not empty user.userNumber}">
         <div class="topbar-info" id="J_userInfo"><span class="user"><a rel="nofollow" class="user-name" href="" target="_blank"><span class="name">${user.userName}</span>&nbsp;&nbsp;<i class="glyphicon glyphicon-chevron-down"></i></a>
           <ul class="user-menu" style="display: none;">
-            <li><a rel="nofollow" href="${ctx}/uc/user/portal" target="_blank">个人中心</a></li>
-            <li><a rel="nofollow" href="${ctx}/uc/order/comment" target="_blank">评价晒单</a></li>
-            <li><a rel="nofollow" href="${ctx}/uc/user/favorite" target="_blank">我的喜欢</a></li>
-            <li><a rel="nofollow" href="" target="_blank">猫宁账户</a></li>
+            <li><a rel="nofollow" href="${ctx}/uc/user/portal">个人中心</a></li>
+            <li><a rel="nofollow" href="${ctx}/uc/order/comment">评价晒单</a></li>
+            <li><a rel="nofollow" href="${ctx}/uc/user/favorite">我的喜欢</a></li>
+            <li><a rel="nofollow" href="" >猫宁账户</a></li>
             <li><a rel="nofollow" href="${ctx}/pass/logout">退出登录</a></li>
           </ul>
           </span><span class="sep">|</span><span class="message"><a rel="nofollow" href="">消息通知<i class="J_miMessageTotal"></i></a></span><span class="sep">|</span><a rel="nofollow" class="link link-order" href="${ctx}/uc/order/list" target="_blank">我的订单</a></div>

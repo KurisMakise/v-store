@@ -1,11 +1,12 @@
 package store.order.service.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.stereotype.Service;
+import store.common.base.BasePageDTO;
+import store.common.support.page.PageInfo;
 import store.order.common.enums.OrderStatusEnum;
 import store.order.common.util.OrderUtils;
 import store.order.entity.Order;
-import store.order.entity.OrderProduct;
 import store.order.entity.OrderShipment;
 import store.order.entity.OrderStatus;
 import store.order.mapper.OrderMapper;
@@ -13,6 +14,7 @@ import store.order.mapper.OrderProductMapper;
 import store.order.mapper.OrderShipmentMapper;
 import store.order.mapper.OrderStatusMapper;
 import store.order.pojo.vo.OrderShoppingCartVO;
+import store.order.pojo.vo.OrderVO;
 import store.order.service.IOrderService;
 
 import java.util.Date;
@@ -27,17 +29,20 @@ import java.util.List;
 @Service
 public class OrderServiceImpl implements IOrderService {
 
-    @Autowired
-    private OrderMapper orderMapper;
+    private final OrderMapper orderMapper;
 
-    @Autowired
-    private OrderShipmentMapper orderShipmentMapper;
+    private final OrderShipmentMapper orderShipmentMapper;
 
-    @Autowired
-    private OrderStatusMapper orderStatusMapper;
+    private final OrderStatusMapper orderStatusMapper;
 
-    @Autowired
-    private OrderProductMapper orderProductMapper;
+    private final OrderProductMapper orderProductMapper;
+
+    public OrderServiceImpl(OrderMapper orderMapper, OrderShipmentMapper orderShipmentMapper, OrderStatusMapper orderStatusMapper, OrderProductMapper orderProductMapper) {
+        this.orderMapper = orderMapper;
+        this.orderShipmentMapper = orderShipmentMapper;
+        this.orderStatusMapper = orderStatusMapper;
+        this.orderProductMapper = orderProductMapper;
+    }
 
 
     @Override
@@ -70,6 +75,21 @@ public class OrderServiceImpl implements IOrderService {
         orderStatusMapper.insert(orderStatus);
 
         return orderNumber;
+    }
+
+    @Override
+    public BasePageDTO<OrderVO> listOrderPage(Long userId, String type, PageInfo pageInfo, String search) {
+        List<OrderVO> orders = orderMapper.listOrder(userId, type, pageInfo, search);
+        pageInfo.setTotal(orderMapper.getCount(userId, type, search));
+        return new BasePageDTO<>(pageInfo, orders);
+    }
+
+    @Override
+    public Order getOrder(Long userId, Long orderNumber) {
+        QueryWrapper<Order> orderQueryWrapper = new QueryWrapper<>();
+        orderQueryWrapper.eq("user_id", userId);
+        orderQueryWrapper.eq("order_number", orderNumber);
+        return orderMapper.selectOne(orderQueryWrapper);
     }
 
 }

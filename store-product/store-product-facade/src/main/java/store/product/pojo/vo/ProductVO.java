@@ -1,11 +1,12 @@
 package store.product.pojo.vo;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
- * @creator violet
- * @createTime 2019/3/7
- * @description
+ * creator violet
+ * createTime 2019/3/7
+ * description
  */
 public class ProductVO {
 
@@ -61,24 +62,22 @@ public class ProductVO {
     private Integer commentNumber;
 
     /**
-     * 评论ID
+     * 商品评论
      */
-    private Long commentId;
-
-    /**
-     * 评论内容
-     */
-    private String content;
-
-    /**
-     * 评论人昵称
-     */
-    private String userName;
+    private List<Comment> comments;
 
     /**
      * 标签名称
      */
     private String labelName;
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     public Long getRecommendProductId() {
         return recommendProductId;
@@ -158,30 +157,6 @@ public class ProductVO {
 
     public void setCommentNumber(Integer commentNumber) {
         this.commentNumber = commentNumber;
-    }
-
-    public Long getCommentId() {
-        return commentId;
-    }
-
-    public void setCommentId(Long commentId) {
-        this.commentId = commentId;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
     }
 
     public String getLabelName() {

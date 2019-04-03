@@ -106,6 +106,7 @@ public class PageInfo {
 
     public void setCurrent(long current) {
         this.current = current < 0 ? 0 : current;
+        this.offset = (this.current - 1) * this.limit;
     }
 
     public String getSort() {

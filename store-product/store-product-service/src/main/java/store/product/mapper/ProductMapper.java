@@ -1,15 +1,7 @@
 package store.product.mapper;
 
-import store.product.entity.Product;
+import store.product.pojo.vo.ProductVO;
 
 public interface ProductMapper {
-    int deleteByPrimaryKey(Long productId);
-
-    int insertSelective(Product record);
-
-    Product selectByPrimaryKey(Long productId);
-
-    int updateByPrimaryKeySelective(Product record);
-
-    int updateByPrimaryKey(Product record);
+    ProductVO getProductVOByNumber(Long productNumber);
 }

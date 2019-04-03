@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * author  violet
  * createTime 2019/3/23 17:53
- * description TODO
+ * description
  * version 1.0
  */
 public class OrderVO {
@@ -25,6 +25,11 @@ public class OrderVO {
      * 订单编号,系统生成
      */
     private Long orderNumber;
+
+    /**
+     * 订单配送用户名
+     */
+    private String orderShipmentUserName;
 
     /**
      * 用户ID
@@ -107,7 +112,7 @@ public class OrderVO {
     private List<OrderProduct> orderProducts;
 
     /**
-     * 订单状态表
+     * 订单操作记录状态表
      */
     private List<OrderStatus> orderStatusList;
 
@@ -262,4 +267,13 @@ public class OrderVO {
     public void setOrderStatusList(List<OrderStatus> orderStatusList) {
         this.orderStatusList = orderStatusList;
     }
+
+    public String getOrderShipmentUserName() {
+        return orderShipmentUserName;
+    }
+
+    public void setOrderShipmentUserName(String orderShipmentUserName) {
+        this.orderShipmentUserName = orderShipmentUserName;
+    }
+
 }

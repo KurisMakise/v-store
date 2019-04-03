@@ -15,105 +15,13 @@
   <sql id="Base_Column_List">
     pic_img_id, product_id, pic_img, sort, status, create_time, create_by
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from os_product_image
-    where pic_img_id = #{picImgId,jdbcType=BIGINT}
+
+
+  <select id="getProductImageVO" resultType="store.product.pojo.vo.ProductImageVO" >
+    SELECT pic_img    as picImg,
+           product_id as productId,
+           pic_img_id as picImgId
+    FROM os_product_image
+    WHERE product_id = #{productId}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from os_product_image
-    where pic_img_id = #{picImgId,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="store.product.entity.ProductImage">
-    insert into os_product_image (pic_img_id, product_id, pic_img, 
-      sort, status, create_time, 
-      create_by)
-    values (#{picImgId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{picImg,jdbcType=VARCHAR}, 
-      #{sort,jdbcType=TINYINT}, #{status,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{createBy,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="store.product.entity.ProductImage">
-    insert into os_product_image
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="picImgId != null">
-        pic_img_id,
-      </if>
-      <if test="productId != null">
-        product_id,
-      </if>
-      <if test="picImg != null">
-        pic_img,
-      </if>
-      <if test="sort != null">
-        sort,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="createBy != null">
-        create_by,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="picImgId != null">
-        #{picImgId,jdbcType=BIGINT},
-      </if>
-      <if test="productId != null">
-        #{productId,jdbcType=BIGINT},
-      </if>
-      <if test="picImg != null">
-        #{picImg,jdbcType=VARCHAR},
-      </if>
-      <if test="sort != null">
-        #{sort,jdbcType=TINYINT},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=TINYINT},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createBy != null">
-        #{createBy,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="store.product.entity.ProductImage">
-    update os_product_image
-    <set>
-      <if test="productId != null">
-        product_id = #{productId,jdbcType=BIGINT},
-      </if>
-      <if test="picImg != null">
-        pic_img = #{picImg,jdbcType=VARCHAR},
-      </if>
-      <if test="sort != null">
-        sort = #{sort,jdbcType=TINYINT},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=TINYINT},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createBy != null">
-        create_by = #{createBy,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where pic_img_id = #{picImgId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="store.product.entity.ProductImage">
-    update os_product_image
-    set product_id = #{productId,jdbcType=BIGINT},
-      pic_img = #{picImg,jdbcType=VARCHAR},
-      sort = #{sort,jdbcType=TINYINT},
-      status = #{status,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      create_by = #{createBy,jdbcType=VARCHAR}
-    where pic_img_id = #{picImgId,jdbcType=BIGINT}
-  </update>
 </mapper>

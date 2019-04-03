@@ -1,15 +1,10 @@
 package store.product.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import store.product.entity.ProductAttribute;
+import store.product.pojo.vo.ProductAttributeVO;
 
-public interface ProductAttributeMapper {
-    int deleteByPrimaryKey(Long attributeId);
+public interface ProductAttributeMapper extends BaseMapper<ProductAttribute> {
 
-    int insertSelective(ProductAttribute record);
-
-    ProductAttribute selectByPrimaryKey(Long attributeId);
-
-    int updateByPrimaryKeySelective(ProductAttribute record);
-
-    int updateByPrimaryKey(ProductAttribute record);
+    ProductAttributeVO getProductAttrVO(Long productId);
 }

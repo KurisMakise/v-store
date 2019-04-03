@@ -8,10 +8,11 @@ package store.order.common.enums;
  */
 public enum OrderTypeEnum {
     ALL_VALID(1, "1,2,3,4,5,6", "全部有效订单"),
-    TO_BE_PAID(2, "2", "待支付"),
-    PICKING(3, "3,4,5", "待收货"),
+    TO_BE_PAID(2, "1", "待支付"),
+    PICKING(3, "2,3,4,5", "待收货"),
     CLOSE(4, "9,10", "已关闭"),
-    ALL_ORDER(5, "1,2,3,4,5,6,9,10", "全部订单");
+    ALL_ORDER(5, "1,2,3,4,5,6,9,10", "全部订单"),
+    UNKNOWN_ORDER(6, "", "未知订单类型");
 
     private Integer type;
 
@@ -35,5 +36,14 @@ public enum OrderTypeEnum {
 
     public String getTypeInfo() {
         return typeInfo;
+    }
+
+    public static OrderTypeEnum typeOf(Integer type) {
+        for (OrderTypeEnum orderType : values()) {
+            if (orderType.getType().equals(type)) {
+                return orderType;
+            }
+        }
+        return OrderTypeEnum.UNKNOWN_ORDER;
     }
 }

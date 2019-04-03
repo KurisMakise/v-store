@@ -11,12 +11,12 @@
 <jsp:include page="/WEB-INF/views/modules/common/site_header.jsp" />
 <!-- 轮播top菜单导航引入 -->
 
-<c:if test="${not empty product}"> 
+<c:if test="${not empty productVO}">
   <!--     分类导航栏 begin       -->
   <div class="breadcrumbs">
     <div class="container-fluid"><a href='${ctx}/index'>首页</a>
       <c:forEach items="${upperCategories}" var="upperCategory"><span class="sep">&gt;</span><a href="${ctx}/list?categoryId=${upperCategory.categoryId}">${upperCategory.name}</a></c:forEach>
-      <span class="sep">&gt;</span><a href="${ctx}/detail/${product.productNumber}">${product.name}</a> </div>
+      <span class="sep">&gt;</span><a href="${ctx}/detail/${productVO.productNumber}">${productVO.name}</a> </div>
   </div>
   <!--     分类导航栏 end       --> 
   
@@ -34,8 +34,8 @@
               </div>
               <div class="goods-small-pic clearfix">
                 <ul id="goodsPicList">
-                  <c:forEach items="${productImages}" var="productImage">
-                    <li> <img src="${ctximg}/${productImage.picImg}" alt="${product.name}" title="${product.name}"> </li>
+                  <c:forEach items="${productImageVOS}" var="productImage">
+                    <li> <img src="${ctximg}/${productImage.picImg}" alt="${productVO.name}" title="${productVO.name}"> </li>
                   </c:forEach>
                 </ul>
               </div>
@@ -46,34 +46,34 @@
             <dl class="goods-info-box ">
               <dt class="goods-info-head">
                 <dl id="J_goodsInfoBlock">
-                  <dt id="goodsName" class="goods-name"> ${product.name} </dt>
+                  <dt id="goodsName" class="goods-name"> ${productVO.name} </dt>
                   <dd class="goods-subtitle">
-                    <p> ${product.introduce} </p>
+                    <p> ${productVO.introduce} </p>
                   </dd>
                   <dd class="goods-info-head-tip">
                     <ul>
-                      <c:if test="${not empty product.labelName}">
-                        <li class="others"><i>${product.labelName}</i> </li>
+                      <c:if test="${not empty productVO.labelName}">
+                        <li class="others"><i>${productVO.labelName}</i> </li>
                       </c:if>
                     </ul>
                   </dd>
-                  <dd class="goods-info-head-price clearfix"> <b class="J_mi_goodsPrice sys_item_price">${product.showPrice}</b> <i>&nbsp;元</i> <span> 赠送积分:<span class="J_mi_marketPrice sys_item_score">${product.showScore}</span> </span> </dd>
-                  <c:forEach items="${kindVOs}" var="kindVO">
-                    <dd class="goods-info-head-size clearfix sys_item_specpara"  data-sid="${kindVO.specificationId}"> <span class="style-label">${kindVO.name}：</span>
+                  <dd class="goods-info-head-price clearfix"> <b class="J_mi_goodsPrice sys_item_price">${productVO.showPrice}</b> <i>&nbsp;元</i> <span> 赠送积分:<span class="J_mi_marketPrice sys_item_score">${productVO.showScore}</span> </span> </dd>
+                  <c:forEach items="${specificationVOS}" var="specficationVO">
+                    <dd class="goods-info-head-size clearfix sys_item_specpara"  data-sid="${specficationVO.specificationId}"> <span class="style-label">${productVO.name}：</span>
                       <ul class="clearfix">
-                        <c:forEach items="${kindVO.kindAttributes}" var="kindAttribute">
-                          <li data-aid="${kindAttribute.specAttrId}"><a href="javascript:;" class="item goodsStyle" title="${kindAttribute.name}">${kindAttribute.name}</a></li>
+                        <c:forEach items="${specficationVO.specificationAttributeVOS}" var="specAttributeVO">
+                          <li data-aid="${specAttributeVO.specAttrId}"><a href="javascript:;" class="item goodsStyle" title="${specAttributeVO.specAttrName}">${specAttributeVO.specAttrName}</a></li>
                         </c:forEach>
                       </ul>
                     </dd>
                   </c:forEach>
-                  <dd class="goods-info-head-cart" id="goodsDetailBtnBox"> <a href="javascript:void(0)" onclick="add_cart(this)" id="goodsDetailAddCartBtn" class="btn btn-primary goods-add-cart-btn" data-product-spec-number=""> <i class="glyphicon glyphicon-shopping-cart"></i>加入购物车 </a> <a id="goodsDetailCollectBtn" data-pid="${product.productNumber}" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn" href="javascript:void(0)" onclick="add_favorite(this);"> <i class="glyphicon glyphicon-heart-empty"></i>&nbsp;喜欢&nbsp; </a> </dd>
-                  <dd class="goods-info-head-cart" id="goodsDetailBtnBoxForInform" style="display: none;"> <a href="" class="btn  btn-gray goods-over-btn" data-stat-id="01b1dbea83f08143"> <i class="iconfont "></i>到货通知 </a> <a id="goodsDetailCollectBtn" data-pid="${product.productNumber}" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " href="javascript:void(0)" onclick="add_favorite(this);"> <i class="glyphicon glyphicon-heart-empty"></i>&nbsp;喜欢&nbsp;</a></dd>
+                  <dd class="goods-info-head-cart" id="goodsDetailBtnBox"> <a href="javascript:void(0)" onclick="add_cart(this)" id="goodsDetailAddCartBtn" class="btn btn-primary goods-add-cart-btn" data-product-spec-number=""> <i class="glyphicon glyphicon-shopping-cart"></i>加入购物车 </a> <a id="goodsDetailCollectBtn" data-pid="${productVO.productNumber}" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn" href="javascript:void(0)" onclick="add_favorite(this);"> <i class="glyphicon glyphicon-heart-empty"></i>&nbsp;喜欢&nbsp; </a> </dd>
+                  <dd class="goods-info-head-cart" id="goodsDetailBtnBoxForInform" style="display: none;"> <a href="" class="btn  btn-gray goods-over-btn" data-stat-id="01b1dbea83f08143"> <i class="iconfont "></i>到货通知 </a> <a id="goodsDetailCollectBtn" data-pid="${productVO.productNumber}" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " href="javascript:void(0)" onclick="add_favorite(this);"> <i class="glyphicon glyphicon-heart-empty"></i>&nbsp;喜欢&nbsp;</a></dd>
                   <dd class="goods-info-head-userfaq">
                     <ul class="detail-list">
-                      <li class="J_scrollHref"><a href="#goodsComment" data-index='2' class='J_scrollHref'><i class="glyphicon glyphicon-edit"></i>&nbsp;评价&nbsp;<b>${productAttribute.commentNumber}</b> </a> </li>
-                      <li class="J_scrollHref mid"><a href="#goodsFaq" data-index='3' class='J_scrollHref'><i class="glyphicon glyphicon-edit"></i>&nbsp;提问&nbsp;<b>${productAttribute.questionNumber}</b> </a> </li>
-                      <li class="J_scrollHref"><a href="#goodsComment" data-index='2' class='J_scrollHref'><i class="glyphicon glyphicon-edit"></i>&nbsp;满意度&nbsp;<b>${productAttribute.commentAverage}</b> </a> </li>
+                      <li class="J_scrollHref"><a href="#goodsComment" data-index='2' class='J_scrollHref'><i class="glyphicon glyphicon-edit"></i>&nbsp;评价&nbsp;<b>${productAttrVO.commentNumber}</b> </a> </li>
+                      <li class="J_scrollHref mid"><a href="#goodsFaq" data-index='3' class='J_scrollHref'><i class="glyphicon glyphicon-edit"></i>&nbsp;提问&nbsp;<b>${productAttrVO.questionNumber}</b> </a> </li>
+                      <li class="J_scrollHref"><a href="#goodsComment" data-index='2' class='J_scrollHref'><i class="glyphicon glyphicon-edit"></i>&nbsp;满意度&nbsp;<b>${productAttrVO.commentAverage}</b> </a> </li>
                     </ul>
                   </dd>
                 </dl>
@@ -91,8 +91,8 @@
         <ul class="detail-list J_detailNav J_originNav" >
           <li class='current detail-nav'> <a href="#goodsDesc" data-index='0' class='J_scrollHref'>详情描述</a> </li>
           <li class='detail-nav'> <a href="#goodsParam" data-index='1' class='J_scrollHref'>规格参数</a> </li>
-          <li class='detail-nav'> <a href="#goodsComment" data-index='2' class='J_scrollHref'>评价晒单 <i>(${productAttribute.commentNumber})</i></a> </li>
-          <li class='last detail-nav'> <a href="#goodsFaq" data-index='3' class='J_scrollHref'>商品提问 <i>(${productAttribute.questionNumber})</i></a> </li>
+          <li class='detail-nav'> <a href="#goodsComment" data-index='2' class='J_scrollHref'>评价晒单 <i>(${productAttrVO.commentNumber})</i></a> </li>
+          <li class='last detail-nav'> <a href="#goodsFaq" data-index='3' class='J_scrollHref'>商品提问 <i>(${productAttrVO.questionNumber})</i></a> </li>
         </ul>
       </div>
     </div>
@@ -102,7 +102,7 @@
     <div class="goods-detail-desc J_itemBox" id="goodsDesc" style="display: block;">
       <div class="container">
         <div class="shape-container">
-          <p class="detailBlock"> ${product.description} </p>
+          <p class="detailBlock"> ${productVO.description} </p>
         </div>
       </div>
     </div>
@@ -119,13 +119,13 @@
     <div class="goods-detail-param  J_itemBox">
       <div class="container-fluid">
         <ul class='param-list'>
-          <li class='goods-img'> <img alt="${pruduct.name}" src="${ctximg}/${product.picImg}" title="${pruduct.name}"> </li>
+          <li class='goods-img'> <img alt="${productVO.name}" src="${ctximg}/${productVO.picImg}" title="${productVO.name}"> </li>
           <li class="goods-tech-spec">
             <dl>
               <dd>
                 <ul>
-                  <c:forEach items="${productParameters}" var="productParameter">
-                    <li> ${productParameter.name}：${productParameter.value} </li>
+                  <c:forEach items="${productParameterVOS}" var="productParameterVO">
+                    <li> ${productParameterVO.name}：${productParameterVO.value} </li>
                   </c:forEach>
                 </ul>
               </dd>
@@ -144,18 +144,18 @@
       </div>
     </div>
     <div class="goods-detail-comment J_itemBox hasContent" id="goodsCommentContent" style="display: block;">
-      <div class="goods-detail-comment-groom" id="J_recommendComment" style="display:${productAttribute.commentNumber eq 0?'none':'black'}">
+      <div class="goods-detail-comment-groom" id="J_recommendComment" style="display:${productAttrVO.commentNumber eq 0?'none':'black'}">
         <div class="container-fluid">
           <ul class="main-block">
             <li class="percent">
-              <div class="per-num"> <i>${productAttribute.commentAverage}</i>% </div>
+              <div class="per-num"> <i>${productAttrVO.commentAverage}</i>% </div>
               <div class="per-title"> 购买后满意 </div>
-              <div class="per-amount"> <i>${productAttribute.commentNumber}</i>名用户投票 </div>
+              <div class="per-amount"> <i>${productAttrVO.commentNumber}</i>名用户投票 </div>
             </li>
           </ul>
         </div>
       </div>
-      <div class="goods-detail-comment-content" id="J_commentDetailBlock" style="display:${productAttribute.commentNumber eq 0?'none':'black'}">
+      <div class="goods-detail-comment-content" id="J_commentDetailBlock" style="display:${productAttrVO.commentNumber eq 0?'none':'black'}">
         <div class="container-fluid">
           <div class="row">
             <div class="span14 goods-detail-comment-list">
@@ -172,11 +172,11 @@
               <ul class="comment-timeline-list" id="J_timelineComment">
               </ul>
             </div>
-            <div class="span20 goods-detail-comment-more" style="display:${productAttribute.commentNumber gt 10?'block':'none'}" id="J_loadMoreHref"> <a target="_blank" href="${ctx}/comment/list?productNumber=${product.productNumber}">查看更多评价</a> </div>
+            <div class="span20 goods-detail-comment-more" style="display:${productAttrVO.commentNumber gt 10?'block':'none'}" id="J_loadMoreHref"> <a target="_blank" href="${ctx}/comment/list?productNumber=${productVO.productNumber}">查看更多评价</a> </div>
           </div>
         </div>
       </div>
-      <div class="goods-detail-null-content" style="display:${productAttribute.commentNumber eq 0?'block':'none'}" id="J_commentTipInfo">
+      <div class="goods-detail-null-content" style="display:${productAttrVO.commentNumber eq 0?'block':'none'}" id="J_commentTipInfo">
         <div class="container-fluid">
           <h3>暂时还没有评价</h3>
           <p>期待你分享科技带来的乐趣</p>
@@ -210,7 +210,7 @@
             <p>对商品还不太了解，问问看吧</p>
           </div>
         </div>
-        <div class="more-question"> <a href="${ctx}/question/asklist?productNumber=${product.productNumber}" target="_blank" style="display:${productAttribute.questionNumber gt 6?'block':'none'}">查看全部 <span id="J_goodsQuestionAmount"></span> ${productAttribute.questionNumber}条已回答的问题 &gt;</a> </div>
+        <div class="more-question"> <a href="${ctx}/question/asklist?productNumber=${productVO.productNumber}" target="_blank" style="display:${productAttribute.questionNumber gt 6?'block':'none'}">查看全部 <span id="J_goodsQuestionAmount"></span> ${productAttrVO.questionNumber}条已回答的问题 &gt;</a> </div>
       </div>
     </div>
     <!-- 商品详情商品提问 end --> 
@@ -275,9 +275,9 @@
       <div class="row">
         <div class="span4">
           <dl class="goods-sub-bar-info clearfix">
-            <dt> <img alt="${pruduct.name}" src="${ctximg}/${product.picImg}"> </dt>
-            <dd> <strong>${product.name}</strong>
-              <p> <em><span class="J_mi_goodsPrice">${product.showPrice}</span>元</em> <del><span class="J_mi_marketPrice">79元</span></del> </p>
+            <dt> <img alt="${productVO.name}" src="${ctximg}/${productVO.picImg}"> </dt>
+            <dd> <strong>${productVO.name}</strong>
+              <p> <em><span class="J_mi_goodsPrice">${productVO.showPrice}</span>元</em> <del><span class="J_mi_marketPrice">79元</span></del> </p>
             </dd>
           </dl>
         </div>
@@ -286,8 +286,8 @@
             <ul class="detail-list J_pro_related_btns  J_detailNav">
               <li class="current"> <a href="#goodsDesc"  data-index="1"  class="J_scrollHref">详情描述</a> </li>
               <li> <a href="#goodsParam" data-index="1" class="J_scrollHref">规格参数</a> </li>
-              <li> <a href="#goodsComment" data-index="2" class="J_scrollHref">评价晒单 <i>(${productAttribute.commentNumber})</i></a> </li>
-              <li> <a href="#goodsFaq" data-index="3" class="J_scrollHref">商品提问 <i>(${productAttribute.questionNumber})</i></a> </li>
+              <li> <a href="#goodsComment" data-index="2" class="J_scrollHref">评价晒单 <i>(${productAttrVO.commentNumber})</i></a> </li>
+              <li> <a href="#goodsFaq" data-index="3" class="J_scrollHref">商品提问 <i>(${productAttrVO.questionNumber})</i></a> </li>
             </ul>
           </div>
         </div>
@@ -299,7 +299,7 @@
   </div>
   <!-- 跟随 导航 end --> 
 </c:if>
-<c:if test="${empty product}">
+<c:if test="${empty productVO}">
   <div class="container-fluid">
     <div class="xm-box ">
       <div class="bd">
@@ -312,17 +312,14 @@
     </div>
   </div>
 </c:if>
-<myfooter> 
-  <!-- layer javascript --> 
-  <script src="${ctxsta}/common/layer/layer.js"></script> 
-  <script src="${ctxsta}/os/js/goodsDetail.js"></script> 
+<myfooter>
   <script>
 //价格json
-var sys_item=${productSpecifications};
-var default_price=${product.showPrice};
-var default_score=${product.showScore};
-var productNumber=${product.productNumber};
-var productId=${product.productId};
+var default_price=${productVO.showPrice};
+var default_score=${productVO.showScore};
+var productNumber=${productVO.productNumber};
+var productId=${productVO.productId};
+var sys_item=${productSpecVOS};
 
 // 判断是否收藏商品
 $(function(){
@@ -344,7 +341,7 @@ $(function(){
 				$('#goodsDetailCollectBtn i').removeClass("red");
 			}
 		}
-	})	
+	})
 })
 // 收藏商品
 function add_favorite(obj) {
@@ -364,7 +361,7 @@ function add_favorite(obj) {
 					});
 				}
 			}
-		})			
+		})
 	}else {
 		$.ajax({
 			type : 'post',
@@ -379,10 +376,13 @@ function add_favorite(obj) {
 					});
 				}
 			}
-		})			
+		})
 	}
 }
-</script> 
+</script>
+  <!-- layer javascript -->
+  <script src="${ctxsta}/common/layer/layer.js"></script>
+  <script src="${ctxsta}/os/js/goodsDetail.js"></script>
 </myfooter>
 </body>
 </html>

@@ -54,7 +54,7 @@
 		    os_shopping_cart c
 		LEFT JOIN os_product_specification s ON c.product_spec_number = s.product_spec_number
 		LEFT JOIN os_product p ON s.product_id = p.product_id
-		LEFT JOIN os_product_spec_rel r ON s.product_spec_number = r.product_spec_number
+		LEFT JOIN os_product_spec_rel r ON s.product_spec_number = r.product_spec_id
 		LEFT JOIN os_specification_attribute a ON r.spec_attr_id = a.spec_attr_id
 	    <where>
             <if test="userId != null">

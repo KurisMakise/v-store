@@ -34,275 +34,44 @@
     shelve_by, update_time, update_by, search_key, page_title, page_description, page_keyword, 
     remarks
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from os_product
-    where product_id = #{productId,jdbcType=BIGINT}
+    <resultMap id="productVOResultMap" type="store.product.pojo.vo.ProductVO">
+        <id column="productId" property="productId"/>
+        <result column="productNumber" property="productNumber"/>
+        <result column="name" property="name"/>
+        <result column="showPrice" property="showPrice"/>
+        <result column="showScore" property="showScore"/>
+        <result column="introduce" property="introduce"/>
+        <result column="description" property="description"/>
+        <result column="picImg" property="picImg"/>
+        <result column="commentNumber" property="commentNumber"/>
+        <result column="labelName" property="labelName"/>
+        <collection property="comments" ofType="store.product.pojo.vo.Comment">
+            <id column="commentId" property="commentId"/>
+            <result column="content" property="content"/>
+            <result column="userName" property="userName"/>
+        </collection>
+     </resultMap>
+  <select id="getProductVOByNumber" resultMap="productVOResultMap">
+        SELECT recommend_product_id as recommentProductId,
+               p.product_id         as productId,
+               p.product_number     as productNumber,
+               p.name,
+               p.show_price         as showPrice,
+               p.show_score         as showScore,
+               p.introduce,
+               d.description,
+               p.pic_img            as picImg,
+               a.comment_number     as commentNumber,
+               c.comment_id         as commentId,
+               c.content,
+               c.user_name          as userName,
+               l.label_name         as labelName
+        FROM os_product p
+                 LEFT JOIN os_product_detail d ON p.product_id = d.product_id
+                 LEFT JOIN os_comment c ON p.product_id = c.product_id
+                 LEFT JOIN os_label l ON p.label_id = l.label_id
+                 LEFT JOIN os_product_attribute a ON p.product_id = a.product_id
+                 LEFT JOIN os_product_recommend r ON p.product_id = r.product_id
+        WHERE p.product_number = #{productNumber}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from os_product
-    where product_id = #{productId,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="store.product.entity.Product">
-    insert into os_product (product_id, product_number, label_id, 
-      name, show_score, show_price, 
-      introduce, pic_img, show_in_top, 
-      show_in_nav, show_in_hot, show_in_shelve, 
-      create_time, create_by, shelve_time, 
-      shelve_by, update_time, update_by, 
-      search_key, page_title, page_description, 
-      page_keyword, remarks)
-    values (#{productId,jdbcType=BIGINT}, #{productNumber,jdbcType=BIGINT}, #{labelId,jdbcType=INTEGER}, 
-      #{name,jdbcType=VARCHAR}, #{showScore,jdbcType=INTEGER}, #{showPrice,jdbcType=DECIMAL}, 
-      #{introduce,jdbcType=VARCHAR}, #{picImg,jdbcType=VARCHAR}, #{showInTop,jdbcType=TINYINT}, 
-      #{showInNav,jdbcType=TINYINT}, #{showInHot,jdbcType=TINYINT}, #{showInShelve,jdbcType=TINYINT}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{shelveTime,jdbcType=TIMESTAMP}, 
-      #{shelveBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}, 
-      #{searchKey,jdbcType=VARCHAR}, #{pageTitle,jdbcType=VARCHAR}, #{pageDescription,jdbcType=VARCHAR}, 
-      #{pageKeyword,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="store.product.entity.Product">
-    insert into os_product
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="productId != null">
-        product_id,
-      </if>
-      <if test="productNumber != null">
-        product_number,
-      </if>
-      <if test="labelId != null">
-        label_id,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="showScore != null">
-        show_score,
-      </if>
-      <if test="showPrice != null">
-        show_price,
-      </if>
-      <if test="introduce != null">
-        introduce,
-      </if>
-      <if test="picImg != null">
-        pic_img,
-      </if>
-      <if test="showInTop != null">
-        show_in_top,
-      </if>
-      <if test="showInNav != null">
-        show_in_nav,
-      </if>
-      <if test="showInHot != null">
-        show_in_hot,
-      </if>
-      <if test="showInShelve != null">
-        show_in_shelve,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="createBy != null">
-        create_by,
-      </if>
-      <if test="shelveTime != null">
-        shelve_time,
-      </if>
-      <if test="shelveBy != null">
-        shelve_by,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-      <if test="updateBy != null">
-        update_by,
-      </if>
-      <if test="searchKey != null">
-        search_key,
-      </if>
-      <if test="pageTitle != null">
-        page_title,
-      </if>
-      <if test="pageDescription != null">
-        page_description,
-      </if>
-      <if test="pageKeyword != null">
-        page_keyword,
-      </if>
-      <if test="remarks != null">
-        remarks,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="productId != null">
-        #{productId,jdbcType=BIGINT},
-      </if>
-      <if test="productNumber != null">
-        #{productNumber,jdbcType=BIGINT},
-      </if>
-      <if test="labelId != null">
-        #{labelId,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="showScore != null">
-        #{showScore,jdbcType=INTEGER},
-      </if>
-      <if test="showPrice != null">
-        #{showPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="introduce != null">
-        #{introduce,jdbcType=VARCHAR},
-      </if>
-      <if test="picImg != null">
-        #{picImg,jdbcType=VARCHAR},
-      </if>
-      <if test="showInTop != null">
-        #{showInTop,jdbcType=TINYINT},
-      </if>
-      <if test="showInNav != null">
-        #{showInNav,jdbcType=TINYINT},
-      </if>
-      <if test="showInHot != null">
-        #{showInHot,jdbcType=TINYINT},
-      </if>
-      <if test="showInShelve != null">
-        #{showInShelve,jdbcType=TINYINT},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createBy != null">
-        #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="shelveTime != null">
-        #{shelveTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="shelveBy != null">
-        #{shelveBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null">
-        #{updateBy,jdbcType=VARCHAR},
-      </if>
-      <if test="searchKey != null">
-        #{searchKey,jdbcType=VARCHAR},
-      </if>
-      <if test="pageTitle != null">
-        #{pageTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="pageDescription != null">
-        #{pageDescription,jdbcType=VARCHAR},
-      </if>
-      <if test="pageKeyword != null">
-        #{pageKeyword,jdbcType=VARCHAR},
-      </if>
-      <if test="remarks != null">
-        #{remarks,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="store.product.entity.Product">
-    update os_product
-    <set>
-      <if test="productNumber != null">
-        product_number = #{productNumber,jdbcType=BIGINT},
-      </if>
-      <if test="labelId != null">
-        label_id = #{labelId,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="showScore != null">
-        show_score = #{showScore,jdbcType=INTEGER},
-      </if>
-      <if test="showPrice != null">
-        show_price = #{showPrice,jdbcType=DECIMAL},
-      </if>
-      <if test="introduce != null">
-        introduce = #{introduce,jdbcType=VARCHAR},
-      </if>
-      <if test="picImg != null">
-        pic_img = #{picImg,jdbcType=VARCHAR},
-      </if>
-      <if test="showInTop != null">
-        show_in_top = #{showInTop,jdbcType=TINYINT},
-      </if>
-      <if test="showInNav != null">
-        show_in_nav = #{showInNav,jdbcType=TINYINT},
-      </if>
-      <if test="showInHot != null">
-        show_in_hot = #{showInHot,jdbcType=TINYINT},
-      </if>
-      <if test="showInShelve != null">
-        show_in_shelve = #{showInShelve,jdbcType=TINYINT},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createBy != null">
-        create_by = #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="shelveTime != null">
-        shelve_time = #{shelveTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="shelveBy != null">
-        shelve_by = #{shelveBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null">
-        update_by = #{updateBy,jdbcType=VARCHAR},
-      </if>
-      <if test="searchKey != null">
-        search_key = #{searchKey,jdbcType=VARCHAR},
-      </if>
-      <if test="pageTitle != null">
-        page_title = #{pageTitle,jdbcType=VARCHAR},
-      </if>
-      <if test="pageDescription != null">
-        page_description = #{pageDescription,jdbcType=VARCHAR},
-      </if>
-      <if test="pageKeyword != null">
-        page_keyword = #{pageKeyword,jdbcType=VARCHAR},
-      </if>
-      <if test="remarks != null">
-        remarks = #{remarks,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where product_id = #{productId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="store.product.entity.Product">
-    update os_product
-    set product_number = #{productNumber,jdbcType=BIGINT},
-      label_id = #{labelId,jdbcType=INTEGER},
-      name = #{name,jdbcType=VARCHAR},
-      show_score = #{showScore,jdbcType=INTEGER},
-      show_price = #{showPrice,jdbcType=DECIMAL},
-      introduce = #{introduce,jdbcType=VARCHAR},
-      pic_img = #{picImg,jdbcType=VARCHAR},
-      show_in_top = #{showInTop,jdbcType=TINYINT},
-      show_in_nav = #{showInNav,jdbcType=TINYINT},
-      show_in_hot = #{showInHot,jdbcType=TINYINT},
-      show_in_shelve = #{showInShelve,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      shelve_time = #{shelveTime,jdbcType=TIMESTAMP},
-      shelve_by = #{shelveBy,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=VARCHAR},
-      search_key = #{searchKey,jdbcType=VARCHAR},
-      page_title = #{pageTitle,jdbcType=VARCHAR},
-      page_description = #{pageDescription,jdbcType=VARCHAR},
-      page_keyword = #{pageKeyword,jdbcType=VARCHAR},
-      remarks = #{remarks,jdbcType=VARCHAR}
-    where product_id = #{productId,jdbcType=BIGINT}
-  </update>
 </mapper>

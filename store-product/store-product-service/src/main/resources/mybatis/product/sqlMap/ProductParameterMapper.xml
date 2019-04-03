@@ -19,137 +19,14 @@
     product_parameter_id, product_id, name, value, status, sort, create_time, create_by, 
     update_time, update_by
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from os_product_parameter
-    where product_parameter_id = #{productParameterId,jdbcType=BIGINT}
+
+  <select id="listProductParameterVO" resultType="store.product.pojo.vo.ProductParameterVO">
+    SELECT name,
+           value
+    FROM os_product_parameter
+    WHERE product_id = #{productId}
+    AND status = #{status}
+    order by sort
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from os_product_parameter
-    where product_parameter_id = #{productParameterId,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="store.product.entity.ProductParameter">
-    insert into os_product_parameter (product_parameter_id, product_id, name, 
-      value, status, sort, 
-      create_time, create_by, update_time, 
-      update_by)
-    values (#{productParameterId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
-      #{value,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{sort,jdbcType=INTEGER}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{updateBy,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="store.product.entity.ProductParameter">
-    insert into os_product_parameter
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="productParameterId != null">
-        product_parameter_id,
-      </if>
-      <if test="productId != null">
-        product_id,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="value != null">
-        value,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="sort != null">
-        sort,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="createBy != null">
-        create_by,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-      <if test="updateBy != null">
-        update_by,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="productParameterId != null">
-        #{productParameterId,jdbcType=BIGINT},
-      </if>
-      <if test="productId != null">
-        #{productId,jdbcType=BIGINT},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="value != null">
-        #{value,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=TINYINT},
-      </if>
-      <if test="sort != null">
-        #{sort,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createBy != null">
-        #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null">
-        #{updateBy,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="store.product.entity.ProductParameter">
-    update os_product_parameter
-    <set>
-      <if test="productId != null">
-        product_id = #{productId,jdbcType=BIGINT},
-      </if>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="value != null">
-        value = #{value,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=TINYINT},
-      </if>
-      <if test="sort != null">
-        sort = #{sort,jdbcType=INTEGER},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createBy != null">
-        create_by = #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null">
-        update_by = #{updateBy,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where product_parameter_id = #{productParameterId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="store.product.entity.ProductParameter">
-    update os_product_parameter
-    set product_id = #{productId,jdbcType=BIGINT},
-      name = #{name,jdbcType=VARCHAR},
-      value = #{value,jdbcType=VARCHAR},
-      status = #{status,jdbcType=TINYINT},
-      sort = #{sort,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=VARCHAR}
-    where product_parameter_id = #{productParameterId,jdbcType=BIGINT}
-  </update>
+
 </mapper>

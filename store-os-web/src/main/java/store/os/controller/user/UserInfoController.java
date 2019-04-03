@@ -88,7 +88,7 @@ public class UserInfoController {
     @ApiOperation("修改收货地址")
     @PutMapping("/address/{addressId}")
     @ResponseBody
-    public Object addressUpdate(@RequestParam Address address, @PathVariable Long addressId) {
+    public Object addressUpdate(Address address, @PathVariable Long addressId) {
         address.setAddressId(addressId);
         int count = addressService.updateAddress(address, SingletonLoginUtils.getUserId());
         if (count == 0) {
