@@ -1,7 +1,6 @@
 package store.product.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import store.common.enums.StatusEnum;
 import store.product.entity.Recommend;
@@ -14,18 +13,20 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @creator violet
- * @createTime 2019/3/13
- * @description
+ * @author  violet
+ * @since 2019/3/13
  */
 @Service
 public class ProductRecommendServiceImpl implements IProductRecommendService {
 
-    @Autowired
-    private RecommendMapper recommendMapper;
+    private final RecommendMapper recommendMapper;
 
-    @Autowired
-    private ProductRecommendMapper productRecommendMapper;
+    private final ProductRecommendMapper productRecommendMapper;
+
+    public ProductRecommendServiceImpl(RecommendMapper recommendMapper, ProductRecommendMapper productRecommendMapper) {
+        this.recommendMapper = recommendMapper;
+        this.productRecommendMapper = productRecommendMapper;
+    }
 
     @Override
     public List<ProductVO> listByRecommendId(long recommendId) {

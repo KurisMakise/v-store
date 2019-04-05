@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8"%>
 <%@ include file="/WEB-INF/layouts/base.jsp"%>
-<c:forEach items="${questions}" var="question">
+<c:forEach items="${questionPage.records}" var="question">
   <li data-id="${question.questionId}">
     <div class="left-hand float ">
       <div class="hand-block J_questionLike " data-id="${question.questionId}" onclick="question_like(this,${question.questionId})"> <i class="glyphicon glyphicon-thumbs-up"></i><br>

@@ -15,6 +15,4 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/upload")
 public class UploadController {
 
-
-
 }

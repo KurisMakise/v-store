@@ -67,8 +67,8 @@
                       </ul>
                     </dd>
                   </c:forEach>
-                  <dd class="goods-info-head-cart" id="goodsDetailBtnBox"> <a href="javascript:void(0)" onclick="add_cart(this)" id="goodsDetailAddCartBtn" class="btn btn-primary goods-add-cart-btn" data-product-spec-number=""> <i class="glyphicon glyphicon-shopping-cart"></i>加入购物车 </a> <a id="goodsDetailCollectBtn" data-pid="${productVO.productNumber}" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn" href="javascript:void(0)" onclick="add_favorite(this);"> <i class="glyphicon glyphicon-heart-empty"></i>&nbsp;喜欢&nbsp; </a> </dd>
-                  <dd class="goods-info-head-cart" id="goodsDetailBtnBoxForInform" style="display: none;"> <a href="" class="btn  btn-gray goods-over-btn" data-stat-id="01b1dbea83f08143"> <i class="iconfont "></i>到货通知 </a> <a id="goodsDetailCollectBtn" data-pid="${productVO.productNumber}" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " href="javascript:void(0)" onclick="add_favorite(this);"> <i class="glyphicon glyphicon-heart-empty"></i>&nbsp;喜欢&nbsp;</a></dd>
+                  <dd class="goods-info-head-cart" id="goodsDetailBtnBox"> <a href="javascript:void(0)" onclick="add_cart(this)" id="goodsDetailAddCartBtn" class="btn btn-primary goods-add-cart-btn" data-product-spec-number=""> <i class="glyphicon glyphicon-shopping-cart"></i>加入购物车 </a> <a id="goodsDetailCollectBtn" data-pid="${productVO.productId}" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn" href="javascript:void(0)" onclick="add_favorite(this);"> <i class="glyphicon glyphicon-heart-empty"></i>&nbsp;收藏&nbsp; </a> </dd>
+                  <dd class="goods-info-head-cart" id="goodsDetailBtnBoxForInform" style="display: none;"> <a href="" class="btn  btn-gray goods-over-btn" data-stat-id="01b1dbea83f08143"> <i class="iconfont "></i>到货通知 </a> <a id="goodsDetailCollectBtn" data-pid="${productVO.productId}" data-isfavorite="false" class=" btn btn-gray  goods-collect-btn " href="javascript:void(0)" onclick="add_favorite(this);"> <i class="glyphicon glyphicon-heart-empty"></i>&nbsp;收藏&nbsp;</a></dd>
                   <dd class="goods-info-head-userfaq">
                     <ul class="detail-list">
                       <li class="J_scrollHref"><a href="#goodsComment" data-index='2' class='J_scrollHref'><i class="glyphicon glyphicon-edit"></i>&nbsp;评价&nbsp;<b>${productAttrVO.commentNumber}</b> </a> </li>
@@ -172,7 +172,7 @@
               <ul class="comment-timeline-list" id="J_timelineComment">
               </ul>
             </div>
-            <div class="span20 goods-detail-comment-more" style="display:${productAttrVO.commentNumber gt 10?'block':'none'}" id="J_loadMoreHref"> <a target="_blank" href="${ctx}/comment/list?productNumber=${productVO.productNumber}">查看更多评价</a> </div>
+            <div class="span20 goods-detail-comment-more" style="display:${productAttrVO.commentNumber gt 10?'block':'none'}" id="J_loadMoreHref"> <a target="_blank" href="${ctx}/comment/list?productId=${productVO.productId}">查看更多评价</a> </div>
           </div>
         </div>
       </div>
@@ -198,19 +198,19 @@
           <input type="text" placeholder="输入你的提问" class="input-block J_inputQuestion" data-can-search="true" data-pagesize="6">
           <div class="btn btn-primary question-btn J_btnQuestion" onclick="add_question(this);">提问</div>
         </div>
-        <div class="question-order J_questionOrderBlock" style="display:${productAttribute.questionNumber eq 0?'none':'block'}">
+        <div class="question-order J_questionOrderBlock" style="display:${productAttrVO.questionNumber eq 0?'none':'block'}">
           <div class="order-block"> <a href="javascript:void(0);" class="J_questionHelp" data-pagesize="6" onclick="question_help(this);">最有帮助</a> <span class="sep">|</span> <a href="javascript:void(0);" class="J_questionNew" data-pagesize="6" onclick="question_new(this);">最新</a> </div>
         </div>
         <ul class="question-content" id="J_goodsQuestionBlock">
         </ul>
         <div class="question-null-content J_nullInfo">抱歉，没有找到答案，您可以点击“提问”提交此条提问给已经购买者、小米官方客服和产品经理，我们会及时回复。</div>
-        <div class="goods-detail-null-content" style="display:${productAttribute.questionNumber eq 0?'block':'none'}" id="J_questionTipInfo">
+        <div class="goods-detail-null-content" style="display:${productAttrVO.questionNumber eq 0?'block':'none'}" id="J_questionTipInfo">
           <div class="container-fluid">
             <h3>暂时还没有提问</h3>
             <p>对商品还不太了解，问问看吧</p>
           </div>
         </div>
-        <div class="more-question"> <a href="${ctx}/question/asklist?productNumber=${productVO.productNumber}" target="_blank" style="display:${productAttribute.questionNumber gt 6?'block':'none'}">查看全部 <span id="J_goodsQuestionAmount"></span> ${productAttrVO.questionNumber}条已回答的问题 &gt;</a> </div>
+        <div class="more-question"> <a href="${ctx}/question/list?productId=${productVO.productId}" target="_blank" style="display:${productAttrVO.questionNumber gt 6?'block':'none'}">查看全部 <span id="J_goodsQuestionAmount"></span> ${productAttrVO.questionNumber}条已回答的问题 &gt;</a> </div>
       </div>
     </div>
     <!-- 商品详情商品提问 end --> 
@@ -326,9 +326,9 @@ $(function(){
 	$.ajax({
 		type : 'get',
 		dataType : 'json',
-		url : baselocation + '/favorite/' + productNumber,
+		url : baselocation + '/favorite/' + productId,
 		success : function(result) {
-			if (result.success == true) {
+			if (result.code == 1) {
 				if(result.data != null) {
 					$('#goodsDetailCollectBtn').attr('data-isfavorite',true);
 					$('#goodsDetailCollectBtn i').addClass("red");
@@ -345,15 +345,15 @@ $(function(){
 })
 // 收藏商品
 function add_favorite(obj) {
-	var productNumber = $(obj).attr("data-pid");
+	var productId = $(obj).attr("data-pid");
 	var result = Boolean($(obj).attr('data-isfavorite'));
 	if(result) {
 		$.ajax({
 			type : 'delete',
 			dataType : 'json',
-			url : baselocation + '/favorite/' + productNumber,
+			url : baselocation + '/favorite/' + productId,
 			success : function(result) {
-				if (result.success == true) {
+				if (result.code == 1) {
 					$('#goodsDetailCollectBtn i').toggleClass("red");
 				} else {
 					layer.alert(result.message, {
@@ -366,9 +366,9 @@ function add_favorite(obj) {
 		$.ajax({
 			type : 'post',
 			dataType : 'json',
-			url : baselocation + '/favorite/' + productNumber,
+			url : baselocation + '/favorite/' + productId,
 			success : function(result) {
-				if (result.success == true) {
+				if (result.code == 1) {
 					$('#goodsDetailCollectBtn i').toggleClass("red");
 				} else {
 					layer.alert(result.message, {

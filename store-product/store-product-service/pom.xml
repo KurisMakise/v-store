@@ -15,16 +15,25 @@
     <!-- FIXME change it to the project's website -->
     <url>http://www.example.com</url>
     <dependencies>
-        <dependency>
-            <groupId>com.violet</groupId>
-            <artifactId>store-product-facade</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
+
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring-web-mvc.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.violet</groupId>
+            <artifactId>store-product-facade</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.violet</groupId>
+            <artifactId>store-user-service</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
 </project>

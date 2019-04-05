@@ -24,191 +24,53 @@
     comment_id, product_id, user_id, user_name, pic_img, order_id, star, content, good_count, 
     status, type, create_time, create_by, update_time, update_by
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from os_comment
-    where comment_id = #{commentId,jdbcType=BIGINT}
+
+  <select id="listTimeLine" resultType="store.product.pojo.vo.CommentVO">
+    SELECT c.comment_id as commentId,
+           c.create_time as createTime,
+           c.user_name as userName,
+           c.content,
+           c.good_count as goodCount
+    FROM os_comment c
+    WHERE c.product_id = #{productId}
+    AND c.status = #{status}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from os_comment
-    where comment_id = #{commentId,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="store.product.entity.Comment">
-    insert into os_comment (comment_id, product_id, user_id, 
-      user_name, pic_img, order_id, 
-      star, content, good_count, 
-      status, type, create_time, 
-      create_by, update_time, update_by
-      )
-    values (#{commentId,jdbcType=BIGINT}, #{productId,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, 
-      #{userName,jdbcType=VARCHAR}, #{picImg,jdbcType=VARCHAR}, #{orderId,jdbcType=BIGINT}, 
-      #{star,jdbcType=TINYINT}, #{content,jdbcType=VARCHAR}, #{goodCount,jdbcType=INTEGER}, 
-      #{status,jdbcType=TINYINT}, #{type,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
-      #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="store.product.entity.Comment">
-    insert into os_comment
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="commentId != null">
-        comment_id,
-      </if>
-      <if test="productId != null">
-        product_id,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="userName != null">
-        user_name,
-      </if>
-      <if test="picImg != null">
-        pic_img,
-      </if>
-      <if test="orderId != null">
-        order_id,
-      </if>
-      <if test="star != null">
-        star,
-      </if>
-      <if test="content != null">
-        content,
-      </if>
-      <if test="goodCount != null">
-        good_count,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-      <if test="createBy != null">
-        create_by,
-      </if>
-      <if test="updateTime != null">
-        update_time,
-      </if>
-      <if test="updateBy != null">
-        update_by,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="commentId != null">
-        #{commentId,jdbcType=BIGINT},
-      </if>
-      <if test="productId != null">
-        #{productId,jdbcType=BIGINT},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="userName != null">
-        #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="picImg != null">
-        #{picImg,jdbcType=VARCHAR},
-      </if>
-      <if test="orderId != null">
-        #{orderId,jdbcType=BIGINT},
-      </if>
-      <if test="star != null">
-        #{star,jdbcType=TINYINT},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="goodCount != null">
-        #{goodCount,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=TINYINT},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=TINYINT},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createBy != null">
-        #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null">
-        #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null">
-        #{updateBy,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="store.product.entity.Comment">
-    update os_comment
-    <set>
-      <if test="productId != null">
-        product_id = #{productId,jdbcType=BIGINT},
-      </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=BIGINT},
-      </if>
-      <if test="userName != null">
-        user_name = #{userName,jdbcType=VARCHAR},
-      </if>
-      <if test="picImg != null">
-        pic_img = #{picImg,jdbcType=VARCHAR},
-      </if>
-      <if test="orderId != null">
-        order_id = #{orderId,jdbcType=BIGINT},
-      </if>
-      <if test="star != null">
-        star = #{star,jdbcType=TINYINT},
-      </if>
-      <if test="content != null">
-        content = #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="goodCount != null">
-        good_count = #{goodCount,jdbcType=INTEGER},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=TINYINT},
-      </if>
-      <if test="type != null">
-        type = #{type,jdbcType=TINYINT},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createBy != null">
-        create_by = #{createBy,jdbcType=VARCHAR},
-      </if>
-      <if test="updateTime != null">
-        update_time = #{updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateBy != null">
-        update_by = #{updateBy,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where comment_id = #{commentId,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="store.product.entity.Comment">
-    update os_comment
-    set product_id = #{productId,jdbcType=BIGINT},
-      user_id = #{userId,jdbcType=BIGINT},
-      user_name = #{userName,jdbcType=VARCHAR},
-      pic_img = #{picImg,jdbcType=VARCHAR},
-      order_id = #{orderId,jdbcType=BIGINT},
-      star = #{star,jdbcType=TINYINT},
-      content = #{content,jdbcType=VARCHAR},
-      good_count = #{goodCount,jdbcType=INTEGER},
-      status = #{status,jdbcType=TINYINT},
-      type = #{type,jdbcType=TINYINT},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      create_by = #{createBy,jdbcType=VARCHAR},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      update_by = #{updateBy,jdbcType=VARCHAR}
-    where comment_id = #{commentId,jdbcType=BIGINT}
-  </update>
+
+    <resultMap id="listCommentResultMap" type="store.product.pojo.vo.CommentVO">
+        <id column="commentId" property="commentId"/>
+        <result column="createTime" property="createTime"/>
+        <result column="userName" property="userName"/>
+        <result column="content" property="content"/>
+        <result column="goodCount" property="goodCount"/>
+        <result column="picImg" property="picImg"/>
+        <collection property="replyComments" ofType="store.product.pojo.vo.CommentReplyVO">
+            <id column="commentReplyId" property="commentReplyId"/>
+            <result column="type" property="type"/>
+            <result column="rePicImg" property="picImg"/>
+            <result column="reUserName" property="userName"/>
+            <result column="reContent" property="content"/>
+            <result column="reGoodCount" property="goodCount"/>
+        </collection>
+    </resultMap>
+
+
+  <select id="listComment" resultMap="listCommentResultMap">
+    SELECT c.comment_id as commentId,
+           c.create_time as createTime,
+           c.user_name as userName,
+           c.content,
+           c.good_count as goodCount,
+           c.pic_img as picImg,
+           r.comment_reply_id as commentReplyId,
+           r.type,
+           r.pic_img as rePicImg,
+           r.user_name as reUserName,
+           r.content as reContent,
+           r.good_count as reGoodCount
+    FROM os_comment c
+    LEFT JOIN os_comment_reply r ON c.comment_id = r.comment_id
+    WHERE c.product_id = #{productId}
+    AND c.status = #{status}
+  </select>
+
 </mapper>

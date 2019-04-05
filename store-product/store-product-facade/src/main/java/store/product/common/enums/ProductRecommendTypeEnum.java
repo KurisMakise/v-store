@@ -1,9 +1,8 @@
 package store.product.common.enums;
 
 /**
- * @creator violet
- * @createTime 2019/3/15
- * @description
+ * @author violet
+ * @since 2019/3/15
  */
 public enum ProductRecommendTypeEnum {
 

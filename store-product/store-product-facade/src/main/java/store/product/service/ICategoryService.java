@@ -52,7 +52,7 @@ public interface ICategoryService {
      * param status 类目状态
      * return
      */
-    Category getById(Long categoryId, Integer status);
+    CategoryVO getById(Long categoryId, Integer status);
 
     /**
      * 根据类目ID查找子类目列表（如果沒有则返回当前目录列表）
@@ -60,7 +60,7 @@ public interface ICategoryService {
      * param status 子类目状态
      * return
      */
-    List<Category> listLowerCategories(Long categoryId, Integer status);
+    List<CategoryVO> listLowerCategories(Long categoryId, Integer status);
 
     /**
      * 根据类目ID查找父类目列表（如果沒有则返回当前目录列表）
@@ -68,7 +68,7 @@ public interface ICategoryService {
      * param status 父类目状态
      * return
      */
-    List<Category> listUpperCategories(Long categoryId, Integer status);
+    List<CategoryVO> listUpperCategories(Long categoryId, Integer status);
 
     /**
      * 根据商品ID查找父类目列表

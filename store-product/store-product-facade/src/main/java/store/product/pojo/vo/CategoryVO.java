@@ -17,6 +17,8 @@ public class CategoryVO implements BaseVO {
      */
     private Long categoryId;
 
+    private Long parentId;
+
     /**
      * 分类名称
      */
@@ -66,6 +68,14 @@ public class CategoryVO implements BaseVO {
 
     public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
+    }
+
+    public Long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
     public String getName() {

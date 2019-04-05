@@ -1,15 +1,8 @@
 package store.product.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import store.product.entity.CommentReply;
 
-public interface CommentReplyMapper {
-    int deleteByPrimaryKey(Long commentReplyId);
+public interface CommentReplyMapper extends BaseMapper<CommentReply> {
 
-    int insertSelective(CommentReply record);
-
-    CommentReply selectByPrimaryKey(Long commentReplyId);
-
-    int updateByPrimaryKeySelective(CommentReply record);
-
-    int updateByPrimaryKey(CommentReply record);
 }

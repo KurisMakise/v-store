@@ -1,12 +1,11 @@
 package store.online.common.enums;
 
 /**
- * @creator violet
- * @createTime 2019/2/28
- * @description
+ * @author  violet
+ * @since 2019/2/28
  */
 public enum AdvertTypeEnum {
-    INDEX_CAROUSEL(1L, "首页-轮播广告", "indexCAROUSEL"),
+    INDEX_CAROUSEL(1L, "首页-轮播广告", "indexCarousel"),
     INDEX_HOT_ADVERT(2L, "首页-热点广告", "indexHotAdvert");
 
     private long type;

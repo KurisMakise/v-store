@@ -19,7 +19,7 @@
                 <div class="col-md-12 col-sm-12">
                     <div class="box">
                         <ul class="ull">
-                            <c:forEach items="${indexCarouselImgs}" var="indexCarouselImg">
+                            <c:forEach items="${indexCarousel}" var="indexCarouselImg">
                                 <li><a href="${indexCarouselImg.href}" title="${indexCarouselImg.title}" target="_blank"><img src="${ctximg }/${indexCarouselImg.picImg}" alt="${indexCarouselImg.title }"></a></li>
                             </c:forEach>
                         </ul>
@@ -41,7 +41,7 @@
                     </div>
                     <div class="span16" id="J_homePromo" data-stat-title="焦点图下方小图">
                         <ul class="home-promo-list clearfix">
-                            <c:forEach items="${indexHotAdvertImgs }" var="indexHotAdvertImg" varStatus="indexHotAdvertImgStat">
+                            <c:forEach items="${indexHotAdvert }" var="indexHotAdvertImg" varStatus="indexHotAdvertImgStat">
                                 <c:if test="${indexHotAdvertImgStat.first}">
                                     <li class="first"><a class="item" href="${indexHotAdvertImg.href }" title="${indexHotAdvertImg.title}"><img src="${ctximg }/${indexHotAdvertImg.picImg}" alt="${indexHotAdvertImg.title }"></a></li>
                                 </c:if>

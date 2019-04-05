@@ -10,6 +10,8 @@ import java.util.List;
 
 public interface CategoryMapper extends BaseMapper<Category> {
 
+    CategoryVO getCategoryById(Long categoryId, Integer status);
+
     Category getCategory(Long productId, Integer status);
 
     /**
@@ -29,5 +31,9 @@ public interface CategoryMapper extends BaseMapper<Category> {
      */
     List<Long> listSubCategoryIds(long categoryId, @Param("status") int status);
 
+    List<CategoryVO> listUpperCategories(Long categoryId, Integer status);
 
+    List<CategoryVO> listLowerCategories(Long categoryId, Integer status);
+
+    List<CategoryVO> listCategoriesVO(Integer status);
 }

@@ -7,7 +7,6 @@ import store.product.pojo.vo.ProductSpecificationVO;
 import store.product.pojo.vo.SpecificationVO;
 import store.product.service.IProductSpecificationService;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

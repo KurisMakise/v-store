@@ -1,39 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="store.product.mapper.ProductMapper">
-  <resultMap id="BaseResultMap" type="store.product.entity.Product">
-    <constructor>
-      <idArg column="product_id" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="product_number" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="label_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="show_score" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="show_price" javaType="java.math.BigDecimal" jdbcType="DECIMAL" />
-      <arg column="introduce" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="pic_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="show_in_top" javaType="java.lang.Byte" jdbcType="TINYINT" />
-      <arg column="show_in_nav" javaType="java.lang.Byte" jdbcType="TINYINT" />
-      <arg column="show_in_hot" javaType="java.lang.Byte" jdbcType="TINYINT" />
-      <arg column="show_in_shelve" javaType="java.lang.Byte" jdbcType="TINYINT" />
-      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="create_by" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="shelve_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="shelve_by" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="update_by" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="search_key" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="page_title" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="page_description" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="page_keyword" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="remarks" javaType="java.lang.String" jdbcType="VARCHAR" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List">
-    product_id, product_number, label_id, name, show_score, show_price, introduce, pic_img, 
-    show_in_top, show_in_nav, show_in_hot, show_in_shelve, create_time, create_by, shelve_time, 
-    shelve_by, update_time, update_by, search_key, page_title, page_description, page_keyword, 
-    remarks
-  </sql>
+
+    <select id="listProductVO" resultType="store.product.pojo.vo.ProductVO">
+        SELECT p.product_id as productId,
+               p.product_number as productNumber,
+               p.name,
+               p.show_price as showPrice,
+               p.show_score as showScore,
+               p.introduce,
+               p.pic_img    as picImg,
+               l.label_name as labelName,
+               a.sales_volume
+        FROM os_product p
+                 LEFT JOIN os_label l ON l.label_id = p.label_id
+                 LEFT JOIN os_product_category c ON c.product_id = p.product_id
+                 LEFT JOIN os_product_attribute a ON c.product_id = a.product_id
+        WHERE p.show_in_shelve = #{showInShelve}
+        AND c.category_id IN
+        <foreach collection="categoryIds" item="categoryId" separator="," open="(" close=")">
+             #{categoryId}
+        </foreach>
+        <if test="search != null">
+            AND (p.name LIKE '%${search}%' OR p.introduce LIKE '%${search}%')
+        </if>
+    </select>
+
     <resultMap id="productVOResultMap" type="store.product.pojo.vo.ProductVO">
         <id column="productId" property="productId"/>
         <result column="productNumber" property="productNumber"/>
@@ -73,5 +65,29 @@
                  LEFT JOIN os_product_attribute a ON p.product_id = a.product_id
                  LEFT JOIN os_product_recommend r ON p.product_id = r.product_id
         WHERE p.product_number = #{productNumber}
+  </select>
+
+    <select id="getProductVOById" resultMap="productVOResultMap">
+        SELECT recommend_product_id as recommentProductId,
+               p.product_id         as productId,
+               p.product_number     as productNumber,
+               p.name,
+               p.show_price         as showPrice,
+               p.show_score         as showScore,
+               p.introduce,
+               d.description,
+               p.pic_img            as picImg,
+               a.comment_number     as commentNumber,
+               c.comment_id         as commentId,
+               c.content,
+               c.user_name          as userName,
+               l.label_name         as labelName
+        FROM os_product p
+                 LEFT JOIN os_product_detail d ON p.product_id = d.product_id
+                 LEFT JOIN os_comment c ON p.product_id = c.product_id
+                 LEFT JOIN os_label l ON p.label_id = l.label_id
+                 LEFT JOIN os_product_attribute a ON p.product_id = a.product_id
+                 LEFT JOIN os_product_recommend r ON p.product_id = r.product_id
+        WHERE p.product_id = #{productId}
   </select>
 </mapper>

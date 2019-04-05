@@ -1,13 +1,13 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8"%>
 <%@ include file="/WEB-INF/layouts/base.jsp"%>
 
-<c:forEach items="${commentVOs}" var="comment">
-  <li class="purple timelineunit J_commentContent" data-id="${comment.commentId}">
-    <h4 class="line-time"><fmt:formatDate value="${comment.createTime}" pattern="yyyy年MM月dd日" /></h4>
-    <p class="line-content"> <a href="/comment/commentDetail/comment_id/${comment.commentId}" target="_blank"> ${comment.content} </a> </p>
+<c:forEach items="${commentVOPage.records}" var="commentVO">
+  <li class="purple timelineunit J_commentContent" data-id="${commentVO.commentId}">
+    <h4 class="line-time"><fmt:formatDate value="${commentVO.createTime}" pattern="yyyy年MM月dd日" /></h4>
+    <p class="line-content"> <a href="/comment/commentDetail/comment_id/${commentVO.commentId}" target="_blank"> ${commentVO.content} </a> </p>
     <div class="line-foot">
-      <div class="line-left">来自于 ${comment.userName}</div>
-      <div class="line-right J_hasHelp" data-commentid="${comment.commentId}" onclick="comment_like(this,${comment.commentId})"> <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;&nbsp;有帮助&nbsp;&nbsp;<span class="amount">${comment.goodCount}</span> </div>
+      <div class="line-left">来自于 ${commentVO.userName}</div>
+      <div class="line-right J_hasHelp" data-commentid="${commentVO.commentId}" onclick="comment_like(this,${commentVO.commentId})"> <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;&nbsp;有帮助&nbsp;&nbsp;<span class="amount">${commentVO.goodCount}</span> </div>
     </div>
     <div class="line-dot"></div>
   </li>

@@ -39,6 +39,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/static/**", "anon");
         filterChainDefinitionMap.put("/index", "anon");
         filterChainDefinitionMap.put("/pass/kaptcha", "anon");
+        filterChainDefinitionMap.put("/list", "anon");
         //配置退出过滤器，退出代码Shiro已经实现
 //        filterChainDefinitionMap.put("/pass/logout", "logout");
         //过滤链定义，从上向下顺序执行，一般将/**放最下面

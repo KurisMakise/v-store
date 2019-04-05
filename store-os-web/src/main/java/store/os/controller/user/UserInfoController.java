@@ -47,7 +47,7 @@ public class UserInfoController {
 
     @ApiOperation("收藏的商品")
     @GetMapping("/favorite")
-    public String favorite(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "10") int limit) {
+    public String favorite(Model model, @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "6") int limit) {
         PageInfo pageInfo = new PageInfo(limit, page);
         BasePageDTO<Favorite> favoriteBasePageDTO = favoriteService.listByUserId(SingletonLoginUtils.getUserId(), pageInfo);
 
@@ -55,14 +55,6 @@ public class UserInfoController {
         model.addAttribute("pageInfo", favoriteBasePageDTO.getPageInfo());
 
         return "/modules/usercenter/user_favorite";
-    }
-
-    @ApiOperation("删除收藏")
-    @DeleteMapping("/favorite/{productNumber}")
-    @ResponseBody
-    public Object deleteFavorite(@PathVariable Long productNumber) {
-        Integer count = favoriteService.deleteByProductNumber(productNumber, SingletonLoginUtils.getUserId());
-        return new OsResult(CommonReturnCode.SUCCESS, count);
     }
 
     @ApiOperation("收货地址页面")

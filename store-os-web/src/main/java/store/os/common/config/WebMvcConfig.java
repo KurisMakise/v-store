@@ -40,8 +40,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     //添加过滤器
     @Bean
-    public FilterRegistrationBean<ConfigurableSiteMeshFilter> filterRegister() {
-        FilterRegistrationBean<ConfigurableSiteMeshFilter> filter = new FilterRegistrationBean<>();
+    public FilterRegistrationBean filterRegister() {
+        FilterRegistrationBean filter = new FilterRegistrationBean<>();
         filter.setFilter(new WebSiteMeshFilter());
         return filter;
     }

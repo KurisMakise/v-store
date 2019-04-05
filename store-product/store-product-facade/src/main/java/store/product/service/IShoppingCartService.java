@@ -1,12 +1,7 @@
 package store.product.service;
 
-import store.order.entity.Order;
-import store.order.entity.OrderShipment;
-import store.order.pojo.vo.OrderShoppingCartVO;
 import store.product.pojo.vo.CartVO;
 import store.product.pojo.vo.ShoppingCartVO;
-
-import java.util.List;
 
 /**
  * @creator violet

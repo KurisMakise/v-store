@@ -15,9 +15,8 @@ import store.product.service.IProductRecommendService;
 import java.util.List;
 
 /**
- * @creator violet
- * @createTime 2019/3/13
- * @description
+ * @author  violet
+ * @since 2019/3/13
  */
 @Controller
 @Api("商品推荐")

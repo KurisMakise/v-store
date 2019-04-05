@@ -1,15 +1,13 @@
 package store.product.mapper;
 
-import store.product.entity.Comment;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import store.product.pojo.vo.CommentVO;
+
+import java.util.List;
 
 public interface CommentMapper {
-    int deleteByPrimaryKey(Long commentId);
 
-    int insertSelective(Comment record);
+    List<CommentVO> listTimeLine(Long productId, Integer status, Page<CommentVO> page);
 
-    Comment selectByPrimaryKey(Long commentId);
-
-    int updateByPrimaryKeySelective(Comment record);
-
-    int updateByPrimaryKey(Comment record);
+    List<CommentVO> listComment(Long productId, Integer status, Page<CommentVO> page);
 }

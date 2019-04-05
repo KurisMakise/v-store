@@ -33,7 +33,7 @@
                   <h3 class="title"><a href="${ctx}/detail/${favorite.productNumber}" target="_blank">${favorite.name}</a></h3>
                   <p class="price"> ${favorite.showPrice}元 </p>
                   <p class="rank"></p>
-                  <div class="actions"> <a class="btn btn-small btn-line-gray J_delFav" href="javascript:void(0)" onclick="favorite_delete(this,${favorite.productNumber})">删除</a> <a class="btn btn-small btn-primary" target="_blank" href="${ctx}/detail/${favorite.productNumber}">查看详情</a> </div>
+                  <div class="actions"> <a class="btn btn-small btn-line-gray J_delFav" href="javascript:void(0)" data-id=${favorite.productNumber} onclick="favorite_delete(this,${favorite.productNumber})">删除</a> <a class="btn btn-small btn-primary" target="_blank" href="${ctx}/detail/${favorite.productNumber}">查看详情</a> </div>
                 </li>
               </c:forEach>
             </ul>
@@ -75,13 +75,14 @@
   
   	//删除收藏商品
   	function favorite_delete(obj, data) {
+      data = $(obj).attr("data-id")
   		layer.confirm('确认要删除吗？', {
   			btn : [ '确定', '取消' ] //按钮
   		}, function() {
   			$.ajax({
   				type : 'delete',
   				dataType : 'json',
-  				url : baselocation + '/uc/user/favorite/' + data,
+  				url : baselocation + '/favorite/' + data,
   				success : function(result) {
   					if (result.code == 1) {
   						$(obj).parent().parent("li").remove();

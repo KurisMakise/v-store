@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=utf-8"%>
 <%@ include file="/WEB-INF/layouts/base.jsp"%>
 
-<c:forEach items="${commentVOs}" var="comment">
+<c:forEach items="${commentVOPage.records}" var="comment">
   <li data-id="${comment.commentId}">
     <div class="user-image"> <img src="${ctximg}/${comment.picImg}" alt="${comment.userName}"> </div>
     <div class="user-emoj">&nbsp;超爱&nbsp;<i class="glyphicon glyphicon-thumbs-up"></i> </div>
@@ -16,7 +16,7 @@
           <input type="text" placeholder="回复楼主" class="J_commentAnswerInput">
           <a href="javascript:void(0);" class="btn answer-btn J_commentAnswerBtn" data-commentid="${comment.commentId}" onclick="comment_reply(this,${comment.commentId})">回复</a> </div>
       </dd>
-      <c:forEach items="${comment.commentReplies}" var="commentReply">
+      <c:forEach items="${comment.replyComments}" var="commentReply">
         <c:if test="${commentReply.type eq 1}">
           <dd class="user-comment-answer"> <img class="self-image" src="${ctximg}/${commentReply.picImg}" alt="${commentReply.userName}">
             <p>${commentReply.content}<span class="official-name">&nbsp;&nbsp;官方回复</span> <a href="javascript:void(0);" class="J_csLike" data-commentid="${commentReply.commentReplyId}" onclick="comment_csLike(this,${commentReply.commentReplyId})"> <i class="glyphicon glyphicon-thumbs-up"></i>&nbsp;赞客服&nbsp; <span class="amount">${commentReply.goodCount}</span> </a></p>

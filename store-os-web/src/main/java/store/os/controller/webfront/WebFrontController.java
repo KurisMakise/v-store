@@ -42,15 +42,15 @@ public class WebFrontController {
     public String index(Model model) {
         //首页-广告栏-左部导航栏
         List<NavigationBar> indexAdvertLeft = navigationBarService.listByNavigationId(NavigationBarTypeEnum.INDEX_ADVERT_LEFT.getType());
-        model.addAttribute(NavigationBarTypeEnum.INDEX_ADVERT_LEFT.getCode(), indexAdvertLeft);
+        model.addAttribute("indexAdvertLeft", indexAdvertLeft);
 
         //首页轮播广告列表
-        List<AdvertDetail> indexCarouselImgs = advertDetailService.listByAdvertId(AdvertTypeEnum.INDEX_CAROUSEL.getType());
-        model.addAttribute(AdvertTypeEnum.INDEX_CAROUSEL.getCode(), indexCarouselImgs);
+        List<AdvertDetail> indexCarousel = advertDetailService.listByAdvertId(AdvertTypeEnum.INDEX_CAROUSEL.getType());
+        model.addAttribute("indexCarousel", indexCarousel);
 
         //首页热点广告列表
         List<AdvertDetail> indexHotAdvertImgs = advertDetailService.listByAdvertId(AdvertTypeEnum.INDEX_HOT_ADVERT.getType());
-        model.addAttribute(AdvertTypeEnum.INDEX_HOT_ADVERT.getCode(), indexHotAdvertImgs);
+        model.addAttribute("indexHotAdvert", indexHotAdvertImgs);
 
         return "modules/webfront/index";
     }

@@ -1,17 +1,7 @@
 package store.product.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import store.product.entity.ProductDetail;
 
-public interface ProductDetailMapper {
-    int deleteByPrimaryKey(Long productDetailId);
-
-    int insertSelective(ProductDetail record);
-
-    ProductDetail selectByPrimaryKey(Long productDetailId);
-
-    int updateByPrimaryKeySelective(ProductDetail record);
-
-    int updateByPrimaryKeyWithBLOBs(ProductDetail record);
-
-    int updateByPrimaryKey(ProductDetail record);
+public interface ProductDetailMapper extends BaseMapper<ProductDetail> {
 }

@@ -1,7 +1,6 @@
 package store.product.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import store.common.base.BasePageDTO;
 import store.common.enums.StatusEnum;
@@ -20,18 +19,24 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * @creator violet
- * @createTime 2019/2/27
- * @description
+ * <p>
+ * 分类服务
+ * </p>
+ *
+ * @author violet
+ * @since 2019/2/27
  */
 @Service
 public class CategoryServiceImpl implements ICategoryService {
 
-    @Autowired
-    private CategoryMapper categoryMapper;
+    private final CategoryMapper categoryMapper;
 
-    @Autowired
-    private ProductCategoryMapper productCategoryMapper;
+    private final ProductCategoryMapper productCategoryMapper;
+
+    public CategoryServiceImpl(CategoryMapper categoryMapper, ProductCategoryMapper productCategoryMapper) {
+        this.categoryMapper = categoryMapper;
+        this.productCategoryMapper = productCategoryMapper;
+    }
 
     @Override
     public Integer insertAdvert(Category category, String userName) {
@@ -78,31 +83,84 @@ public class CategoryServiceImpl implements ICategoryService {
                 categoryVO.setProducts(productVOS);
             }
         }
-
         return categoryVOS;
     }
 
     @Override
-    public Category getById(Long categoryId, Integer status) {
-        return null;
+    public CategoryVO getById(Long categoryId, Integer status) {
+        return categoryMapper.getCategoryById(categoryId, status);
     }
 
     @Override
-    public List<Category> listLowerCategories(Long categoryId, Integer status) {
-        return null;
+    public List<CategoryVO> listLowerCategories(Long categoryId, Integer status) {
+        CategoryVO category = categoryMapper.getCategoryById(categoryId, status);
+        if (category == null)
+            return null;
+
+        List<CategoryVO> categoryVOS = categoryMapper.listCategoriesVO(status);
+
+        List<CategoryVO> lowerCategories = listLower(category.getCategoryId(), new ArrayList<>(), categoryVOS);
+        Collections.reverse(lowerCategories);
+
+        return lowerCategories;
     }
 
     @Override
-    public List<Category> listUpperCategories(Long categoryId, Integer status) {
-        return null;
+    public List<CategoryVO> listUpperCategories(Long categoryId, Integer status) {
+        CategoryVO category = categoryMapper.getCategoryById(categoryId, status);
+        if (category == null)
+            return null;
+
+        //查询所有分类
+        List<CategoryVO> categoryVOS = categoryMapper.listCategoriesVO(status);
+        List<CategoryVO> upperCategories = listUpper(category.getParentId(), new ArrayList<>(), categoryVOS);
+        Collections.reverse(upperCategories);
+        return upperCategories;
     }
+
+
+    private List<CategoryVO> listUpper(Long parentId, List<CategoryVO> container, List<CategoryVO> categories) {
+        if (parentId == null)
+            return container;
+        for (CategoryVO categoryVO : categories) {
+            if (parentId.equals(categoryVO.getCategoryId())) {
+                if (container.indexOf(categoryVO) != -1)
+                    return container;
+                container.add(categoryVO);
+                listUpper(categoryVO.getParentId(), container, categories);
+            }
+        }
+        return container;
+    }
+
+    private List<CategoryVO> listLower(Long categoryId, List<CategoryVO> container, List<CategoryVO> categories) {
+        if (categoryId == null)
+            return container;
+        for (CategoryVO category : categories) {
+            if (categoryId.equals(category.getParentId())) {
+                if (container.indexOf(category) != -1)
+                    return container;
+                container.add(category);
+                listLower(category.getCategoryId(), container, categories);
+            }
+        }
+        return container;
+    }
+
 
     @Override
     public List<Category> listUpperByProductId(Long productId, Integer status) {
+        //所有分类
         List<Category> categories = categoryMapper.selectList(null);
+        if (categories == null || categories.isEmpty())
+            return null;
+        //当前分类
         Category category = categoryMapper.getCategory(productId, status);
+
+        //查询父目录
         List<Category> upperCategories = upperCategory(category.getCategoryId(), new ArrayList<>(), categories);
         Collections.reverse(upperCategories);
+
         return upperCategories;
     }
 

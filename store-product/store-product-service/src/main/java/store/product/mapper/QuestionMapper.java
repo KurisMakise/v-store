@@ -1,15 +1,15 @@
 package store.product.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import store.product.entity.Question;
+import store.product.pojo.vo.QuestionVO;
 
-public interface QuestionMapper {
-    int deleteByPrimaryKey(Long questionId);
+import java.util.List;
 
-    int insertSelective(Question record);
+public interface QuestionMapper extends BaseMapper<Question> {
 
-    Question selectByPrimaryKey(Long questionId);
+    List<QuestionVO> listQuestionVOS(Long productId, Integer status, Page page);
 
-    int updateByPrimaryKeySelective(Question record);
 
-    int updateByPrimaryKey(Question record);
 }

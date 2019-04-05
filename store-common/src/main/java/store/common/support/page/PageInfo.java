@@ -1,12 +1,15 @@
 package store.common.support.page;
 
+import java.io.Serializable;
+
 /**
  * creator violet
  * createTime 2019/2/27
  * description
  */
-public class PageInfo {
+public class PageInfo implements Serializable {
 
+    private static final long serialVersionUID = -6951670330693473121L;
     /**
      * 总记录
      */

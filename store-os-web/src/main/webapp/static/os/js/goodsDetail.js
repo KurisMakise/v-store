@@ -202,7 +202,7 @@ function question_help() {
 	$.ajax({
 		type : 'get',
 		dataType : 'text',
-		url : baselocation + '/question/askList?productId=' + productId + '&sort=1&page=1',
+		url : baselocation + '/question/productDetail?productId=' + productId + '&sort=1&page=1',
 		success : function(result) {
 			$("#J_goodsQuestionBlock").html(result);
 		}
@@ -217,7 +217,7 @@ function question_new() {
 	$.ajax({
 		type : 'get',
 		dataType : 'text',
-		url : baselocation + '/question/askList?productId=' + productId + '&sort=0&page=1',
+		url : baselocation + '/question/productDetail?productId=' + productId + '&sort=0&page=1',
 		success : function(result) {
 			$("#J_goodsQuestionBlock").html(result);
 		}
@@ -232,7 +232,7 @@ function comment_sup() {
 	$.ajax({
 		type : 'get',
 		dataType : 'text',
-		url : baselocation + '/comment/supList?productId=' + productId + '&sort=1&page=1',
+		url : baselocation + '/comment/sup?productId=' + productId + '&sort=1&page=1',
 		success : function(result) {
 			$("#J_supComment").html(result);
 		}
@@ -246,7 +246,7 @@ function comment_time_line() {
 	$.ajax({
 		type : 'get',
 		dataType : 'text',
-		url : baselocation + '/comment/tileLineList?productId=' + productId + '&sort=0&page=1',
+		url : baselocation + '/comment/timeLine?productId=' + productId + '&sort=0&page=1',
 		success : function(result) {
 			$("#J_timelineComment").html(result);
 		}

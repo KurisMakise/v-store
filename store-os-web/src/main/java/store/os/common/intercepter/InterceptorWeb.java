@@ -34,9 +34,6 @@ public class InterceptorWeb implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        String url = request.getRequestURI();
-        System.out.println(url);
-
         // 首页顶部导航栏
         List<NavigationBar> indexTop = navigationBarService.listByNavigationId(NavigationBarTypeEnum.INDEX_TOP.getType());
         request.setAttribute(NavigationBarTypeEnum.INDEX_TOP.getCode(), indexTop);

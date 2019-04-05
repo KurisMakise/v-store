@@ -8,6 +8,7 @@ package store.common.exception;
  */
 public class ValidationException extends RuntimeException {
 
+    private static final long serialVersionUID = -7743276186979497229L;
     private Integer code;
 
     public ValidationException() {
@@ -29,6 +30,11 @@ public class ValidationException extends RuntimeException {
     public ValidationException(Integer code, String message) {
         super(message);
         this.code = code;
+    }
+
+    public ValidationException(ReturnCode returnCode) {
+        super(returnCode.getMessage());
+        this.code = returnCode.getCode();
     }
 
     public ValidationException(ReturnCode returnCode, Throwable cause) {
