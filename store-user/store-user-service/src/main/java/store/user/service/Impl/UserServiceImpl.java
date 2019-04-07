@@ -2,6 +2,7 @@ package store.user.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import store.common.constant.CommonReturnCode;
 import store.common.enums.StatusEnum;
@@ -10,12 +11,12 @@ import store.user.common.util.PasswordUtils;
 import store.user.common.util.UserUtils;
 import store.user.entity.User;
 import store.user.entity.UserLoginLog;
+import store.user.mapper.UserLoginLogMapper;
 import store.user.mapper.UserMapper;
 import store.user.pojo.vo.UserVO;
 import store.user.service.IUserService;
 
 import java.util.Date;
-import java.util.List;
 
 /**
  * author  violet
@@ -28,8 +29,11 @@ public class UserServiceImpl implements IUserService {
 
     private final UserMapper userMapper;
 
-    public UserServiceImpl(UserMapper userMapper) {
+    private final UserLoginLogMapper userLoginLogMapper;
+
+    public UserServiceImpl(UserMapper userMapper, UserLoginLogMapper userLoginLogMapper) {
         this.userMapper = userMapper;
+        this.userLoginLogMapper = userLoginLogMapper;
     }
 
 
@@ -85,8 +89,13 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
-    public Integer updateLogById(Long userId, UserLoginLog userLoginLog) {
-        return null;
+    public Integer updateLogById(UserLoginLog userLoginLog) {
+        User user = new User();
+        user.setUserId(userLoginLog.getUserId());
+        user.setLastLoginIp(userLoginLog.getUserIp());
+        user.setLastLoginTime(userLoginLog.getLoginTime());
+        userMapper.updateById(user);
+        return userLoginLogMapper.insert(userLoginLog);
     }
 
     @Override

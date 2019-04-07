@@ -85,7 +85,7 @@ public class UserLoginController extends BaseController {
             userLoginLog.setUserId(SingletonLoginUtils.getUserId());
             userLoginLog.setBrowser(ServletUtils.getUserBrowser());
             userLoginLog.setOperatingSystem(ServletUtils.getUserOperatingSystem());
-            Integer count = userService.updateLogById(SingletonLoginUtils.getUserId(), userLoginLog);
+            Integer count = userService.updateLogById( userLoginLog);
             return new OsResult(CommonReturnCode.SUCCESS, count);
         } catch (UnknownAccountException e) {
             logger.error(UserReturnCode.USER_NOT_EXIST.getMessage(), e);

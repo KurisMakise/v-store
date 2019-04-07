@@ -25,7 +25,7 @@ public interface IUserService {
 
     User getUserByLoginName(String loginName);
 
-    Integer updateLogById(Long userId, UserLoginLog userLoginLog);
+    Integer updateLogById(UserLoginLog userLoginLog);
 
     Integer insertUser(User user);
 }
