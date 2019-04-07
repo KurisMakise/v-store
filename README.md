@@ -4,16 +4,16 @@
 导入project-doc下sql脚本
 修改store-os-web模块下资源文件夹resourses/application.yaml中spring:datasource数据源
 
-基于springboot maven开发
-安全框架：Apache Shiro(Ehcache缓存)
-视图框架：Spring MVC
-持久层框架：MyBatis + Mybatis-plus 
-布局框架：SiteMesh 
-接口测试框架：Swagger2 
-分布式服务框架：Dubbo+ZooKeeper（待整合）
-搜索引擎:Solr（待整合）
-缓存框架:redis（待整合）
-其他：kaptcha验证码，velocity发送邮件
+基于springboot maven开发<br>
+安全框架：Apache Shiro(Ehcache缓存)<br>
+视图框架：Spring MVC<br>
+持久层框架：MyBatis + Mybatis-plus <br>
+布局框架：SiteMesh <br>
+接口测试框架：Swagger2 <br>
+分布式服务框架：Dubbo+ZooKeeper（待整合）<br>
+搜索引擎:Solr（待整合）<br>
+缓存框架:redis（待整合）<br>
+其他：kaptcha验证码，velocity发送邮件<br>
 
 
 数据库er图
