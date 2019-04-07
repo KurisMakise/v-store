@@ -261,10 +261,7 @@ function add_cart(obj) {
 	$.ajax({
 		type : 'post',
 		dataType : 'json',
-		data : {
-			'productSpecNumber' : productSpecNumber
-		},
-		url : baselocation + '/cart',
+		url : baselocation + '/cart/'+productSpecNumber,
 		success : function(result) {
 			if (result.code == 1) {
 				window.location.href = baselocation + '/cart/' + result.data;

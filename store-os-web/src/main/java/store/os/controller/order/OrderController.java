@@ -3,13 +3,15 @@ package store.os.controller.order;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import store.common.base.BaseController;
 import store.common.constant.CommonReturnCode;
 import store.common.enums.StatusEnum;
+import store.common.exception.ValidationException;
 import store.order.entity.Order;
+import store.order.entity.OrderProduct;
 import store.order.entity.OrderShipment;
 import store.order.pojo.vo.OrderShoppingCartVO;
 import store.order.service.IOrderProductService;
@@ -36,37 +38,40 @@ import java.util.List;
 @Controller
 @RequestMapping("/buy")
 @Api("购买商品")
-public class OrderBuyController {
+public class OrderController extends BaseController {
 
-    @Autowired
-    private IShoppingCartService shoppingCartService;
+    private final IShoppingCartService shoppingCartService;
 
-    @Autowired
-    private IAddressService addressService;
+    private final IAddressService addressService;
 
-    @Autowired
-    private IOrderStatusService orderStatusService;
+    private final IOrderStatusService orderStatusService;
 
-    @Autowired
-    private IOrderProductService orderProductService;
+    private final IOrderProductService orderProductService;
 
-    @Autowired
-    private IOrderShipmentService orderShipmentService;
+    private final IOrderShipmentService orderShipmentService;
 
-    @Autowired
-    private IOrderService orderService;
+    private final IOrderService orderService;
+
+    public OrderController(IShoppingCartService shoppingCartService, IAddressService addressService, IOrderStatusService orderStatusService, IOrderProductService orderProductService, IOrderShipmentService orderShipmentService, IOrderService orderService) {
+        this.shoppingCartService = shoppingCartService;
+        this.addressService = addressService;
+        this.orderStatusService = orderStatusService;
+        this.orderProductService = orderProductService;
+        this.orderShipmentService = orderShipmentService;
+        this.orderService = orderService;
+    }
 
 
     @ApiOperation("填写订单信息")
     @GetMapping("/checkout")
     public String checkout(Model model) {
         //收货地址
-        List<Address> addresses = addressService.listAddress(1L);
+        List<Address> addresses = addressService.listAddress(SingletonLoginUtils.getUserId());
         model.addAttribute("addresses", addresses);
-
         //购物车选中商品
-        CartVO cartVO = shoppingCartService.list(1L, StatusEnum.CHECKED.getStatus());
+        CartVO cartVO = shoppingCartService.list(SingletonLoginUtils.getUserId(), StatusEnum.CHECKED.getStatus());
         model.addAttribute("cartVO", cartVO);
+
         return "modules/order/order_buy_checkout";
     }
 
@@ -75,7 +80,7 @@ public class OrderBuyController {
     @ResponseBody
     public Object confirm(@RequestParam(value = "addressId") Long addressId, Order order) {
         //收货地址
-        long userId = SingletonLoginUtils.getUserId();
+        Long userId = SingletonLoginUtils.getUserId();
         Address address = addressService.getAddress(addressId, userId);
         if (address != null) {
             OrderShipment orderShipment = new OrderShipment();
@@ -92,13 +97,16 @@ public class OrderBuyController {
                 BeanUtils.copyProperties(shoppingCartVO, orderShoppingCartVO);
                 orderShoppingCartVOS.add(orderShoppingCartVO);
             }
-
+            if (orderShoppingCartVOS.isEmpty()) {
+                return new OsResult(CommonReturnCode.BAD_PARAM.getCode(), "购物车商品不存在");
+            }
             //生成订单
             Long orderNumber = orderService.insertOrder(order, orderShipment, orderShoppingCartVOS, userId);
 
             if (orderNumber != null) {
                 shoppingCartService.deleteCheckProduct(userId);
-                return new OsResult(CommonReturnCode.SUCCESS);
+                //TODO orderNumber有时候会丢失精度
+                return new OsResult(CommonReturnCode.SUCCESS, orderNumber.toString());
             } else {
                 return new OsResult(CommonReturnCode.UNKNOWN);
             }
@@ -107,4 +115,24 @@ public class OrderBuyController {
         }
     }
 
+    public static void main(String[] args) {
+    }
+
+    @ApiOperation("订单确认")
+    @GetMapping("/confirm/{orderNumber}")
+    public String confirmView(Model model, @PathVariable Long orderNumber) {
+        try {
+            Order order = orderService.getOrder(SingletonLoginUtils.getUserId(), orderNumber);
+            OrderShipment orderShipment = orderShipmentService.getByOrderId(order.getOrderId());
+            List<OrderProduct> orderProducts = orderProductService.listByOrderId(order.getOrderId());
+
+            model.addAttribute("orderShipment", orderShipment);
+            model.addAttribute("orderProducts", orderProducts);
+            model.addAttribute("order", order);
+            return "/modules/order/order_buy_confirm";
+        } catch (ValidationException e) {
+            logger.error(e.getMessage(), e);
+            return "/modules/order/order_buy_confirm";
+        }
+    }
 }

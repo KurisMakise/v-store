@@ -234,7 +234,7 @@ $(function() {
 			E = !1;
 		if (C === D && (C = ""), !(C.length >= 5 && C.length <= 32)) return g.focus(), setMsg(g, "详细地址长度不对，最小为 5 个字，最大32个字"), !1;
 		if (n.test(C) || o.test(C) || p.test(C)) return g.focus(), setMsg(g, "详细地址不正确"), !1;
-		setMsg(g, ""), r.userAdress = C, E = !0;
+		setMsg(g, ""), r.userAddress = C, E = !0;
 		var F = $.trim(h.val()),
 			G = !1;
 		if (!l.test(F)) return h.focus(), setMsg(h, "邮编是6位数字"), !1;

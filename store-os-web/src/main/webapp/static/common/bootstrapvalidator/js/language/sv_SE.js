@@ -48,7 +48,7 @@
             'default': 'Vänligen mata in ett giltigt EAN-nummer'
         },
         emailAddress: {
-            'default': 'Vänligen mata in en giltig emailadress'
+            'default': 'Vänligen mata in en giltig emailaddress'
         },
         file: {
             'default': 'Vänligen välj en giltig fil'
@@ -199,9 +199,9 @@
             'default': 'Vänligen mata in ett giltigt heltal'
         },
         ip: {
-            'default': 'Vänligen mata in en giltig IP-adress',
-            ipv4: 'Vänligen mata in en giltig IPv4-adress',
-            ipv6: 'Vänligen mata in en giltig IPv6-adress'
+            'default': 'Vänligen mata in en giltig IP-address',
+            ipv4: 'Vänligen mata in en giltig IPv4-address',
+            ipv6: 'Vänligen mata in en giltig IPv6-address'
         },
         isbn: {
             'default': 'Vänligen mata in ett giltigt ISBN-nummer'
@@ -220,7 +220,7 @@
             notInclusive: 'Vänligen mata in ett värde mindre än %s'
         },
         mac: {
-            'default': 'Vänligen mata in en giltig MAC-adress'
+            'default': 'Vänligen mata in en giltig MAC-address'
         },
         meid: {
             'default': 'Vänligen mata in ett giltigt MEID-nummer'

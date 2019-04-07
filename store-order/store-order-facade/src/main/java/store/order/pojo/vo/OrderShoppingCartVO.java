@@ -10,6 +10,9 @@ import java.util.List;
  * version 1.0
  */
 public class OrderShoppingCartVO {
+
+    private Long orderShipmentId;
+
     private Long productSpecNumber;
     /**
      * 购买数量
@@ -63,6 +66,15 @@ public class OrderShoppingCartVO {
      * 商品规格名称
      */
     private String productSpecName;
+
+
+    public Long getOrderShipmentId() {
+        return orderShipmentId;
+    }
+
+    public void setOrderShipmentId(Long orderShipmentId) {
+        this.orderShipmentId = orderShipmentId;
+    }
 
     public Long getProductSpecNumber() {
         return productSpecNumber;

@@ -17,6 +17,17 @@ public class ShoppingCartVO {
      */
     private Long cartId;
 
+
+    private Long productSpecId;
+
+    public Long getProductSpecId() {
+        return productSpecId;
+    }
+
+    public void setProductSpecId(Long productSpecId) {
+        this.productSpecId = productSpecId;
+    }
+
     /**
      * 商品规格编号
      */
@@ -243,8 +254,10 @@ public class ShoppingCartVO {
 
     public String getProductSpecName() {
         StringBuilder sb = new StringBuilder();
-        for (String name : specificationName) {
-            sb.append(name).append(" ");
+        if (specificationName != null) {
+            for (String name : specificationName) {
+                sb.append(name).append(" ");
+            }
         }
         this.productSpecName = sb.toString();
         return this.productSpecName;

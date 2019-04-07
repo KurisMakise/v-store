@@ -2,10 +2,13 @@ package store.product.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import store.common.constant.CommonReturnCode;
 import store.common.enums.StatusEnum;
+import store.common.exception.ValidationException;
+import store.product.entity.ProductSpecification;
 import store.product.entity.ShoppingCart;
+import store.product.mapper.ProductSpecificationMapper;
 import store.product.mapper.ShoppingCartMapper;
 import store.product.pojo.vo.CartVO;
 import store.product.pojo.vo.ShoppingCartVO;
@@ -22,21 +25,59 @@ import java.util.List;
 @Service
 public class ShoppingCartServiceImpl implements IShoppingCartService {
 
-    @Autowired
-    private ShoppingCartMapper shoppingCartMapper;
+    private final ShoppingCartMapper shoppingCartMapper;
+
+    private final ProductSpecificationMapper productSpecificationMapper;
+
+    public ShoppingCartServiceImpl(ShoppingCartMapper shoppingCartMapper, ProductSpecificationMapper productSpecificationMapper) {
+        this.shoppingCartMapper = shoppingCartMapper;
+        this.productSpecificationMapper = productSpecificationMapper;
+    }
 
     @Override
-    public Integer insertShoppingCart(Long productSpecNumber, Long userId) {
-        return null;
+    public Integer insertShoppingCart(Long productSpecNumber, Long userId) throws ValidationException {
+        if (productSpecNumber == null)
+            throw new ValidationException(CommonReturnCode.BAD_PARAM.getCode(), "productSpecNumber不存在");
+        if (userId == null)
+            throw new ValidationException(CommonReturnCode.UNAUTHORIZED);
+
+        //检查商品是否存在
+        QueryWrapper<ProductSpecification> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("product_spec_number", productSpecNumber);
+        ProductSpecification productSpecification = productSpecificationMapper.selectOne(queryWrapper);
+        if (productSpecification == null)
+            throw new ValidationException(CommonReturnCode.BAD_PARAM.getCode(), "商品不存在");
+
+
+        //判断购物车是否存在
+        QueryWrapper<ShoppingCart> cartQueryWrapper = new QueryWrapper<>();
+        cartQueryWrapper.eq("product_spec_number", productSpecNumber);
+        ShoppingCart shoppingCart = shoppingCartMapper.selectOne(cartQueryWrapper);
+        if (shoppingCart == null) {
+            shoppingCart = new ShoppingCart();
+            shoppingCart.setCreateTime(new Date());
+            shoppingCart.setUserId(userId);
+            shoppingCart.setProductSpecNumber(productSpecNumber);
+            shoppingCart.setBuyNumber(1);
+            shoppingCart.setUpdateTime(new Date());
+            return shoppingCartMapper.insert(shoppingCart);
+        } else {
+            shoppingCart.setBuyNumber(shoppingCart.getBuyNumber() + 1);
+            shoppingCart.setUpdateTime(new Date());
+            return shoppingCartMapper.updateById(shoppingCart);
+        }
     }
 
     @Override
     public ShoppingCartVO getCart(Long userId, Long productSpecNumber) {
-        return null;
+
+        return shoppingCartMapper.getCart(userId, productSpecNumber);
     }
 
     @Override
-    public CartVO list(Long userId, Integer checkStatus) {
+    public CartVO list(Long userId, Integer checkStatus) throws ValidationException {
+        if (userId == null)
+            throw new ValidationException(CommonReturnCode.UNAUTHORIZED);
         //根据用户ID查询购物车列表
         List<ShoppingCartVO> shoppingCartVOS = shoppingCartMapper.list(userId, checkStatus);
         CartVO cartVO = new CartVO();

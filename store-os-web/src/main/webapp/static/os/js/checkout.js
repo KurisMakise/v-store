@@ -110,7 +110,7 @@ $(function() {
 			dataType : 'json',
 			data : params,
 			success : function(result) {
-				if (result.code == true) {
+				if (result.code == 1) {
 					window.location.href = baselocation + '/buy/confirm/' + result.data;
 				} else {
 					layer.alert(result.message, {

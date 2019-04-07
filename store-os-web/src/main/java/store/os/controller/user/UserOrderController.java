@@ -53,8 +53,8 @@ public class UserOrderController extends BaseController {
     @ApiOperation("订单详情")
     @GetMapping("/{orderNumber}")
     public String orderView(Model model, @PathVariable Long orderNumber) {
-        Order order = orderService.getOrder(SingletonLoginUtils.getUserId(), orderNumber);
-        model.addAttribute("order", order);
+        OrderVO orderVO = orderService.getOrderVO(orderNumber, SingletonLoginUtils.getUserId());
+        model.addAttribute("orderVO", orderVO);
         return "/modules/usercenter/user_order_view";
     }
 

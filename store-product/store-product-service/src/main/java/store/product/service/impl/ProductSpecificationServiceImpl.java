@@ -31,12 +31,15 @@ public class ProductSpecificationServiceImpl implements IProductSpecificationSer
         List<ProductSpecificationVO> productSpecificationVOS = productSpecificationMapper.listProductSpecVO(productId, status);
 
         //商品规格
-        List<SpecificationVO> specificationVOS = productSpecificationMapper.listSpecVO(status);
+        List<SpecificationVO> specificationVOS = productSpecificationMapper.listSpecVO(productId, status);
 
         //将商品规格作为key
         Map<String, ProductSpecificationVO> specificationVOMap = new HashMap<>();
         for (ProductSpecificationVO vo : productSpecificationVOS) {
             String key = String.valueOf(vo.getSpecAttrIds());
+            if ("[]".equals(key)) {
+                key = "default";
+            }
             specificationVOMap.put(key, vo);
         }
 

@@ -48,7 +48,7 @@
             'default': 'Bitte gültige EAN Nummer eingeben'
         },
         emailAddress: {
-            'default': 'Bitte gültige Emailadresse eingeben'
+            'default': 'Bitte gültige Emailaddresse eingeben'
         },
         file: {
             'default': 'Bitte gültiges File eingeben'
@@ -199,9 +199,9 @@
             'default': 'Bitte Zahl eingeben'
         },
         ip: {
-            'default': 'Bitte  gültige IP-Adresse eingeben',
-            ipv4: 'Bitte  gültige IPv4 Adresse eingeben',
-            ipv6: 'Bitte  gültige IPv6 Adresse eingeben'
+            'default': 'Bitte  gültige IP-addresse eingeben',
+            ipv4: 'Bitte  gültige IPv4 addresse eingeben',
+            ipv6: 'Bitte  gültige IPv6 addresse eingeben'
         },
         isbn: {
             'default': 'Bitte gültige ISBN Nummer eingeben'
@@ -220,7 +220,7 @@
             notInclusive: 'Bitte Wert kleiner als %s eingeben'
         },
         mac: {
-            'default': 'Bitte gültige MAC Adresse eingeben'
+            'default': 'Bitte gültige MAC addresse eingeben'
         },
         meid: {
             'default': 'Bitte gültige MEID Nummer eingeben'

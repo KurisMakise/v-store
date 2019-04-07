@@ -22,12 +22,12 @@
         </div>
         <div class="section-body clearfix" id="J_addressList">
           <c:forEach items="${addresses}" var="address">
-            <div class="address-item J_addressItem" data-address_id="${address.addressId}" data-consignee="${address.userName}" data-tel="${address.userPhone}" data-province_id="${address.provinceId}" data-province_name="${address.provinceName}" data-city_id="${address.cityId}" data-city_name="${address.cityName}" data-district_id="${address.districtId}" data-district_name="${address.districtName}" data-zipcode="${address.userZipcode}" data-address="${address.userAdress}" data-tag_name="${address.userTag}">
+            <div class="address-item J_addressItem" data-address_id="${address.addressId}" data-consignee="${address.userName}" data-tel="${address.userPhone}" data-province_id="${address.provinceId}" data-province_name="${address.provinceName}" data-city_id="${address.cityId}" data-city_name="${address.cityName}" data-district_id="${address.districtId}" data-district_name="${address.districtName}" data-zipcode="${address.userZipcode}" data-address="${address.userAddress}" data-tag_name="${address.userTag}">
               <dl>
                 <dt> <span class="tag">${address.userTag}</span> <em class="uname">${address.userName}</em> </dt>
                 <dd class="utel"> ${address.userPhone} </dd>
                 <dd class="uaddress"> ${address.provinceName}&nbsp;&nbsp;${address.cityName}&nbsp;&nbsp;${address.districtName}<br>
-                  ${address.userAdress} (${address.userZipcode}) </dd>
+                  ${address.userAddress} (${address.userZipcode}) </dd>
               </dl>
               <div class="actions"> <a href="javascript:void(0);" class="modify J_addressModify">修改</a> </div>
             </div>
@@ -55,7 +55,7 @@
               <p class="tip-msg tipMsg"></p>
             </div>
             <div class="form-section">
-              <textarea class="input-text J_addressInput" type="text" id="user_adress" name="user_adress" placeholder="详细地址，路名或街道名称，门牌号"></textarea>
+              <textarea class="input-text J_addressInput" type="text" id="user_address" name="user_address" placeholder="详细地址，路名或街道名称，门牌号"></textarea>
               <p class="tip-msg tipMsg"></p>
             </div>
             <div class="form-section">
@@ -90,7 +90,7 @@
         </div>
         <div class="section-body clearfix">
           <ul class="clearfix J_optionList options ">
-            <li data-type="shipment" class="J_option selected" data-amount="10" data-value="1"> 快递配送（免运费） </li>
+            <li data-type="shipment" class="J_option selected" data-amount="0" data-value="1"> 快递配送（免运费） </li>
             <li data-type="shipment" class="J_option hide" data-amount="10" data-value="2"> 快递配送（运费 10 元） </li>
           </ul>
           <div class="service-self-tip" id="J_serviceSelfTip"></div>

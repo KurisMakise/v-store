@@ -18,7 +18,6 @@ public class InterceptorLogin implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //认证用户放入request中
-        System.out.println(request.getRequestURL());
         AuthorizingUser authorizingUser = SingletonLoginUtils.getUser();
         request.setAttribute("user", authorizingUser);
         return true;

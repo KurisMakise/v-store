@@ -30,35 +30,13 @@ public class Address {
 
     private String districtName;
 
-    private String userAdress;
+    private String userAddress;
 
     private String userZipcode;
 
     private Date createTime;
 
     private Date updateTime;
-
-    public Address(Long addressId, Long userId, String userName, String userTag, String userPhone, Integer provinceId, String provinceName, Integer cityId, String cityName, Integer districtId, String districtName, String userAdress, String userZipcode, Date createTime, Date updateTime) {
-        this.addressId = addressId;
-        this.userId = userId;
-        this.userName = userName;
-        this.userTag = userTag;
-        this.userPhone = userPhone;
-        this.provinceId = provinceId;
-        this.provinceName = provinceName;
-        this.cityId = cityId;
-        this.cityName = cityName;
-        this.districtId = districtId;
-        this.districtName = districtName;
-        this.userAdress = userAdress;
-        this.userZipcode = userZipcode;
-        this.createTime = createTime;
-        this.updateTime = updateTime;
-    }
-
-    public Address() {
-        super();
-    }
 
     public Long getAddressId() {
         return addressId;
@@ -81,7 +59,7 @@ public class Address {
     }
 
     public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+        this.userName = userName;
     }
 
     public String getUserTag() {
@@ -89,7 +67,7 @@ public class Address {
     }
 
     public void setUserTag(String userTag) {
-        this.userTag = userTag == null ? null : userTag.trim();
+        this.userTag = userTag;
     }
 
     public String getUserPhone() {
@@ -97,7 +75,7 @@ public class Address {
     }
 
     public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone == null ? null : userPhone.trim();
+        this.userPhone = userPhone;
     }
 
     public Integer getProvinceId() {
@@ -113,7 +91,7 @@ public class Address {
     }
 
     public void setProvinceName(String provinceName) {
-        this.provinceName = provinceName == null ? null : provinceName.trim();
+        this.provinceName = provinceName;
     }
 
     public Integer getCityId() {
@@ -129,7 +107,7 @@ public class Address {
     }
 
     public void setCityName(String cityName) {
-        this.cityName = cityName == null ? null : cityName.trim();
+        this.cityName = cityName;
     }
 
     public Integer getDistrictId() {
@@ -145,15 +123,15 @@ public class Address {
     }
 
     public void setDistrictName(String districtName) {
-        this.districtName = districtName == null ? null : districtName.trim();
+        this.districtName = districtName;
     }
 
-    public String getUserAdress() {
-        return userAdress;
+    public String getUserAddress() {
+        return userAddress;
     }
 
-    public void setUserAdress(String userAdress) {
-        this.userAdress = userAdress == null ? null : userAdress.trim();
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
     }
 
     public String getUserZipcode() {

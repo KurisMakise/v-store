@@ -111,7 +111,6 @@ public class ProductController {
 
             //商品
             Page<ProductVO> productVOPage = new Page<>(page, limit);
-
             setOrder(productVOPage, sort);
             List<Long> categoryIds = getLowerCategory(lowerCategories);
             categoryIds.add(categoryId);

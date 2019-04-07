@@ -1,8 +1,11 @@
 package store.order.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import store.common.base.BasePageDTO;
+import store.common.constant.CommonReturnCode;
+import store.common.exception.ValidationException;
 import store.common.support.page.PageInfo;
 import store.order.common.enums.OrderStatusEnum;
 import store.order.common.util.OrderUtils;
@@ -46,6 +49,16 @@ public class OrderServiceImpl implements IOrderService {
 
 
     @Override
+    public OrderVO getOrderVO(Long orderNumber, Long userId) {
+        if (userId == null)
+            throw new ValidationException(CommonReturnCode.UNAUTHORIZED);
+        if (orderNumber == null)
+            throw new ValidationException(CommonReturnCode.BAD_PARAM);
+
+        return orderMapper.getOrderVO(orderNumber, userId);
+    }
+
+    @Override
     public Long insertOrder(Order order, OrderShipment orderShipment, List<OrderShoppingCartVO> orderShoppingCartVOS, Long userId) {
         //创建订单
         Long orderNumber = OrderUtils.getOrderNumber();
@@ -58,6 +71,7 @@ public class OrderServiceImpl implements IOrderService {
         orderMapper.insert(order);
 
         //创建订单配送表
+        orderShipment.setOrderId(order.getOrderId());
         orderShipment.setUpdateTime(new Date());
         orderShipmentMapper.insert(orderShipment);
 
@@ -86,6 +100,11 @@ public class OrderServiceImpl implements IOrderService {
 
     @Override
     public Order getOrder(Long userId, Long orderNumber) {
+        if (userId == null)
+            throw new ValidationException(CommonReturnCode.UNAUTHORIZED);
+        if (orderNumber == null)
+            throw new ValidationException(CommonReturnCode.BAD_PARAM);
+
         QueryWrapper<Order> orderQueryWrapper = new QueryWrapper<>();
         orderQueryWrapper.eq("user_id", userId);
         orderQueryWrapper.eq("order_number", orderNumber);

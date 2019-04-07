@@ -27,6 +27,21 @@ public class ProductVO {
     private Long productNumber;
 
     /**
+     * 评论人
+     */
+    private String userName;
+
+    /**
+     * 评论ID
+     */
+    private Long commentId;
+
+    /**
+     * 评论内存
+     */
+    private String content;
+
+    /**
      * 商品名称
      */
     private String name;
@@ -70,6 +85,31 @@ public class ProductVO {
      * 标签名称
      */
     private String labelName;
+
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Long getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(Long commentId) {
+        this.commentId = commentId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public List<Comment> getComments() {
         return comments;

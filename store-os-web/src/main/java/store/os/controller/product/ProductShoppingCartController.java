@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import store.common.base.BaseController;
 import store.common.constant.CommonReturnCode;
 import store.common.enums.StatusEnum;
+import store.common.exception.ValidationException;
 import store.os.common.result.OsResult;
-import store.os.common.security.AuthorizingUser;
 import store.os.controller.common.util.SingletonLoginUtils;
 import store.product.pojo.vo.CartVO;
+import store.product.pojo.vo.ShoppingCartVO;
 import store.product.service.IShoppingCartService;
 
 /**
@@ -22,7 +24,7 @@ import store.product.service.IShoppingCartService;
 @Controller
 @RequestMapping("/cart")
 @Api("商品购物车")
-public class ProductShoppingCartController {
+public class ProductShoppingCartController extends BaseController {
 
     private final IShoppingCartService shoppingCartService;
 
@@ -32,29 +34,48 @@ public class ProductShoppingCartController {
     }
 
 
+    @ApiOperation("购物车信息")
+    @GetMapping("/{productSpecNumber}")
+    public String view(Model model, @PathVariable Long productSpecNumber) {
+        ShoppingCartVO shoppingCartVO = shoppingCartService.getCart(SingletonLoginUtils.getUserId(), productSpecNumber);
+        model.addAttribute("shoppingCartVO", shoppingCartVO);
+        return "/modules/product/product_cart_info";
+    }
+
+
     @ApiOperation("加入购物车")
-    @GetMapping("/create")
+    @PostMapping("/{productSpecNumber}")
     @ResponseBody
-    public Object Create(Model model, @RequestParam Long productSpecNumber) {
-        AuthorizingUser authorizingUser = SingletonLoginUtils.getUser();
-        if (authorizingUser != null) {
-            shoppingCartService.insertShoppingCart(productSpecNumber, authorizingUser.getUserId());
+    public Object create(@PathVariable Long productSpecNumber) {
+        try {
+            Integer count = shoppingCartService.insertShoppingCart(productSpecNumber, SingletonLoginUtils.getUserId());
+            if (count != null && count > 0) {
+                return new OsResult(CommonReturnCode.SUCCESS, productSpecNumber);
+            }
+        } catch (ValidationException e) {
+            logger.error(e.getMessage(), e);
+            return new OsResult(e.getCode(), e.getMessage());
         }
-        return null;
+        return new OsResult(CommonReturnCode.UNKNOWN);
     }
 
     @ApiOperation("购物车数量")
     @GetMapping("/cartNumber")
     @ResponseBody
     public Object cartNumber() {
-        CartVO cartVO = shoppingCartService.list(1L, StatusEnum.ALL.getStatus());
-        return cartVO.getTotalNumber();
+        try {
+            CartVO cartVO = shoppingCartService.list(SingletonLoginUtils.getUserId(), StatusEnum.ALL.getStatus());
+            return new OsResult(CommonReturnCode.SUCCESS, cartVO.getTotalNumber());
+        } catch (ValidationException e) {
+            logger.error(e.getMessage(), e);
+            return new OsResult(CommonReturnCode.UNKNOWN, 0);
+        }
     }
 
     @ApiOperation("导航栏购物车")
     @GetMapping("/topBar")
     public String topBar(Model model) {
-        CartVO cartVO = shoppingCartService.list(1L, StatusEnum.ALL.getStatus());
+        CartVO cartVO = shoppingCartService.list(SingletonLoginUtils.getUserId(), StatusEnum.ALL.getStatus());
         model.addAttribute("cartVO", cartVO);
         return "modules/product/product_cart_topBar";
     }
@@ -62,8 +83,12 @@ public class ProductShoppingCartController {
     @ApiOperation("购物车列表")
     @GetMapping("/list")
     public String list(Model model) {
-        CartVO list = shoppingCartService.list(1L, StatusEnum.ALL.getStatus());
-        model.addAttribute("cartVO", list);
+        try {
+            CartVO list = shoppingCartService.list(SingletonLoginUtils.getUserId(), StatusEnum.ALL.getStatus());
+            model.addAttribute("cartVO", list);
+        } catch (ValidationException e) {
+            logger.error(e.getMessage(), e);
+        }
         return "modules/product/product_cart_list";
     }
 
@@ -71,7 +96,7 @@ public class ProductShoppingCartController {
     @PutMapping("/{productSpecNumber}")
     @ResponseBody
     public Object updateBuyNumber(@PathVariable long productSpecNumber, int buyNumber) {
-        Integer count = shoppingCartService.updateBuyNumber(productSpecNumber, 1L, buyNumber);
+        Integer count = shoppingCartService.updateBuyNumber(productSpecNumber, SingletonLoginUtils.getUserId(), buyNumber);
         if (count != null) {
             return new OsResult(CommonReturnCode.SUCCESS, count);
         }

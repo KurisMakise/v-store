@@ -13,4 +13,5 @@ public interface ProductMapper extends BaseMapper<Product> {
     ProductVO getProductVOById(Long productId);
 
     List<ProductVO> listProductVO(List<Long> categoryIds, Integer showInShelve, String search, Page<ProductVO> page);
+
 }

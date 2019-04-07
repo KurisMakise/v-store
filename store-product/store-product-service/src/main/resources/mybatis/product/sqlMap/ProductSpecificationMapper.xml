@@ -1,28 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="store.product.mapper.ProductSpecificationMapper">
-    <resultMap id="BaseResultMap" type="store.product.entity.ProductSpecification">
-        <constructor>
-            <idArg column="product_spec_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
-            <arg column="product_spec_number" javaType="java.lang.Long" jdbcType="BIGINT"/>
-            <arg column="product_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
-            <arg column="spec" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="stock" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="sales_volume" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="price" javaType="java.math.BigDecimal" jdbcType="DECIMAL"/>
-            <arg column="score" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="default_status" javaType="java.lang.Byte" jdbcType="TINYINT"/>
-            <arg column="status" javaType="java.lang.Byte" jdbcType="TINYINT"/>
-            <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-            <arg column="create_by" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-            <arg column="update_by" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        </constructor>
-    </resultMap>
-    <sql id="Base_Column_List">
-    product_spec_id, product_spec_number, product_id, spec, stock, sales_volume, price,
-    score, default_status, status, create_time, create_by, update_time, update_by
-  </sql>
 
     <resultMap id="productSpecVOResultMap" type="store.product.pojo.vo.ProductSpecificationVO">
         <id column="product_spec_number" property="productSpecNumber"/>
@@ -67,8 +45,11 @@
                s.name             as specName,
                s.specification_id as specificationId
         FROM os_specification_attribute a
-                 LEFT JOIN os_specification s ON a.specification_id = s.specification_id
+        LEFT JOIN os_specification s ON a.specification_id = s.specification_id
+        LEFT JOIN os_product_spec_rel r ON r.spec_attr_id = a.spec_attr_id
+        LEFT JOIN os_product_specification p ON p.product_spec_id = r.product_spec_id
         WHERE s.status = #{status}
+        AND p.product_id = #{productId}
         ORDER BY
         s.sort ASC,
         a.sort ASC

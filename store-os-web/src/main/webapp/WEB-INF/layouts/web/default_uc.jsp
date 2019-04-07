@@ -41,7 +41,7 @@
             <div class="box-bd">
               <ul class="uc-nav-list">
                 <li><a href="${ctx}/uc/order/list">我的订单</a></li>
-                <li><a href="${ctx}/uc/order/comment" data-count="comment" data-count-style="bracket">评价晒单</a></li>
+                <li><a href="" data-count="comment" data-count-style="bracket">评价晒单</a></li>
               </ul>
             </div>
           </div>
@@ -64,9 +64,9 @@
             </div>
             <div class="box-bd">
               <ul class="uc-nav-list">
-                <li><a href="">个人信息</a></li>
-                <li><a href="">修改密码</a></li>
-                <li><a href="">社区VIP认证</a></li>
+                <li><a href="">个人信息（待完成）</a></li>
+                <li><a href="">修改密码（待完成）</a></li>
+                <li><a href="">社区VIP认证（待完成）</a></li>
               </ul>
             </div>
           </div>

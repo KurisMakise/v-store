@@ -19,7 +19,7 @@ public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
         builder
                 .addDecoratorPath("/**", "/WEB-INF/layouts/web/default.jsp")//拦截规则，/decorator/default 会被转发
                 .addDecoratorPath("/uc/**", "/WEB-INF/layouts/web/default_uc.jsp")
-                .addExcludedPath("/cart/**")
+                .addExcludedPath("/cart/topBar")
                 .addExcludedPath("/recommend/**")
                 .addExcludedPath("/comment/sup")
                 .addExcludedPath("/comment/timeLine")

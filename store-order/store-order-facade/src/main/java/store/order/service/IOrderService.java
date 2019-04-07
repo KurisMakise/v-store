@@ -17,6 +17,8 @@ import java.util.List;
  */
 public interface IOrderService {
 
+    OrderVO getOrderVO(Long orderNumber, Long userId);
+
     /**
      * @param order                订单
      * @param orderShipment        收货地址

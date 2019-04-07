@@ -45,7 +45,7 @@ $(function() {
 		"height" : "35",
 		"parentClass" : "pageTitle",
 		"callback" : function(keyword) {
-			window.location.href = baselocation + '/search?search=' + keyword;
+			window.location.href = baselocation + '/list?search=' + keyword;
 		}
 	});
 })

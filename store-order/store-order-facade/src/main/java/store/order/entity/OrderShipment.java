@@ -28,13 +28,16 @@ public class OrderShipment {
 
     private String districtName;
 
-    private String userAdress;
+    private String userAddress;
 
     private Integer userZipcode;
 
     private Date updateTime;
 
-    public OrderShipment(Long orderShipmentId, Long orderId, String userName, String userPhone, Integer provinceId, String provinceName, Integer cityId, String cityName, Integer districtId, String districtName, String userAdress, Integer userZipcode, Date updateTime) {
+    public OrderShipment() {
+    }
+
+    public OrderShipment(Long orderShipmentId, Long orderId, String userName, String userPhone, Integer provinceId, String provinceName, Integer cityId, String cityName, Integer districtId, String districtName, String userAddress, Integer userZipcode, Date updateTime) {
         this.orderShipmentId = orderShipmentId;
         this.orderId = orderId;
         this.userName = userName;
@@ -45,13 +48,9 @@ public class OrderShipment {
         this.cityName = cityName;
         this.districtId = districtId;
         this.districtName = districtName;
-        this.userAdress = userAdress;
+        this.userAddress = userAddress;
         this.userZipcode = userZipcode;
         this.updateTime = updateTime;
-    }
-
-    public OrderShipment() {
-        super();
     }
 
     public Long getOrderShipmentId() {
@@ -75,7 +74,7 @@ public class OrderShipment {
     }
 
     public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+        this.userName = userName;
     }
 
     public String getUserPhone() {
@@ -83,7 +82,7 @@ public class OrderShipment {
     }
 
     public void setUserPhone(String userPhone) {
-        this.userPhone = userPhone == null ? null : userPhone.trim();
+        this.userPhone = userPhone;
     }
 
     public Integer getProvinceId() {
@@ -99,7 +98,7 @@ public class OrderShipment {
     }
 
     public void setProvinceName(String provinceName) {
-        this.provinceName = provinceName == null ? null : provinceName.trim();
+        this.provinceName = provinceName;
     }
 
     public Integer getCityId() {
@@ -115,7 +114,7 @@ public class OrderShipment {
     }
 
     public void setCityName(String cityName) {
-        this.cityName = cityName == null ? null : cityName.trim();
+        this.cityName = cityName;
     }
 
     public Integer getDistrictId() {
@@ -131,15 +130,15 @@ public class OrderShipment {
     }
 
     public void setDistrictName(String districtName) {
-        this.districtName = districtName == null ? null : districtName.trim();
+        this.districtName = districtName;
     }
 
-    public String getUserAdress() {
-        return userAdress;
+    public String getUserAddress() {
+        return userAddress;
     }
 
-    public void setUserAdress(String userAdress) {
-        this.userAdress = userAdress == null ? null : userAdress.trim();
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
     }
 
     public Integer getUserZipcode() {

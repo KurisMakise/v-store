@@ -40,6 +40,7 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/index", "anon");
         filterChainDefinitionMap.put("/pass/kaptcha", "anon");
         filterChainDefinitionMap.put("/list", "anon");
+
         //配置退出过滤器，退出代码Shiro已经实现
 //        filterChainDefinitionMap.put("/pass/logout", "logout");
         //过滤链定义，从上向下顺序执行，一般将/**放最下面
@@ -48,7 +49,7 @@ public class ShiroConfig {
 //        filterChainDefinitionMap.put("/index", "user");
         //authc:所有url都必须通过认证才可以访问,anon:所有都可以匿名访问
         filterChainDefinitionMap.put("/uc/**", "authc");
-
+        filterChainDefinitionMap.put("/buy/checkout", "authc");
         //不设置会自动寻找Web工程目录下的"/login.jsp"页面
         shiroFilterFactoryBean.setLoginUrl("/pass/login");
         //登录成功后要跳转的链接

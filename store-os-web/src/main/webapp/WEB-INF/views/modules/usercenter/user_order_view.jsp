@@ -163,7 +163,7 @@
                 </tr>
                 <tr>
                   <th>收货地址：</th>
-                  <td>${orderVO.orderShipment.provinceName}&nbsp;${orderVO.orderShipment.cityName}&nbsp;${orderVO.orderShipment.districtName}&nbsp;${orderVO.orderShipment.userAdress}</td>
+                  <td>${orderVO.orderShipment.provinceName}&nbsp;${orderVO.orderShipment.cityName}&nbsp;${orderVO.orderShipment.districtName}&nbsp;${orderVO.orderShipment.userAddress}</td>
                 </tr>
               </tbody>
             </table>
@@ -283,7 +283,7 @@
       <div class="form-row clearfix">
         <fieldset class="form-section form-section-active">
           <label class="input-label" for="Street">详细地址</label>
-          <textarea class="input-text" id="Street" name="Order[address]" placeholder="路名或街道地址，门牌号">${orderVO.orderShipment.userAdress}</textarea>
+          <textarea class="input-text" id="Street" name="Order[address]" placeholder="路名或街道地址，门牌号">${orderVO.orderShipment.userAddress}</textarea>
         </fieldset>
       </div>
       <div class="form-row clearfix">
@@ -313,14 +313,14 @@
   <div class="modal-ft"> <a id="J_cancelEditTime" class="btn btn-gray J_cancel" data-dismiss="modal" href="javascript: void(0);">取消</a> <a id="J_submitEditTime" class="btn btn-primary" href="javascript: void(0);">保存</a> </div>
 </div>
 <div class="modal-backdrop in" style="display: none; width: 100%; height: 1854px;"></div>
-<myfooter> 
-  <!-- layer javascript --> 
-  <script src="${ctxsta}/common/layer/layer.js"></script> 
-  <script src="${ctxsta}/os/area/js/area.js"></script> 
-  <script src="${ctxsta}/os/area/js/location.js"></script> 
-  <script src="${ctxsta}/os/area/js/select2.js"></script> 
-  <script src="${ctxsta}/os/area/js/select2_locale_zh-CN.js"></script> 
-  <script src="${ctxsta}/os/js/order.js"></script> 
+<myfooter>
+  <!-- layer javascript -->
+  <script src="${ctxsta}/common/layer/layer.js"></script>
+  <script src="${ctxsta}/os/area/js/area.js"></script>
+  <script src="${ctxsta}/os/area/js/location.js"></script>
+  <script src="${ctxsta}/os/area/js/select2.js"></script>
+  <script src="${ctxsta}/os/area/js/select2_locale_zh-CN.js"></script>
+  <script src="${ctxsta}/os/js/order.js"></script>
 </myfooter>
 </body>
 </html>

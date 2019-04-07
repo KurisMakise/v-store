@@ -48,7 +48,7 @@
             'default': 'Veuillez fournir un code-barre EAN valide'
         },
         emailAddress: {
-            'default': 'Veuillez fournir une adresse e-mail valide'
+            'default': 'Veuillez fournir une addresse e-mail valide'
         },
         file: {
             'default': 'Veuillez choisir un fichier valide'
@@ -199,9 +199,9 @@
             'default': 'Veuillez fournir un nombre valide'
         },
         ip: {
-            'default': 'Veuillez fournir une adresse IP valide',
-            ipv4: 'Veuillez fournir une adresse IPv4 valide',
-            ipv6: 'Veuillez fournir une adresse IPv6 valide'
+            'default': 'Veuillez fournir une addresse IP valide',
+            ipv4: 'Veuillez fournir une addresse IPv4 valide',
+            ipv6: 'Veuillez fournir une addresse IPv6 valide'
         },
         isbn: {
             'default': 'Veuillez fournir un code ISBN valide'
@@ -220,7 +220,7 @@
             notInclusive: 'Veuillez fournir une valeur inférieure à %s'
         },
         mac: {
-            'default': 'Veuillez fournir une adresse MAC valide'
+            'default': 'Veuillez fournir une addresse MAC valide'
         },
         meid: {
             'default': 'Veuillez fournir un code MEID valide'

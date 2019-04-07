@@ -21,14 +21,14 @@
             <p class="order-time" id="J_deliverDesc">我们将尽快为您发货</p>
             <p class="order-time">请在<span class="pay-time-tip">23小时55分</span>内完成支付, 超时后将取消订单</p>
             <p class="post-info" id="J_postInfo"> 收货信息：${orderShipment.userName} ${orderShipment.userPhone}&nbsp;&nbsp;
-              ${orderShipment.provinceName}&nbsp;&nbsp;${orderShipment.cityName}&nbsp;&nbsp;${orderShipment.districtName}&nbsp;&nbsp;${orderShipment.userAdress} </p>
+              ${orderShipment.provinceName}&nbsp;&nbsp;${orderShipment.cityName}&nbsp;&nbsp;${orderShipment.districtName}&nbsp;&nbsp;${orderShipment.userAddress} </p>
           </div>
           <div class="fr">
             <p class="total"> 应付总额：<span class="money"><em>${order.payAmount }</em>元</span> </p>
             <a href="javascript:void(0);" class="show-detail" id="J_showDetail">订单详情&nbsp;<i class="glyphicon glyphicon-chevron-down"></i></a> </div>
         </div>
         <i class="iconfont icon-right">&#x221a;</i>
-        <div class="order-detail">
+        <div class="order-detail" style="display: block;">
           <ul>
             <li class="clearfix">
               <div class="label">订单号：</div>
@@ -37,7 +37,7 @@
             <li class="clearfix">
               <div class="label">收货信息：</div>
               <div class="content"> ${orderShipment.userName} ${orderShipment.userPhone}&nbsp;&nbsp;
-                ${orderShipment.provinceName}&nbsp;&nbsp;${orderShipment.cityName}&nbsp;&nbsp;${orderShipment.districtName}&nbsp;&nbsp;${orderShipment.userAdress} </div>
+                ${orderShipment.provinceName}&nbsp;&nbsp;${orderShipment.cityName}&nbsp;&nbsp;${orderShipment.districtName}&nbsp;&nbsp;${orderShipment.userAddress} </div>
             </li>
             <li class="clearfix">
               <div class="label">商品名称：</div>
@@ -216,8 +216,11 @@
 </div>
 <myfooter> 
   <!-- layer javascript --> 
-  <script src="${ctxsta}/common/layer/layer.js"></script> 
-  <script src="${ctxsta}/os/js/order.js"></script> 
+  <script src="${ctxsta}/common/layer/layer.js"></script>
+<%--
+  <script src="${ctxsta}/os/area/js/area.js"></script>
+--%>
+  <script src="${ctxsta}/os/js/order.js"></script>
 </myfooter>
 </body>
 </html>

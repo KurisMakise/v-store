@@ -48,7 +48,7 @@
             'default': 'Vennligst fyll ut dette feltet med et gyldig EAN-nummer'
         },
         emailAddress: {
-            'default': 'Vennligst fyll ut dette feltet med en gyldig epostadresse'
+            'default': 'Vennligst fyll ut dette feltet med en gyldig epostaddresse'
         },
         file: {
             'default': 'Velg vennligst en gyldig fil'
@@ -199,9 +199,9 @@
             'default': 'Vennligst fyll ut dette feltet med et gyldig tall'
         },
         ip: {
-            'default': 'Vennligst fyll ut dette feltet med en gyldig IP adresse',
-            ipv4: 'Vennligst fyll ut dette feltet med en gyldig IPv4 adresse',
-            ipv6: 'Vennligst fyll ut dette feltet med en gyldig IPv6 adresse'
+            'default': 'Vennligst fyll ut dette feltet med en gyldig IP addresse',
+            ipv4: 'Vennligst fyll ut dette feltet med en gyldig IPv4 addresse',
+            ipv6: 'Vennligst fyll ut dette feltet med en gyldig IPv6 addresse'
         },
         isbn: {
             'default': 'Vennligst fyll ut dette feltet med ett gyldig ISBN-nummer'
@@ -220,7 +220,7 @@
             notInclusive: 'Vennligst fyll ut dette feltet med en verdi mindre enn %s'
         },
         mac: {
-            'default': 'Vennligst fyll ut dette feltet med en gyldig MAC adresse'
+            'default': 'Vennligst fyll ut dette feltet med en gyldig MAC addresse'
         },
         meid: {
             'default': 'Vennligst fyll ut dette feltet med et gyldig MEID-nummer'
