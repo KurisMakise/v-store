@@ -26,27 +26,27 @@
         <dd><a rel="nofollow" href="#">相关下载</a></dd>
       </dl>
       <dl class="col-links ">
-        <dt>猫宁之家</dt>
-        <dd><a rel="nofollow" href="#">猫宁之家</a></dd>
+        <dt>小米之家</dt>
+        <dd><a rel="nofollow" href="#">小米之家</a></dd>
         <dd><a rel="nofollow" href="#">服务网点</a></dd>
         <dd><a rel="nofollow" href="#">预约服务</a></dd>
       </dl>
       <dl class="col-links ">
-        <dt>关于猫宁</dt>
-        <dd><a rel="nofollow" href="#">了解猫宁</a></dd>
-        <dd><a rel="nofollow" href="#">加入猫宁</a></dd>
+        <dt>关于小米</dt>
+        <dd><a rel="nofollow" href="#">了解小米</a></dd>
+        <dd><a rel="nofollow" href="#">加入小米</a></dd>
         <dd><a rel="nofollow" href="#">联系我们</a></dd>
       </dl>
       <dl class="col-links ">
         <dt>关注我们</dt>
         <dd><a rel="nofollow" href="#">新浪微博</a></dd>
-        <dd><a rel="nofollow" href="#">猫宁部落</a></dd>
+        <dd><a rel="nofollow" href="#">小米部落</a></dd>
         <dd><a rel="nofollow" href="#">官方微信</a></dd>
       </dl>
       <dl class="col-links ">
         <dt>特色服务</dt>
         <dd><a rel="nofollow" href="#">F 码通道</a></dd>
-        <dd><a rel="nofollow" href="#">猫宁移动</a></dd>
+        <dd><a rel="nofollow" href="#">小米移动</a></dd>
         <dd><a rel="nofollow" href="#">防伪查询</a></dd>
       </dl>
       <div class="col-contact">
@@ -67,7 +67,7 @@
       <p class="sites">
         <c:forEach items="${indexBottom}" var="indexBottom"> <a href="${indexBottom.href}" target="${indexBottom.target}">${indexBottom.name}</a><span class="sep">|</span> </c:forEach>
       </p>
-      <p> © 2016<a href="https://git.oschina.net/Morning_/Morning" target="_blank"> 穿鞋子的猫 </a>/ <span id="showsectime"></span> / <span id="TimeShow"></span>
+      <p> © 2016<a href="https://git.oschina.net/xiaomi_/xiaomi" target="_blank"> 穿鞋子的猫 </a>/ <span id="showsectime"></span> / <span id="TimeShow"></span>
       <p>
       <p> © <a href="#">mi.com</a> 京ICP证110507号 京ICP备10046444号 京公网安备1101080212535号 <a href="#">京网文[2014]0059-0009号</a> 违法和不良信息举报电话：185-0130-1238 </p>
     </div>

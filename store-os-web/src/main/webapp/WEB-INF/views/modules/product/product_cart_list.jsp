@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>我的购物车 - 猫宁商城</title>
+<title>我的购物车 - 小米商城</title>
 <link rel="stylesheet" href="${ctxsta}/os/css/cart.css">
 <link rel="stylesheet" href="${ctxsta}/common/icheck/flat/orange.css" />
 </head>

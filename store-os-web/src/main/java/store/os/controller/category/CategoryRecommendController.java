@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/recommend")
-@Api("分类推荐")
+@Api(tags = {"分类推荐"})
 public class CategoryRecommendController {
 
     @Autowired

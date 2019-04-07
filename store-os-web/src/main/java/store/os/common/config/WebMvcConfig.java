@@ -33,9 +33,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(interceptorWeb())
                 .addPathPatterns("/index", "/list", "/search", "/detail/*", "/question/askList",
                         "/comment/list", "/buy/checkout", "/buy/confirm", "/cart/*", "/uc/**");
+
         registry.addInterceptor(interceptorLogin())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/", "/pass/**", "/static/**", "/uploads/**", "/common/**");
+                .excludePathPatterns("/", "/pass/**", "/static/**", "/uploads/**", "/common/**","swagger-ui.html");
     }
 
     //添加过滤器

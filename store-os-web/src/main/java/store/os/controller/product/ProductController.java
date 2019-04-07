@@ -31,7 +31,7 @@ import java.util.List;
  */
 
 @Controller
-@Api("商品")
+@Api(tags = {"商品"})
 public class ProductController {
 
     private final IProductService productService;

@@ -22,7 +22,7 @@ import store.os.controller.common.util.SingletonLoginUtils;
  */
 
 @Controller
-@Api("订单中心")
+@Api(tags = {"用户订单"})
 @RequestMapping("/uc/order")
 public class UserOrderController extends BaseController {
 

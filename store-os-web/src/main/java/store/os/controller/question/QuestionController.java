@@ -32,7 +32,7 @@ import java.util.List;
  * description
  * version 1.0
  */
-@Api("商品提问")
+@Api(tags = {"商品提问"})
 @RequestMapping("/question")
 @Controller
 public class QuestionController extends BaseController {

@@ -37,7 +37,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/buy")
-@Api("购买商品")
+@Api(tags = {"购买商品"})
 public class OrderController extends BaseController {
 
     private final IShoppingCartService shoppingCartService;

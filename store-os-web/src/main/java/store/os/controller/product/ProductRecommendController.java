@@ -19,7 +19,7 @@ import java.util.List;
  * @since 2019/3/13
  */
 @Controller
-@Api("商品推荐")
+@Api(tags = {"商品推荐"})
 @RequestMapping("/recommend")
 public class ProductRecommendController {
 

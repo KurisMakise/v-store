@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>订单详情 - 猫宁商城</title>
+<title>订单详情 - 小米商城</title>
 <link rel="stylesheet" href="${ctxsta}/os/css/address.css">
 <link rel="stylesheet" href="${ctxsta}/os/area/css/select2.css" />
 </head>

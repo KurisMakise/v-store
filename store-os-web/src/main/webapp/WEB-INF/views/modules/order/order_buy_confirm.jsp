@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>选择在线支付方式 - 猫宁商城</title>
+<title>选择在线支付方式 - 小米商城</title>
 <link rel="stylesheet" href="${ctxsta}/os/css/order-confirm.css">
 </head>
 <body>

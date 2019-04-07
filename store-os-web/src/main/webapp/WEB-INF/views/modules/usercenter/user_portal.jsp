@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>个人中心 - 猫宁商城</title>
+<title>个人中心 - 小米商城</title>
 </head>
 <body>
 <div class="span16">

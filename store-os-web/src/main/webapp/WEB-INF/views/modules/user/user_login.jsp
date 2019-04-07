@@ -3,10 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>账户注册 | 猫宁网 - 但行好事，莫问前程</title>
-<meta name="author" content="猫宁Morning. - 但行好事，莫问前程。" />
-<meta name="keywords" content="猫宁商城,猫宁Morning,猫宁公益商城,公益,电子商城,猫宁社区,公益商城,在线购物,社会责任">
-<meta name="description" content="猫宁Morning公益商城是中国公益性在线电子商城，以商城B2C模式运营的公益在线商城，是一家致力于将传统公益商城互联网化的创新公益商城。">
+<title>账户注册 | 小米网 - 但行好事，莫问前程</title>
+<meta name="author" content="小米xiaomi. - 但行好事，莫问前程。" />
+<meta name="keywords" content="小米商城,小米xiaomi,小米公益商城,公益,电子商城,小米社区,公益商城,在线购物,社会责任">
+<meta name="description" content="小米xiaomi公益商城是中国公益性在线电子商城，以商城B2C模式运营的公益在线商城，是一家致力于将传统公益商城互联网化的创新公益商城。">
 <link rel="shortcut icon" href="${ctximg}/default/ico/favicon.ico" type="image/x-icon" />
 <link rel="stylesheet" href="${ctxsta}/common/bootstrap/css/bootstrap.min.css" />
 <link rel="stylesheet" href="${ctxsta}/os/user/css/gloab.css" />
@@ -67,7 +67,7 @@
   </div>
 </div>
 <footer class="footer clear">
-  <div class="footer_copyright"> © 2016<a href="https://git.oschina.net/Morning_/Morning" target="_blank"> 穿鞋子的猫 </a>/ <span id="showsectime"></span> / <span id="TimeShow"></span> </div>
+  <div class="footer_copyright"> © 2016<a href="https://git.oschina.net/xiaomi_/xiaomi" target="_blank"> 穿鞋子的猫 </a>/ <span id="showsectime"></span> / <span id="TimeShow"></span> </div>
 </footer>
 <script src="${ctxsta}/common/jquery/jquery-2.1.4.min.js"></script> 
 <script src="${ctxsta}/common/bootstrap/js/bootstrap.min.js"></script> 

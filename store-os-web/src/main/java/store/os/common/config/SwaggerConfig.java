@@ -25,8 +25,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
-                .title("title")
-                .description("description")
+                .title("电子商城")
+                .description("电子商城前台接口")
                 .contact(new Contact("violet","www.violet.com","569252295qq.com"))
                 .version("1.0.0")
                 .build();

@@ -29,7 +29,7 @@ import java.util.List;
  * description 评论控制器
  */
 
-@Api("评论控制器")
+@Api(tags = {"商品评论"})
 @Controller
 @RequestMapping("/comment")
 

@@ -30,12 +30,12 @@
                                             </h2>
                                             <p style="line-height: 28px; margin: 0px; text-indent: 2em; font-family: 'lucida Grande', Verdana, 'Microsoft YaHei'; font-size: 12px;">
                                                 <font color="#313131">
-                                                    嗨！亲爱的！你好，欢迎成为猫宁用户。
+                                                    嗨！亲爱的！你好，欢迎成为小米用户。
                                                 </font>
                                             </p>
                                             <p style="line-height: 28px; margin: 0px; text-indent: 2em;font-family: 'lucida Grande', Verdana, 'Microsoft YaHei'; font-size: 12px;">
                                                 <font color="#ff0000">
-                                                    您可以体验猫宁为您带来的精彩购物体验内容了！欢迎来到全新的购物世界。
+                                                    您可以体验小米为您带来的精彩购物体验内容了！欢迎来到全新的购物世界。
                                                 </font>
                                             </p>
                                             <p style="line-height: 28px; margin: 0px; text-indent: 2em;font-family: 'lucida Grande', Verdana, 'Microsoft YaHei'; font-size: 12px;">
@@ -59,7 +59,7 @@
                                             </p>
                                             <p style="margin-top: 0px; margin-bottom: 0px;">
                                                 <span style="color: rgb(51, 51, 51); font-family: 'lucida Grande', Verdana, 'Microsoft YaHei'; line-height: 25px; widows: 1; font-size: 13px;">
-                                                    猫宁客服团队敬上<br>
+                                                    小米客服团队敬上<br>
                                                     ${userDate}
                                                     
                                                 </span>
@@ -69,7 +69,7 @@
                                             </h2>
 
 											<div style="color:#c5c5c5; font-size:12px; border-top:1px solid #e6e6e6; padding:7px 0; line-height:20px;">
-                                				本邮件是用户注册猫宁后系统自动发出，如果你并未注册猫宁网，可能是因为其他用户误输入了你的邮箱地址而使你收到了这封邮件，你可以点击这里
+                                				本邮件是用户注册小米后系统自动发出，如果你并未注册小米网，可能是因为其他用户误输入了你的邮箱地址而使你收到了这封邮件，你可以点击这里
                                 				<a href="#" target="_blank" style="color:#019875; text-decoration:underline;">修改密码
                                	 				</a>
                             				</div>

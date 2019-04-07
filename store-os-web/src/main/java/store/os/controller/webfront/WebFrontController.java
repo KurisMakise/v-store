@@ -26,7 +26,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 
 @Controller
-@Api(value = "商城首页")
+@Api(tags = {"商城首页"})
 public class WebFrontController {
 
     private final IAdvertDetailService advertDetailService;

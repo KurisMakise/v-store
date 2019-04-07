@@ -21,7 +21,7 @@ import java.awt.image.BufferedImage;
  */
 @Controller
 @RequestMapping("/pass")
-@Api("验证码")
+@Api(tags = {"验证码"})
 public class CaptchaController extends BaseController {
 
     private final Producer captchaProducer;

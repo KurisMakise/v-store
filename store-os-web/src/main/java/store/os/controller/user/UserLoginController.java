@@ -38,7 +38,7 @@ import java.util.Map;
  */
 
 @Controller
-@Api("用户登录")
+@Api(tags = {"用户登录"})
 @RequestMapping("/pass")
 public class UserLoginController extends BaseController {
 
@@ -107,6 +107,7 @@ public class UserLoginController extends BaseController {
 
     @ApiOperation("完善个人信息")
     @PostMapping("/perfect")
+    @ResponseBody
     public Object perfectUser(@RequestParam String email, @RequestParam String realName, @RequestParam String telephone) {
         if (!RegexUtils.isTelephone(telephone)) {
             return new OsResult(CommonReturnCode.BAD_PARAM.getCode(), "请输入正确手机号");
@@ -119,11 +120,13 @@ public class UserLoginController extends BaseController {
         }
         try {
             Integer count = userService.perfectUser(email, realName, telephone);
-            return new OsResult(CommonReturnCode.SUCCESS, count);
+            if (count != null && count > 0)
+                return new OsResult(CommonReturnCode.SUCCESS, realName);
         } catch (ValidationException e) {
             logger.error(e.getMessage(), e);
             return new OsResult(e.getCode(), e.getMessage());
         }
+        return new OsResult(CommonReturnCode.UNKNOWN);
     }
 
     @ApiOperation("注册界面")

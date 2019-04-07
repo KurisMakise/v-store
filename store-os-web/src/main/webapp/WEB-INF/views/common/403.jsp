@@ -4,9 +4,9 @@
 <html>
   <head>
     <title>403 - Not found</title>
-	<meta name="author" content="猫宁Morning. - 但行好事,莫问前程." />  
-	<meta name="keywords" content="猫宁商城,猫宁Morning,猫宁公益商城,公益,电子商城,猫宁社区,公益商城,在线购物,社会责任">
-	<meta name="description" content="猫宁Morning公益商城是中国公益性在线电子商城，以商城B2C模式运营的公益在线商城，是一家致力于将传统公益商城互联网化的创新公益商城。">
+	<meta name="author" content="小米xiaomi. - 但行好事,莫问前程." />
+	<meta name="keywords" content="小米商城,小米xiaomi,小米公益商城,公益,电子商城,小米社区,公益商城,在线购物,社会责任">
+	<meta name="description" content="小米xiaomi公益商城是中国公益性在线电子商城，以商城B2C模式运营的公益在线商城，是一家致力于将传统公益商城互联网化的创新公益商城。">
 	<link rel="shortcut icon" href="${ctx}/favicon.ico" type="image/x-icon" />
 	<link rel="stylesheet" href="${ctxsta}/common/error/css/main.css" /> <!-- main stylesheet -->
 	<link rel="stylesheet" href="${ctxsta}/common/error/css/tipsy.css" /> <!-- Tipsy implementation -->

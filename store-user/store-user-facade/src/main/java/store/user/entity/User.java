@@ -1,8 +1,13 @@
 package store.user.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.util.Date;
 
+@TableName("os_user")
 public class User {
+    @TableId
     private Long userId;
 
     private Long userNumber;

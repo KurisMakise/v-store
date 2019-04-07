@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>填写订单信息 - 猫宁商城</title>
+<title>填写订单信息 - 小米商城</title>
 <link rel="stylesheet" href="${ctxsta}/os/css/address.css">
 <link rel="stylesheet" href="${ctxsta}/os/area/css/select2.css" />
 <link rel="stylesheet" href="${ctxsta}/os/css/checkout.css">

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>猫宁商城</title>
+    <title>京东(JD.COM)-正品低价、品质保障、配送及时、轻松购物</title>
     <link rel="stylesheet" href="${ctxsta}/os/css/index.css">
 </head>
 <body>

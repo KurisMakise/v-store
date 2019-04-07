@@ -24,7 +24,7 @@ import store.user.service.IUserService;
  * version 1.0
  */
 @Controller
-@Api("用户信息")
+@Api(tags = {"用户信息"})
 @RequestMapping("/uc/user")
 public class UserInfoController {
     private final IUserService userService;

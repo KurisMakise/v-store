@@ -21,7 +21,7 @@ import store.user.service.IFavoriteService;
  * description
  * version 1.0
  */
-@Api("商品收藏")
+@Api(tags = {"商品收藏"})
 @Controller
 public class UserFavoriteController extends BaseController {
 

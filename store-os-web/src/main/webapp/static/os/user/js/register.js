@@ -645,7 +645,7 @@ $(function() {
 							$("#times").text(c);
 						},
 						after : function() {
-							window.location.href = baselocation + '/login';
+							window.location.href = baselocation + '/pass/login';
 						}
 					});
 					$(".message").hide();
@@ -774,7 +774,7 @@ $(function() {
 			dataType : "json",
 			success : function(result) {
 				if (result.code == 1) {
-					$(".part4").children("h3").text("恭喜" + result.data + "猫宁用户,您已成功找回密码,现在开始您的购物之旅吧!");
+					$(".part4").children("h3").text("恭喜" + result.data + "小米用户,您已成功找回密码,现在开始您的购物之旅吧!");
 					$(".part3").hide();
 					$(".part4").show();
 					$(".step li").eq(2).addClass("on");

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>我的收藏夹 - 猫宁商城</title>
+<title>我的收藏夹 - 小米商城</title>
 </head>
 <body>
 <div class="span16">

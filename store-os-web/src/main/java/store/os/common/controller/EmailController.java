@@ -25,7 +25,7 @@ import java.util.Date;
  * description 邮箱验证
  * version 1.0
  */
-@Api("邮箱控制器")
+@Api(tags = {"邮箱"})
 @Controller
 @RequestMapping("/pass")
 public class EmailController {

@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>成功加入购物车 - 猫宁商城</title>
+<title>成功加入购物车 - 小米商城</title>
 <link rel="stylesheet" href="${ctxsta}/os/css/buy-success.css">
 </head>
 <body>

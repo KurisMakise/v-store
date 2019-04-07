@@ -23,7 +23,7 @@ import store.product.service.IShoppingCartService;
  */
 @Controller
 @RequestMapping("/cart")
-@Api("商品购物车")
+@Api(tags = {"商品购物车"})
 public class ProductShoppingCartController extends BaseController {
 
     private final IShoppingCartService shoppingCartService;
