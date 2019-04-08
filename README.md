@@ -10,8 +10,8 @@
 持久层框架：MyBatis + Mybatis-plus <br>
 布局框架：SiteMesh <br>
 接口测试框架：Swagger2 <br>
-其他：kaptcha验证码，velocity发送邮件<br>
-待添加
+其他：kaptcha验证码，velocity发送邮件<br><br>
+待添加<br>
 分布式服务框架：Dubbo+ZooKeeper同步调用（待整合）<br>
 RocketMQ解耦异步调用（待整合）
 搜索引擎:Solr（待整合）<br>
