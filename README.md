@@ -2,7 +2,7 @@
 
 部署：
 导入project-doc下sql脚本
-修改store-os-web模块下资源文件夹resourses/application.yaml中spring:datasource数据源
+修改store-os-web模块下资源文件夹resourses/application.yaml中spring:datasource数据源，运行store-os-web模块下store.Application
 
 基于springboot maven开发<br>
 安全框架：Apache Shiro(Ehcache缓存)<br>
