@@ -6,7 +6,6 @@
 
 基于springboot maven开发<br>
 安全框架：Apache Shiro(Ehcache缓存)<br>
-视图框架：Spring MVC<br>
 持久层框架：MyBatis + Mybatis-plus <br>
 布局框架：SiteMesh <br>
 接口测试框架：Swagger2 <br>
