@@ -30,13 +30,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //所有文件夹及里面的子文件夹;/*是所有文件夹，不含子文件夹
+        //, "/list", "/search", "/detail/*", "/question/askList",  "/comment/list", "/buy/checkout", "/buy/confirm", "/cart/*", "/uc/**"
         registry.addInterceptor(interceptorWeb())
-                .addPathPatterns("/index", "/list", "/search", "/detail/*", "/question/askList",
-                        "/comment/list", "/buy/checkout", "/buy/confirm", "/cart/*", "/uc/**");
+                .addPathPatterns("/index");
 
         registry.addInterceptor(interceptorLogin())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/", "/pass/**", "/static/**", "/uploads/**", "/common/**","swagger-ui.html");
+                .excludePathPatterns("/", "/pass/**", "/static/**", "/uploads/**", "/common/**", "swagger-ui.html");
     }
 
     //添加过滤器

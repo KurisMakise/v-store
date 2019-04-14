@@ -28,12 +28,12 @@ public class PageInfo implements Serializable {
     /**
      * 每页显示记录
      */
-    private long limit;
+    private Long limit;
 
     /**
      * 当前页面
      */
-    private long current;
+    private Long current;
 
     /**
      * 排序字段
@@ -95,7 +95,7 @@ public class PageInfo implements Serializable {
         this.current = this.offset / this.limit + 1;
     }
 
-    public long getLimit() {
+    public Long getLimit() {
         return limit;
     }
 
@@ -103,7 +103,7 @@ public class PageInfo implements Serializable {
         this.limit = limit < 1 ? 1 : limit;
     }
 
-    public long getCurrent() {
+    public Long getCurrent() {
         return current;
     }
 

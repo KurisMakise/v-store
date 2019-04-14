@@ -7,11 +7,11 @@ import java.util.UUID;
 public final class RandomUtils {
 
 	/** 用于随机选的字符和数字 */
-	public static final String ALLCHAR = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	private static final String ALL_CHAR = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	/** 用于随机选的字符 */
-	public static final String LETTERCHAR = "abcdefghijkllmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	private static final String LETTER_CHAR = "abcdefghijkllmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	/** 用于随机选的数字 */
-	public static final String NUMBERCHAR = "0123456789";
+	private static final String NUMBER_CHAR = "0123456789";
 
 	private RandomUtils() {
 		throw new AssertionError();
@@ -20,12 +20,12 @@ public final class RandomUtils {
 	/**
 	 * 生成制定范围内的随机数
 	 * @param scopeMin 最小数
-	 * @param scoeMax 最大数
+	 * @param scopeMax 最大数
 	 * @return 随机数
 	 */
-	public static int integer(int scopeMin, int scoeMax) {
+	public static int integer(int scopeMin, int scopeMax) {
 		Random random = new Random();
-		return random.nextInt(scoeMax) % (scoeMax - scopeMin + 1) + scopeMin;
+		return random.nextInt(scopeMax) % (scopeMax - scopeMin + 1) + scopeMin;
 	}
 
 	/**
@@ -37,7 +37,7 @@ public final class RandomUtils {
 		StringBuilder sb = new StringBuilder();
 		Random random = new Random();
 		for (int i = 0; i < length; i++) {
-			sb.append(NUMBERCHAR.charAt(random.nextInt(NUMBERCHAR.length())));
+			sb.append(NUMBER_CHAR.charAt(random.nextInt(NUMBER_CHAR.length())));
 		}
 		return sb.toString();
 	}
@@ -51,7 +51,7 @@ public final class RandomUtils {
 		StringBuilder sb = new StringBuilder();
 		Random random = new Random();
 		for (int i = 0; i < length; i++) {
-			sb.append(ALLCHAR.charAt(random.nextInt(ALLCHAR.length())));
+			sb.append(ALL_CHAR.charAt(random.nextInt(ALL_CHAR.length())));
 		}
 		return sb.toString();
 	}
@@ -65,7 +65,7 @@ public final class RandomUtils {
 		StringBuilder sb = new StringBuilder();
 		Random random = new Random();
 		for (int i = 0; i < length; i++) {
-			sb.append(ALLCHAR.charAt(random.nextInt(LETTERCHAR.length())));
+			sb.append(ALL_CHAR.charAt(random.nextInt(LETTER_CHAR.length())));
 		}
 		return sb.toString();
 	}

@@ -3,10 +3,12 @@ package store.online.entity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @TableName("os_navigation_bar")
-public class NavigationBar {
+public class NavigationBar  implements Serializable {
+    private static final long serialVersionUID = -5498746844906072854L;
     @TableId("navigation_bar_id")
     private Long navigationBarId;
 

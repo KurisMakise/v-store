@@ -17,6 +17,9 @@ spring:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
+  redis:
+    cluster:
+      nodes:
 server:
   port: 8080
   error:
@@ -30,6 +33,5 @@ logging:
   config: classpath:log4j2.xml
 #  <mvc:annotation-driven enable-matrix-variables="true" />
 #  <mvc:default-servlet-handler/>
-
 
 

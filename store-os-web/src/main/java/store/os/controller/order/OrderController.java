@@ -115,9 +115,6 @@ public class OrderController extends BaseController {
         }
     }
 
-    public static void main(String[] args) {
-    }
-
     @ApiOperation("订单确认")
     @GetMapping("/confirm/{orderNumber}")
     public String confirmView(Model model, @PathVariable Long orderNumber) {

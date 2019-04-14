@@ -3,6 +3,7 @@ package store.online.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import store.common.annotation.RedisCache;
 import store.common.base.BasePageDTO;
 import store.common.enums.StatusEnum;
 import store.common.support.page.PageInfo;
@@ -33,8 +34,8 @@ public class NavigationBarServiceImpl implements INavigationBarService {
     }
 
     @Override
+    @RedisCache(type = NavigationBar.class)
     public List<NavigationBar> listByNavigationId(Long navigationId) {
-
         QueryWrapper<Navigation> navigationQueryWrapper = new QueryWrapper<>();
         navigationQueryWrapper
                 .eq("navigation_id", navigationId)

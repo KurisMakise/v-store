@@ -41,7 +41,7 @@ public class InterceptorWeb implements HandlerInterceptor {
         // 首页底部导航栏
         List<NavigationBar> indexBottom = navigationBarService.listByNavigationId(NavigationBarTypeEnum.INDEX_BOTTOM.getType());
         request.setAttribute(NavigationBarTypeEnum.INDEX_BOTTOM.getCode(), indexBottom);
-//
+
         // 首页分类导航栏
         List<NavigationBar> indexClassify = navigationBarService.listByNavigationId(NavigationBarTypeEnum.INDEX_CLASSIFY.getType());
         request.setAttribute(NavigationBarTypeEnum.INDEX_CLASSIFY.getCode(), indexClassify);

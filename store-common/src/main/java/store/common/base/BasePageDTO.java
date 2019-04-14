@@ -2,6 +2,7 @@ package store.common.base;
 
 import store.common.support.page.PageInfo;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -9,7 +10,7 @@ import java.util.List;
  * createTime 2019/2/23
  * description
  */
-public class BasePageDTO<T> {
+public class BasePageDTO<T> implements Serializable {
 
     /**
      * 分页信息
@@ -34,6 +35,11 @@ public class BasePageDTO<T> {
         this.pageInfo = pageInfo;
     }
 
+    @Override
+    public int hashCode() {
+        return pageInfo.getCurrent().hashCode() + pageInfo.getLimit().hashCode();
+    }
+
     public List<T> getList() {
         return list;
     }
@@ -41,4 +47,6 @@ public class BasePageDTO<T> {
     public void setList(List<T> list) {
         this.list = list;
     }
+
+
 }

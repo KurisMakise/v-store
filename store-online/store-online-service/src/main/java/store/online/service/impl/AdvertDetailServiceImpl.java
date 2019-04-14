@@ -1,7 +1,6 @@
 package store.online.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import store.common.base.BasePageDTO;
 import store.common.enums.StatusEnum;
