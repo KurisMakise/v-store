@@ -16,7 +16,12 @@ RocketMQ解耦异步调用（待整合）<br>
 搜索引擎:Elasticsearch（待整合）<br>
 缓存框架:redis（待整合）<br>
 
+更新日志：<br>
+2019-4-14 新增redis缓存，采用aop注解形式<br>
+
+
 数据库er图
 ![数据库er图](https://github.com/RyougiSHikii/v-store/blob/master/project-doc/picture/%E6%95%B0%E6%8D%AE%E5%BA%93ER%E6%80%BB%E5%9B%BE.jpg)
+
 
 
