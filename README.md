@@ -14,10 +14,10 @@
 分布式服务框架：Dubbo+ZooKeeper同步调用（待整合）<br>
 RocketMQ解耦异步调用（待整合）<br>
 搜索引擎:Elasticsearch（待整合）<br>
-缓存框架:redis（待整合）<br>
+缓存框架:redis（待整合）<br><br>
 
 更新日志：<br>
-2019-4-14 新增redis缓存，采用aop注解形式<br>
+2019-4-14 新增redis缓存，采用aop注解形式<br><br>
 
 
 数据库er图
