@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: spring-cloud-consul-demo
+  cloud:
+    consul:
+      discovery:
+        register: false
+    bus:
+      trace:
+        enabled: true #开启消息跟踪
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: violet
+    password: violet
+    virtual-host: /violet
+server:
+  port: 8002
+
+
+management:
+  security:
+    enabled: false

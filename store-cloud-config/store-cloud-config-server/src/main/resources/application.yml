@@ -1,0 +1,15 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: spring-cloud-config-server
+  cloud:
+    consul:
+      discovery:
+        service-name: store-cloud-config-server
+        health-check-timeout: 10s
+    config:
+      server:
+        git:
+          uri: https://github.com/RyougiSHikii/v-store/    # 配置git仓库的地址
+          search-paths: config-center                        # git仓库地址下的相对地址，可以配置多个，用,分割。
