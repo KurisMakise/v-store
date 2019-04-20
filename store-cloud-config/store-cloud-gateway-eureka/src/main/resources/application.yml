@@ -1,0 +1,100 @@
+server:
+  port: 8888
+spring:
+  application:
+    name: store-cloud-gateway-eureka
+  redis:
+    host: localhost
+    port: 6379
+    password: foobared
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: false
+      routes:
+        - id: requestratelimiter_route
+          uri: lb://store-order-service
+          predicates:
+            - Path=/hello
+          filters:
+              #\u9650\u6D41\uFF1A \u540D\u79F0\u5FC5\u987B\u662F RequestRateLimiter
+              #filter \u540D\u79F0\u5FC5\u987B\u662F RequestRateLimiter
+              #redis-rate-limiter.replenishRate\uFF1A\u5141\u8BB8\u7528\u6237\u6BCF\u79D2\u5904\u7406\u591A\u5C11\u4E2A\u8BF7\u6C42
+              #redis-rate-limiter.burstCapacity\uFF1A\u4EE4\u724C\u6876\u7684\u5BB9\u91CF\uFF0C\u5141\u8BB8\u5728\u4E00\u79D2\u949F\u5185\u5B8C\u6210\u7684\u6700\u5927\u8BF7\u6C42\u6570
+            #key-resolver\uFF1A\u4F7F\u7528 SpEL \u6309\u540D\u79F0\u5F15\u7528 bean
+            - name: RequestRateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 3
+                key-resolver: "#{@hostNameResolver}"
+           #- PrefixPath=/mypath
+           #- StripPrefix=2
+
+            - name: Hystrix
+              args:
+                name: fallbackcmd
+                fallbackUri: forward:/incaseoffailureusethis
+
+            #\u91CD\u8BD5\u8DEF\u7531
+            #retries\uFF1A\u91CD\u8BD5\u6B21\u6570\uFF0C\u9ED8\u8BA4\u503C\u662F 3 \u6B21
+            #statuses\uFF1AHTTP \u7684\u72B6\u6001\u8FD4\u56DE\u7801\uFF0C\u53D6\u503C\u8BF7\u53C2\u8003\uFF1Aorg.springframework.http.HttpStatus
+            #methods\uFF1A\u6307\u5B9A\u54EA\u4E9B\u65B9\u6CD5\u7684\u8BF7\u6C42\u9700\u8981\u8FDB\u884C\u91CD\u8BD5\u903B\u8F91\uFF0C\u9ED8\u8BA4\u503C\u662F GET \u65B9\u6CD5\uFF0C\u53D6\u503C\u53C2\u8003\uFF1Aorg.springframework.http.HttpMethod
+            #series\uFF1A\u4E00\u4E9B\u5217\u7684\u72B6\u6001\u7801\u914D\u7F6E\uFF0C\u53D6\u503C\u53C2\u8003\uFF1Aorg.springframework.http.HttpStatus.Series\u3002\u7B26\u5408\u7684\u67D0\u6BB5\u72B6\u6001\u7801\u624D\u4F1A\u8FDB\u884C\u91CD\u8BD5\u903B\u8F91\uFF0C\u9ED8\u8BA4\u503C\u662F SERVER_ERROR\uFF0C\u503C\u662F 5\uFF0C\u4E5F\u5C31\u662F 5XX(5 \u5F00\u5934\u7684\u72B6\u6001\u7801)\uFF0C\u5171\u67095 \u4E2A\u503C\u3002
+            - name: Retry
+              args:
+                retries: 3
+                statues: BAD_GATEWAY
+
+#      routes:
+#        - id: nameRoot
+#          uri: lb://spring-cloud-producer
+#          predicates:
+#            - Path=/name/**
+#          filters:
+#            - StripPrefix=2
+#        - id: add_request_parameter_route
+#          #       uri: http://localhost:9000
+#          uri: lb://spring-cloud-producer
+#          filters:
+#            - AddRequestParameter=foo, bar
+#          predicates:
+#            - Method=GET
+#        - id: requestratelimiter_route
+#          uri: lb://spring-cloud-producer
+#          filters:
+#            - name: RequestRateLimiter
+#              args:
+#                redis-rate-limiter.replenishRate: 10
+#                redis-rate-limiter.burstCapacity: 20
+#                key-resolver: "#{@userKeyResolver}"
+#          predicates:
+#            - Method=GET
+#        - id: hystrix_route
+#          uri: lb://spring-cloud-producer
+#          predicates:
+#            - Path=/consumingserviceendpoint
+#          filters:
+#            - name: Hystrix
+#              args:
+#                name: fallbackcmd
+#                fallbackUri: forward:/incaseoffailureusethis
+#        - id: retry_test
+#          uri: lb://spring-cloud-producer
+#          predicates:
+#            - Path=/retry
+#          filters:
+#            - name: Retry
+#              args:
+#                retries: 3
+#                statuses: BAD_GATEWAY
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka/
+logging:
+  level:
+    org.springframework.cloud.gateway: debug
+#    spring.cloud.gateway.discovery.locator.enabled\uFF1A\u662F\u5426\u4E0E\u670D\u52A1\u6CE8\u518C\u4E8E\u53D1\u73B0\u7EC4\u4EF6\u8FDB\u884C\u7ED3\u5408\uFF0C\u901A\u8FC7 serviceId \u8F6C\u53D1\u5230\u5177\u4F53\u7684\u670D\u52A1\u5B9E\u4F8B\u3002\u9ED8\u8BA4\u4E3A false\uFF0C\u8BBE\u4E3A true \u4FBF\u5F00\u542F\u901A\u8FC7\u670D\u52A1\u4E2D\u5FC3\u7684\u81EA\u52A8\u6839\u636E serviceId \u521B\u5EFA\u8DEF\u7531\u7684\u529F\u80FD\u3002
+#    eureka.client.service-url.defaultZone\u6307\u5B9A\u6CE8\u518C\u4E2D\u5FC3\u7684\u5730\u5740\uFF0C\u4EE5\u4FBF\u4F7F\u7528\u670D\u52A1\u53D1\u73B0\u529F\u80FD
+#    logging.level.org.springframework.cloud.gateway \u8C03\u6574\u76F8 gateway \u5305\u7684 log \u7EA7\u522B\uFF0C\u4EE5\u4FBF\u6392\u67E5\u95EE\u9898
