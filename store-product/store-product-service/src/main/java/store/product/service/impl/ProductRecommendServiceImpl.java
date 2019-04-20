@@ -1,7 +1,12 @@
 package store.product.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import store.common.enums.StatusEnum;
 import store.product.entity.Recommend;
 import store.product.mapper.ProductRecommendMapper;
@@ -16,7 +21,9 @@ import java.util.List;
  * @author  violet
  * @since 2019/3/13
  */
-@Service
+@RestController
+@Api(tags = {"商品推荐"})
+@RequestMapping("/productRecommendService")
 public class ProductRecommendServiceImpl implements IProductRecommendService {
 
     private final RecommendMapper recommendMapper;
@@ -29,6 +36,8 @@ public class ProductRecommendServiceImpl implements IProductRecommendService {
     }
 
     @Override
+    @ApiOperation("推荐列表")
+    @GetMapping("/listByRecommendId")
     public List<ProductVO> listByRecommendId(long recommendId) {
         //根据推荐ID得到推荐信息
         QueryWrapper<Recommend> recommendQueryWrapper = new QueryWrapper<>();
@@ -46,6 +55,8 @@ public class ProductRecommendServiceImpl implements IProductRecommendService {
     }
 
     @Override
+    @ApiOperation("热门评论")
+    @GetMapping("/listHotComment")
     public List<ProductVO> listHotComment(long recommendId, int type) {
         List<ProductVO> productVOS = listByRecommendId(recommendId);
         if (productVOS != null) {

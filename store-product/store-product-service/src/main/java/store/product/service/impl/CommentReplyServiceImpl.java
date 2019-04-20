@@ -1,6 +1,11 @@
 package store.product.service.impl;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import store.common.constant.CommonReturnCode;
 import store.common.exception.ValidationException;
 import store.product.entity.CommentReply;
@@ -20,7 +25,9 @@ import java.util.Date;
  * @version 1.0
  * @since 2019/4/4 23:00
  */
-@Service
+@RestController
+@RequestMapping("/commentReplyService")
+@Api(tags = {"评论回复"})
 public class CommentReplyServiceImpl implements ICommentReplyService {
 
     private final CommentReplyMapper commentReplyMapper;
@@ -33,6 +40,8 @@ public class CommentReplyServiceImpl implements ICommentReplyService {
     }
 
     @Override
+    @ApiOperation("评论回复")
+    @GetMapping("/replyComment")
     public Integer replyComment(CommentReply commentReply, Long userId) throws ValidationException {
         UserVO userVO = userMapper.getUserVOById(userId);
         if (userVO == null) {

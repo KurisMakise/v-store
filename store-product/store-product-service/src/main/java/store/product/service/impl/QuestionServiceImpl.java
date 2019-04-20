@@ -1,7 +1,12 @@
 package store.product.service.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import store.common.constant.CommonReturnCode;
 import store.common.enums.StatusEnum;
 import store.common.exception.ValidationException;
@@ -22,7 +27,9 @@ import java.util.List;
  * @author violet
  * @version 1.0
  */
-@Service
+@RestController
+@Api("提问服务")
+@RequestMapping("/questionService")
 public class QuestionServiceImpl implements IQuestionService {
 
     private final QuestionMapper questionMapper;
@@ -39,6 +46,8 @@ public class QuestionServiceImpl implements IQuestionService {
 
 
     @Override
+    @ApiOperation("提问列表")
+    @GetMapping("/listQuestionVOS")
     public Page<QuestionVO> listQuestionVOS(Long productId, Page<QuestionVO> page, Integer status) {
         List<QuestionVO> questionVOS = questionMapper.listQuestionVOS(productId, status, page);
         page.setRecords(questionVOS);
@@ -46,6 +55,8 @@ public class QuestionServiceImpl implements IQuestionService {
     }
 
     @Override
+    @ApiOperation("新增提问")
+    @GetMapping("/insertQuestion")
     public Integer insertQuestion(Question question, Long userId) throws ValidationException {
 
         if (question == null || question.getProductId() == null) {
@@ -75,6 +86,8 @@ public class QuestionServiceImpl implements IQuestionService {
     }
 
     @Override
+    @ApiOperation("点赞提问")
+    @GetMapping("/likeQuestion")
     public Integer likeQuestion(Question question, Long userId) throws ValidationException {
         if (userId == null) {
             throw new ValidationException(CommonReturnCode.UNAUTHORIZED);

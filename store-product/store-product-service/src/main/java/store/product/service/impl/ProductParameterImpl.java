@@ -1,7 +1,12 @@
 package store.product.service.impl;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import store.product.mapper.ProductParameterMapper;
 import store.product.pojo.vo.ProductParameterVO;
 import store.product.service.IProductParameterService;
@@ -14,7 +19,9 @@ import java.util.List;
  * description 商品参数
  * version 1.0
  */
-@Service
+@RestController
+@Api(tags = {"商品参数"})
+@RequestMapping("/productParameter")
 public class ProductParameterImpl implements IProductParameterService {
     private final ProductParameterMapper productParameterMapper;
 
@@ -23,6 +30,8 @@ public class ProductParameterImpl implements IProductParameterService {
     }
 
     @Override
+    @ApiOperation("商品参数列表")
+    @GetMapping("/listProductParameterVO")
     public List<ProductParameterVO> listProductParameterVO(Long productId, Integer status) {
         return productParameterMapper.listProductParameterVO(productId, status);
     }

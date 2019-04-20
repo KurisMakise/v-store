@@ -1,7 +1,12 @@
 package store.product.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import store.common.base.BasePageDTO;
 import store.common.enums.StatusEnum;
 import store.common.support.page.PageInfo;
@@ -26,7 +31,9 @@ import java.util.List;
  * @author violet
  * @since 2019/2/27
  */
-@Service
+@RestController
+@Api(tags = {"分类服务"})
+@RequestMapping("/categoryService")
 public class CategoryServiceImpl implements ICategoryService {
 
     private final CategoryMapper categoryMapper;
@@ -39,21 +46,29 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     @Override
+    @ApiOperation("插入广告")
+    @GetMapping("/insertAdvert")
     public Integer insertAdvert(Category category, String userName) {
         return null;
     }
 
     @Override
+    @ApiOperation("置顶分类")
+    @GetMapping("/listTop")
     public List<CategoryVO> listTop(Integer showNumber, Integer advertNumber) {
         return null;
     }
 
     @Override
+    @ApiOperation("热门分类")
+    @GetMapping("/listHot")
     public List<CategoryVO> listHot(Integer showNumber, Integer advertNumber, Integer type) {
         return null;
     }
 
     @Override
+    @ApiOperation("导航列表")
+    @GetMapping("/listNav")
     public List<CategoryVO> listNav(Integer productNumber, Integer navNumber) {
         // 根据是否导航/类目类型/导航状态/导航显示数量查找显示导航分类
         QueryWrapper<Category> categoryQueryWrapper = new QueryWrapper<>();
@@ -87,11 +102,15 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     @Override
+    @ApiOperation("获取分类")
+    @GetMapping("/getById")
     public CategoryVO getById(Long categoryId, Integer status) {
         return categoryMapper.getCategoryById(categoryId, status);
     }
 
     @Override
+    @ApiOperation("下级分类")
+    @GetMapping("/listLowerCategories")
     public List<CategoryVO> listLowerCategories(Long categoryId, Integer status) {
         CategoryVO category = categoryMapper.getCategoryById(categoryId, status);
         if (category == null)
@@ -106,6 +125,8 @@ public class CategoryServiceImpl implements ICategoryService {
     }
 
     @Override
+    @ApiOperation("上级分类")
+    @GetMapping("/listUpperCategories")
     public List<CategoryVO> listUpperCategories(Long categoryId, Integer status) {
         CategoryVO category = categoryMapper.getCategoryById(categoryId, status);
         if (category == null)
@@ -149,6 +170,8 @@ public class CategoryServiceImpl implements ICategoryService {
 
 
     @Override
+    @ApiOperation("根据产品获取上级分类")
+    @GetMapping("/listUpperByProductId")
     public List<Category> listUpperByProductId(Long productId, Integer status) {
         //所有分类
         List<Category> categories = categoryMapper.selectList(null);

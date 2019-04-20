@@ -1,7 +1,12 @@
 package store.product.service.impl;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import store.common.enums.StatusEnum;
 import store.product.common.enums.CategoryRecommendTypeEnum;
 import store.product.common.enums.CategoryTypeEnum;
@@ -20,16 +25,24 @@ import java.util.List;
  * @createTime 2019/3/13
  * @description
  */
-@Service
+
+@RestController
+@Api(tags = {"分类推荐"})
+@RequestMapping("/categoryRecommendService")
 public class CategoryRecommendServiceImpl implements ICategoryRecommendService {
 
-    @Autowired
-    private CategoryMapper categoryMapper;
+    private final CategoryMapper categoryMapper;
 
-    @Autowired
-    private ProductCategoryMapper productCategoryMapper;
+    private final ProductCategoryMapper productCategoryMapper;
+
+    public CategoryRecommendServiceImpl(CategoryMapper categoryMapper, ProductCategoryMapper productCategoryMapper) {
+        this.categoryMapper = categoryMapper;
+        this.productCategoryMapper = productCategoryMapper;
+    }
 
     @Override
+    @ApiOperation("分类推荐列表")
+    @GetMapping("/listTop")
     public List<CategoryVO> listTop(int showNumber, int advertNumber) {
 
         //查询置顶分类广告
@@ -51,9 +64,9 @@ public class CategoryRecommendServiceImpl implements ICategoryRecommendService {
     }
 
     @Override
+    @ApiOperation("热门商品")
+    @GetMapping("/listHot")
     public List<CategoryVO> listHot(int showNumber, int advertNumber, int type) {
-
-
         return null;
     }
 }

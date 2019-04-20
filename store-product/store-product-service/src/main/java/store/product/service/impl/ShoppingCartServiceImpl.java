@@ -2,7 +2,12 @@ package store.product.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import store.common.constant.CommonReturnCode;
 import store.common.enums.StatusEnum;
 import store.common.exception.ValidationException;
@@ -22,7 +27,9 @@ import java.util.List;
  * createTime 2019/3/21
  * description
  */
-@Service
+@RestController
+@Api("购物车服务")
+@RequestMapping("/shoppingCartService")
 public class ShoppingCartServiceImpl implements IShoppingCartService {
 
     private final ShoppingCartMapper shoppingCartMapper;
@@ -35,6 +42,8 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
     }
 
     @Override
+    @ApiOperation("添加购物车")
+    @GetMapping("/insertShoppingCart")
     public Integer insertShoppingCart(Long productSpecNumber, Long userId) throws ValidationException {
         if (productSpecNumber == null)
             throw new ValidationException(CommonReturnCode.BAD_PARAM.getCode(), "productSpecNumber不存在");
@@ -69,12 +78,16 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
     }
 
     @Override
+    @ApiOperation("获取购物车")
+    @GetMapping("/getCart")
     public ShoppingCartVO getCart(Long userId, Long productSpecNumber) {
 
         return shoppingCartMapper.getCart(userId, productSpecNumber);
     }
 
     @Override
+    @ApiOperation("购物车列表")
+    @GetMapping("/list")
     public CartVO list(Long userId, Integer checkStatus) throws ValidationException {
         if (userId == null)
             throw new ValidationException(CommonReturnCode.UNAUTHORIZED);
@@ -86,6 +99,8 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
     }
 
     @Override
+    @ApiOperation("更新购买数量")
+    @GetMapping("/updateBuyNumber")
     public Integer updateBuyNumber(Long productSpecNumber, Long userId, Integer buyNumber) {
         ShoppingCart shoppingCart = checkShoppingCart(productSpecNumber, userId);
 
@@ -106,6 +121,8 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
     }
 
     @Override
+    @ApiOperation("更新购物车选中状态")
+    @GetMapping("/updateStatus")
     public Integer updateStatus(Long productSpecNumber, Long userId, Integer checkStatus) {
         //查询用户购物车是否存在
         ShoppingCart shoppingCart = checkShoppingCart(productSpecNumber, userId);
@@ -119,11 +136,15 @@ public class ShoppingCartServiceImpl implements IShoppingCartService {
     }
 
     @Override
+    @ApiOperation("删除购物车")
+    @GetMapping("/delete")
     public Integer delete(Long productSpecNumber, Long userId) {
         return null;
     }
 
     @Override
+    @ApiOperation("删除选中商品")
+    @GetMapping("/deleteCheckProduct")
     public Integer deleteCheckProduct(Long userId) {
         UpdateWrapper<ShoppingCart> shoppingCartWrapper = new UpdateWrapper<>();
         shoppingCartWrapper.eq("user_id", userId);

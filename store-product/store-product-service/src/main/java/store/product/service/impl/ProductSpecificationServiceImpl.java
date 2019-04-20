@@ -1,6 +1,11 @@
 package store.product.service.impl;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import store.product.mapper.ProductSpecificationMapper;
 import store.product.pojo.dto.ProductSpecificationDTO;
 import store.product.pojo.vo.ProductSpecificationVO;
@@ -17,7 +22,9 @@ import java.util.Map;
  * description
  * version 1.0
  */
-@Service
+@RestController
+@Api(tags = {"商品规格"})
+@RequestMapping("/productSpecificationService")
 public class ProductSpecificationServiceImpl implements IProductSpecificationService {
     private final ProductSpecificationMapper productSpecificationMapper;
 
@@ -26,6 +33,8 @@ public class ProductSpecificationServiceImpl implements IProductSpecificationSer
     }
 
     @Override
+    @ApiOperation("商品规格列表")
+    @GetMapping("/listProductSpec")
     public ProductSpecificationDTO listProductSpec(Long productId, Integer status) {
         //商品详情
         List<ProductSpecificationVO> productSpecificationVOS = productSpecificationMapper.listProductSpecVO(productId, status);
