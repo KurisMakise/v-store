@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: store-order-service
+  rabbitmq:
+    host: localhost
+    username: violet
+    password: violet
+    virtual-host: /violet
+    port: 5672
+
+server:
+  port: 8002

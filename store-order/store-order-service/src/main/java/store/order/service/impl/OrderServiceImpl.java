@@ -1,8 +1,11 @@
 package store.order.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.springframework.beans.BeanUtils;
-import org.springframework.stereotype.Service;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import store.common.base.BasePageDTO;
 import store.common.constant.CommonReturnCode;
 import store.common.exception.ValidationException;
@@ -29,7 +32,9 @@ import java.util.List;
  * description
  * version 1.0
  */
-@Service
+@RestController
+@Api(tags = {"订单服务"})
+@RequestMapping("orderService")
 public class OrderServiceImpl implements IOrderService {
 
     private final OrderMapper orderMapper;
@@ -47,8 +52,9 @@ public class OrderServiceImpl implements IOrderService {
         this.orderProductMapper = orderProductMapper;
     }
 
-
     @Override
+    @GetMapping("/getOrderVO")
+    @ApiOperation("获取订单")
     public OrderVO getOrderVO(Long orderNumber, Long userId) {
         if (userId == null)
             throw new ValidationException(CommonReturnCode.UNAUTHORIZED);
@@ -59,6 +65,8 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
+    @GetMapping("/insertOrder")
+    @ApiOperation("新增订单")
     public Long insertOrder(Order order, OrderShipment orderShipment, List<OrderShoppingCartVO> orderShoppingCartVOS, Long userId) {
         //创建订单
         Long orderNumber = OrderUtils.getOrderNumber();
@@ -92,6 +100,8 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
+    @GetMapping("/listOrderPage")
+    @ApiOperation("订单列表")
     public BasePageDTO<OrderVO> listOrderPage(Long userId, String type, PageInfo pageInfo, String search) {
         List<OrderVO> orders = orderMapper.listOrder(userId, type, pageInfo, search);
         pageInfo.setTotal(orderMapper.getCount(userId, type, search));
@@ -99,6 +109,8 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
+    @GetMapping("/getOrder")
+    @ApiOperation("获取订单")
     public Order getOrder(Long userId, Long orderNumber) {
         if (userId == null)
             throw new ValidationException(CommonReturnCode.UNAUTHORIZED);

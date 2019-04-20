@@ -1,7 +1,9 @@
 package store;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * <p>
@@ -13,9 +15,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @since 2019/4/9 9:27
  */
 @SpringBootApplication
-public class ServerApplication {
+@EnableDiscoveryClient
+public class OrderServiceApplication {
     public static void main(String[] args) {
-       SpringApplication.run(ServerApplication.class);
-        //        run.getBean("");
+        SpringApplication.run(OrderServiceApplication.class, args);
     }
 }

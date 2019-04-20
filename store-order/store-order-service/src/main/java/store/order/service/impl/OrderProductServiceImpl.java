@@ -1,7 +1,11 @@
 package store.order.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.springframework.stereotype.Service;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import store.common.constant.CommonReturnCode;
 import store.common.exception.ValidationException;
 import store.order.entity.OrderProduct;
@@ -16,7 +20,9 @@ import java.util.List;
  * description 订单商品
  * version 1.0
  */
-@Service
+@RestController
+@Api(tags = {"订单商品"})
+@RequestMapping("/orderProductService")
 public class OrderProductServiceImpl implements IOrderProductService {
 
     private final OrderProductMapper orderProductMapper;
@@ -25,7 +31,10 @@ public class OrderProductServiceImpl implements IOrderProductService {
         this.orderProductMapper = orderProductMapper;
     }
 
+
     @Override
+    @GetMapping("/listByOrderId")
+    @ApiOperation("订单商品列表")
     public List<OrderProduct> listByOrderId(Long orderId) {
         if (orderId == null)
             throw new ValidationException(CommonReturnCode.BAD_PARAM);
