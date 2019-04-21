@@ -1,5 +1,8 @@
 package store.order.service;
 
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import store.order.entity.OrderProduct;
 
 import java.util.List;
@@ -10,7 +13,9 @@ import java.util.List;
  * description
  * version 1.0
  */
+@FeignClient(name = "store-order-service/orderProductService")
 public interface IOrderProductService {
 
-    List<OrderProduct> listByOrderId(Long orderId);
+    @PostMapping("/listByOrderId")
+    List<OrderProduct> listByOrderId(@RequestParam("orderId") Long orderId);
 }

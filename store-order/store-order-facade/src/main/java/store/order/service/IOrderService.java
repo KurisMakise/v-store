@@ -1,5 +1,9 @@
 package store.order.service;
 
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import store.common.base.BasePageDTO;
 import store.common.support.page.PageInfo;
 import store.order.entity.Order;
@@ -15,9 +19,12 @@ import java.util.List;
  * description 订单服务
  * version 1.0
  */
+@FeignClient(name = "STORE-ORDER-SERVICE/orderService")
 public interface IOrderService {
 
-    OrderVO getOrderVO(Long orderNumber, Long userId);
+    @PostMapping("/getOrderVO")
+    OrderVO getOrderVO(@RequestParam("orderNumber") Long orderNumber,
+                       @RequestParam("userId") Long userId);
 
     /**
      * @param order                订单
@@ -26,7 +33,11 @@ public interface IOrderService {
      * @param userId               用户Id
      * @return 插入结果
      */
-    Long insertOrder(Order order, OrderShipment orderShipment, List<OrderShoppingCartVO> orderShoppingCartVOS, Long userId);
+    @PostMapping("/insertOrder")
+    Long insertOrder(@RequestParam("order") Order order,
+                     @RequestParam("orderShipment") OrderShipment orderShipment,
+                     @RequestParam("orderShoppingCartVOS") List<OrderShoppingCartVO> orderShoppingCartVOS,
+                     @RequestParam("userId") Long userId);
 
     /**
      * @param userId   用户Id
@@ -35,12 +46,18 @@ public interface IOrderService {
      * @param search   搜索条件
      * @return 订单分页列表
      */
-    BasePageDTO<OrderVO> listOrderPage(Long userId, String type, PageInfo pageInfo, String search);
+    @PostMapping("/listOrderPage")
+    BasePageDTO<OrderVO> listOrderPage(@RequestParam("userId") Long userId,
+                                       @RequestParam("type") String type,
+                                       @RequestBody PageInfo pageInfo,
+                                       @RequestParam("search") String search);
 
     /**
      * @param userId      用户ID
      * @param orderNumber 订单编号
      * @return 订单
      */
-    Order getOrder(Long userId, Long orderNumber);
+    @PostMapping("/getOrder")
+    Order getOrder(@RequestParam("userId") Long userId,
+                   @RequestParam("orderNumber") Long orderNumber);
 }

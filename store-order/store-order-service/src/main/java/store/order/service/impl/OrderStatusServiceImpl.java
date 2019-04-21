@@ -1,6 +1,8 @@
 package store.order.service.impl;
 
-import org.springframework.stereotype.Service;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import store.order.service.IOrderStatusService;
@@ -13,6 +15,7 @@ import store.order.service.IOrderStatusService;
  */
 @RestController
 @RequestMapping("/orderStatusService")
+@Api(tags = {"订单状态"})
 public class OrderStatusServiceImpl implements IOrderStatusService {
 
 }

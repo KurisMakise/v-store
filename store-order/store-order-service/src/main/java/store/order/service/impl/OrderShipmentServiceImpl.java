@@ -3,9 +3,7 @@ package store.order.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import store.common.constant.CommonReturnCode;
@@ -32,7 +30,7 @@ public class OrderShipmentServiceImpl implements IOrderShipmentService {
 
 
     @Override
-    @GetMapping("/getByOrderId")
+    @PostMapping("/getByOrderId")
     @ApiOperation("获取配送信息")
     public OrderShipment getByOrderId(Long orderId) {
         if (orderId == null)

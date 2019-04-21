@@ -3,7 +3,7 @@ package store.order.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import store.common.base.BasePageDTO;
@@ -53,7 +53,7 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    @GetMapping("/getOrderVO")
+    @PostMapping("/getOrderVO")
     @ApiOperation("获取订单")
     public OrderVO getOrderVO(Long orderNumber, Long userId) {
         if (userId == null)
@@ -65,7 +65,7 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    @GetMapping("/insertOrder")
+    @PostMapping("/insertOrder")
     @ApiOperation("新增订单")
     public Long insertOrder(Order order, OrderShipment orderShipment, List<OrderShoppingCartVO> orderShoppingCartVOS, Long userId) {
         //创建订单
@@ -100,7 +100,7 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    @GetMapping("/listOrderPage")
+    @PostMapping("/listOrderPage")
     @ApiOperation("订单列表")
     public BasePageDTO<OrderVO> listOrderPage(Long userId, String type, PageInfo pageInfo, String search) {
         List<OrderVO> orders = orderMapper.listOrder(userId, type, pageInfo, search);
@@ -109,7 +109,7 @@ public class OrderServiceImpl implements IOrderService {
     }
 
     @Override
-    @GetMapping("/getOrder")
+    @PostMapping("/getOrder")
     @ApiOperation("获取订单")
     public Order getOrder(Long userId, Long orderNumber) {
         if (userId == null)
