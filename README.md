@@ -20,7 +20,7 @@
 
 更新日志：<br>
 2019-4-14 新增redis缓存，采用aop注解形式<br><br>
-2019-4-21 采用spring cloud技术<br>
+2019-4-21 <br>
 注册中心:eureka<br>
 配置中心:config+bus+rabbitmq<br>
 网关:gateway<br><br>
