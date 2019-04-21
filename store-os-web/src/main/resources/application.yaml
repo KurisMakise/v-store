@@ -20,8 +20,10 @@ spring:
   redis:
     cluster:
       nodes:
+  application:
+    name: store-os-web
 server:
-  port: 8080
+  port: 8006
   error:
     path: /WEB-INF/views/common/404.jsp
   servlet:
@@ -29,8 +31,6 @@ server:
       init-parameters:
         development: true
 
-logging:
-  config: classpath:log4j2.xml
 #  <mvc:annotation-driven enable-matrix-variables="true" />
 #  <mvc:default-servlet-handler/>
 

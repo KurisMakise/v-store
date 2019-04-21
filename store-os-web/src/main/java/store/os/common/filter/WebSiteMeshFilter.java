@@ -17,9 +17,10 @@ public class WebSiteMeshFilter extends ConfigurableSiteMeshFilter {
     @Override
     protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
         builder
-                .addDecoratorPath("/**", "/WEB-INF/layouts/web/default.jsp")//拦截规则，/decorator/default 会被转发
+                .addDecoratorPath("/**", "/WEB-INF/layouts/web/default.jsp")
                 .addDecoratorPath("/uc/**", "/WEB-INF/layouts/web/default_uc.jsp")
                 .addExcludedPath("/cart/topBar")
+                .addExcludedPath("/hello")
                 .addExcludedPath("/swagger-ui.html")
                 .addExcludedPath("/recommend/**")
                 .addExcludedPath("/comment/sup")

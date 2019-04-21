@@ -24,8 +24,11 @@ import java.util.List;
 @Api(tags = {"分类推荐"})
 public class CategoryRecommendController {
 
-    @Autowired
-    private ICategoryRecommendService categoryRecommendService;
+    private final ICategoryRecommendService categoryRecommendService;
+
+    public CategoryRecommendController(ICategoryRecommendService categoryRecommendService) {
+        this.categoryRecommendService = categoryRecommendService;
+    }
 
 
     @ApiOperation("商品置顶分类")

@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import store.online.common.enums.AdvertTypeEnum;
 import store.online.common.enums.NavigationBarTypeEnum;
 import store.online.entity.AdvertDetail;
@@ -30,6 +31,12 @@ public class WebFrontController {
     public WebFrontController(IAdvertDetailService advertDetailService, INavigationBarService navigationBarService) {
         this.advertDetailService = advertDetailService;
         this.navigationBarService = navigationBarService;
+    }
+    @GetMapping("/hello")
+    @ResponseBody
+    public String hello(){
+        System.out.println("@@@@@@@@@@@@@@@@@@@@@@");
+        return "hello nikii";
     }
 
     @ApiOperation(value = "商城首页", notes = "商城首页展示页面")

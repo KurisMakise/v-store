@@ -5,7 +5,6 @@ import org.sitemesh.content.ContentProperty;
 import org.sitemesh.content.tagrules.TagRuleBundle;
 import org.sitemesh.content.tagrules.html.ExportTagToContentRule;
 import org.sitemesh.tagprocessor.State;
-import org.sitemesh.tagprocessor.TagRule;
 
 /**
  * @creator violet

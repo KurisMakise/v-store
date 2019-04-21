@@ -32,7 +32,6 @@ import java.util.List;
 @Api(tags = {"商品评论"})
 @Controller
 @RequestMapping("/comment")
-
 //TODO 将评论分页查询改为两次，一次查评论，一次查回复
 public class CommentController {
     private final ICommentService commentService;

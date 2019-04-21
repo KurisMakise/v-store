@@ -2,6 +2,7 @@ package store.os.common.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import store.common.constant.CommonReturnCode;
@@ -29,15 +30,13 @@ import java.util.Date;
 @Controller
 @RequestMapping("/pass")
 public class EmailController {
-    private final IEmailService emailService;
-    private final IEmailSendService emailSendService;
-    private final IUserService userService;
+    @Autowired
+    private IEmailService emailService;
+    @Autowired
+    private IEmailSendService emailSendService;
+    @Autowired
+    private IUserService userService;
 
-    public EmailController(IEmailService emailService, IEmailSendService emailSendService, IUserService userService) {
-        this.emailService = emailService;
-        this.emailSendService = emailSendService;
-        this.userService = userService;
-    }
 
     @ApiOperation("找回密码")
     @PutMapping("/email/retrieve")
