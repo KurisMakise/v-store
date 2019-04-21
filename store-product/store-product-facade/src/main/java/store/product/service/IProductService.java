@@ -1,6 +1,10 @@
 package store.product.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import store.product.pojo.vo.ProductVO;
 
 import java.util.List;
@@ -10,11 +14,18 @@ import java.util.List;
  * createTime 2019/2/27
  * description
  */
+@FeignClient("store-product-service/productService")
 public interface IProductService {
 
-    ProductVO getProductVO(Long productNumber);
+    @PostMapping("/getProductVO")
+    ProductVO getProductVO(@RequestParam("productNumber") Long productNumber);
 
-    ProductVO getProductVOById(Long productId);
+    @PostMapping("/getProductVOById")
+    ProductVO getProductVOById(@RequestParam("productId") Long productId);
 
-    void listProductVO(List<Long> categoryIds, Integer showInShelve, String search, Page<ProductVO> page);
+    @PostMapping("/listProductVO")
+    void listProductVO(@RequestBody List<Long> categoryIds,
+                       @RequestParam("showInShelve") Integer showInShelve,
+                       @RequestParam("search") String search,
+                       @RequestParam("page") Page<ProductVO> page);
 }

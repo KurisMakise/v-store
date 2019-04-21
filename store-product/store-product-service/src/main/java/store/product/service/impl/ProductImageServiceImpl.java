@@ -2,8 +2,7 @@ package store.product.service.impl;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import store.product.mapper.ProductImageMapper;
@@ -31,7 +30,7 @@ public class ProductImageServiceImpl implements IProductImageService {
 
     @Override
     @ApiOperation("获取商品")
-    @GetMapping("/getProductImageVO")
+    @PostMapping("/getProductImageVO")
     public List<ProductImageVO> getProductImageVO(Long productId) {
         return productImageMapper.getProductImageVO(productId);
     }

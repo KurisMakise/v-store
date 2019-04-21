@@ -8,7 +8,7 @@
     <!-- 彩色日志格式 -->
     <property name="CONSOLE_LOG_PATTERN" value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(${PID:- }) [%t]{magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n%wex"/>
     <property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %5p ${PID:- } --- [%t] %-40.40logger{39} : %m%n%wex"/>
-    <property name="LOG_HOME" value="../------------------logs-----------------/store/order/"/>
+    <property name="LOG_HOME" value="../------------------logs-----------------/store/product/"/>
     <!--多环境的日志输出-->
     <!--根据不同环境（prod:生产环境，test:测试环境，dev:开发环境）来定义不同的日志输出，-->
     <!--在 logback-spring.xml中使用 springProfile 节点来定义，方法如下：-->

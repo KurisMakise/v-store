@@ -1,25 +1,45 @@
 package store.product.service;
 
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import store.common.exception.ValidationException;
 import store.product.pojo.vo.CartVO;
 import store.product.pojo.vo.ShoppingCartVO;
 
 /**
- * @author  violet
- * @since  2019/2/27
+ * @author violet
+ * @since 2019/2/27
  */
+@FeignClient(name = "store-product-service/shoppingCartService")
 public interface IShoppingCartService {
-    Integer insertShoppingCart(Long productSpecNumber, Long userId) throws ValidationException;
 
-    ShoppingCartVO getCart(Long userId, Long productSpecNumber);
+    @PostMapping("/insertShoppingCart")
+    Integer insertShoppingCart(@RequestParam("productSpecNumber") Long productSpecNumber,
+                               @RequestParam("userId") Long userId) throws ValidationException;
 
-    CartVO list(Long userId, Integer checkStatus);
+    @PostMapping("/getCart")
+    ShoppingCartVO getCart(@RequestParam("userId") Long userId,
+                           @RequestParam("productSpecNumber") Long productSpecNumber);
 
-    Integer updateBuyNumber(Long productSpecNumber, Long userId, Integer buyNumber);
+    @PostMapping("/list")
+    CartVO list(@RequestParam("userId") Long userId,
+                @RequestParam("checkStatus") Integer checkStatus);
 
-    Integer updateStatus(Long productSpecNumber, Long userId, Integer checkStatus);
+    @PostMapping("/updateBuyNumber")
+    Integer updateBuyNumber(@RequestParam("productSpecNumber") Long productSpecNumber,
+                            @RequestParam("userId") Long userId,
+                            @RequestParam("buyNumber") Integer buyNumber);
 
-    Integer delete(Long productSpecNumber, Long userId);
+    @PostMapping("/updateStatus")
+    Integer updateStatus(@RequestParam("productSpecNumber") Long productSpecNumber,
+                         @RequestParam("userId") Long userId,
+                         @RequestParam("checkStatus") Integer checkStatus);
 
-    Integer deleteCheckProduct(Long userId);
+    @PostMapping("/delete")
+    Integer delete(@RequestParam("productSpecNumber") Long productSpecNumber,
+                   @RequestParam("userId") Long userId);
+
+    @PostMapping("/deleteCheckProduct")
+    Integer deleteCheckProduct(@RequestParam("userId") Long userId);
 }

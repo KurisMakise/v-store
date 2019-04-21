@@ -3,8 +3,7 @@ package store.product.service.impl;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import store.product.mapper.CommentMapper;
@@ -33,7 +32,7 @@ public class CommentServiceImpl implements ICommentService {
 
     @Override
     @ApiOperation("最新评论")
-    @GetMapping("/listTimeLine")
+    @PostMapping("/listTimeLine")
     public Page<CommentVO> listTimeLine(Long productId, Integer status, Page<CommentVO> page) {
         List<CommentVO> commentVOS = commentMapper.listTimeLine(productId, status, page);
         page.setRecords(commentVOS);
@@ -42,7 +41,7 @@ public class CommentServiceImpl implements ICommentService {
 
     @Override
     @ApiOperation("评论列表")
-    @GetMapping("/listComment")
+    @PostMapping("/listComment")
     public Page<CommentVO> listComment(Long productId, Integer status, Page<CommentVO> page) {
         List<CommentVO> commentVOS = commentMapper.listComment(productId, status, page);
         page.setRecords(commentVOS);

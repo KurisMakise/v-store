@@ -2,9 +2,7 @@ package store.product.service.impl;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import store.product.mapper.ProductParameterMapper;
@@ -31,7 +29,7 @@ public class ProductParameterImpl implements IProductParameterService {
 
     @Override
     @ApiOperation("商品参数列表")
-    @GetMapping("/listProductParameterVO")
+    @PostMapping("/listProductParameterVO")
     public List<ProductParameterVO> listProductParameterVO(Long productId, Integer status) {
         return productParameterMapper.listProductParameterVO(productId, status);
     }

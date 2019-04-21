@@ -2,8 +2,7 @@ package store.product.service.impl;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import store.product.mapper.ProductAttributeMapper;
@@ -29,7 +28,7 @@ public class ProductAttributeServiceImpl implements IProductAttributeService {
 
     @Override
     @ApiOperation("获取商品属性")
-    @GetMapping("/getProductAttrVO")
+    @PostMapping("/getProductAttrVO")
     public ProductAttributeVO getProductAttrVO(Long productId) {
         return productAttributeMapper.getProductAttrVO(productId);
     }

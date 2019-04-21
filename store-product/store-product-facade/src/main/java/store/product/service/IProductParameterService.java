@@ -1,5 +1,8 @@
 package store.product.service;
 
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import store.product.pojo.vo.ProductParameterVO;
 
 import java.util.List;
@@ -9,7 +12,11 @@ import java.util.List;
  * createTime 2019/2/27
  * description
  */
+
+@FeignClient("store-product-service/productParameterService")
 public interface IProductParameterService {
 
-    List<ProductParameterVO> listProductParameterVO(Long productId, Integer status);
+    @PostMapping("/listProductParameterVO")
+    List<ProductParameterVO> listProductParameterVO(@RequestParam("productId") Long productId,
+                                                    @RequestParam("status") Integer status);
 }

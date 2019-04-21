@@ -2,8 +2,7 @@ package store.product.service.impl;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import store.common.constant.CommonReturnCode;
@@ -41,7 +40,7 @@ public class CommentReplyServiceImpl implements ICommentReplyService {
 
     @Override
     @ApiOperation("评论回复")
-    @GetMapping("/replyComment")
+    @PostMapping("/replyComment")
     public Integer replyComment(CommentReply commentReply, Long userId) throws ValidationException {
         UserVO userVO = userMapper.getUserVOById(userId);
         if (userVO == null) {

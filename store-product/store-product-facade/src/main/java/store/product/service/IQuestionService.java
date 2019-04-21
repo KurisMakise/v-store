@@ -1,6 +1,10 @@
 package store.product.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import store.common.exception.ValidationException;
 import store.product.entity.Question;
 import store.product.pojo.vo.QuestionVO;
@@ -10,10 +14,19 @@ import store.product.pojo.vo.QuestionVO;
  * createTime 2019/2/27
  * description
  */
+
+@FeignClient("store-product-service/questionService")
 public interface IQuestionService {
-    Page<QuestionVO> listQuestionVOS(Long productId, Page<QuestionVO> page, Integer status);
+    @PostMapping("/listQuestionVOS")
+    Page<QuestionVO> listQuestionVOS(@RequestParam("productId") Long productId,
+                                     @RequestBody Page<QuestionVO> page,
+                                     @RequestParam("status") Integer status);
 
-    Integer insertQuestion(Question question, Long userId) throws ValidationException;
+    @PostMapping("/insertQuestion")
+    Integer insertQuestion(@RequestBody Question question,
+                           @RequestParam("userId") Long userId) throws ValidationException;
 
-    Integer likeQuestion(Question question, Long userId) throws ValidationException;
+    @PostMapping("/likeQuestion")
+    Integer likeQuestion(@RequestBody Question question,
+                         @RequestParam("userId") Long userId) throws ValidationException;
 }

@@ -2,15 +2,12 @@ package store.product.service.impl;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import store.common.enums.StatusEnum;
 import store.product.common.enums.CategoryRecommendTypeEnum;
 import store.product.common.enums.CategoryTypeEnum;
-import store.product.common.enums.ProductRecommendTypeEnum;
 import store.product.mapper.CategoryMapper;
 import store.product.mapper.ProductCategoryMapper;
 import store.product.pojo.vo.CategoryVO;
@@ -42,7 +39,7 @@ public class CategoryRecommendServiceImpl implements ICategoryRecommendService {
 
     @Override
     @ApiOperation("分类推荐列表")
-    @GetMapping("/listTop")
+    @PostMapping("/listTop")
     public List<CategoryVO> listTop(int showNumber, int advertNumber) {
 
         //查询置顶分类广告
@@ -65,7 +62,7 @@ public class CategoryRecommendServiceImpl implements ICategoryRecommendService {
 
     @Override
     @ApiOperation("热门商品")
-    @GetMapping("/listHot")
+    @PostMapping("/listHot")
     public List<CategoryVO> listHot(int showNumber, int advertNumber, int type) {
         return null;
     }
