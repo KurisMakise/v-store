@@ -20,7 +20,7 @@ import java.util.Enumeration;
 @RestController
 public class HelloController {
 
-    @Value("${neo.hello}")
+    @Value("${spring.datasource.driver-class-name}")
     private String test;
 
     @RequestMapping("/hello")

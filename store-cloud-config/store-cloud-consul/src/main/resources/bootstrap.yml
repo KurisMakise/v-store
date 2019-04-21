@@ -7,7 +7,7 @@
 spring:
   cloud:
     config:
-      name: neo-config
+      name: v-store-config
       profile: dev
       label: master
       discovery:

@@ -15,7 +15,7 @@ spring:
     password: violet
     virtual-host: /violet
 server:
-  port: 8002
+  port: 8006
 
 
 management:
