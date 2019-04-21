@@ -1,7 +1,11 @@
 package store.online.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import org.springframework.stereotype.Service;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import store.common.base.BasePageDTO;
 import store.common.enums.StatusEnum;
 import store.common.support.page.PageInfo;
@@ -20,7 +24,9 @@ import java.util.List;
  * description
  */
 
-@Service
+@RestController
+@Api(tags = {"广告详情"})
+@RequestMapping("/advertDetailService")
 public class AdvertDetailServiceImpl implements IAdvertDetailService {
     private final AdvertMapper advertMapper;
 
@@ -32,11 +38,15 @@ public class AdvertDetailServiceImpl implements IAdvertDetailService {
     }
 
     @Override
+    @ApiOperation("插入广告")
+    @PostMapping("/insertAdvertDetail")
     public Integer insertAdvertDetail(AdvertDetail advertDetail, String userName) {
         return null;
     }
 
     @Override
+    @ApiOperation("广告列表")
+    @PostMapping("/listByAdvertId")
     public List<AdvertDetail> listByAdvertId(Long advertId) {
         QueryWrapper<Advert> advertQueryWrapper = new QueryWrapper<>();
 
@@ -60,22 +70,30 @@ public class AdvertDetailServiceImpl implements IAdvertDetailService {
     }
 
     @Override
+    @ApiOperation("分页查询")
+    @PostMapping("/listByPage")
     public BasePageDTO<AdvertDetail> listByPage(Long advertId, PageInfo pageInfo, String search) {
         return null;
     }
 
     @Override
+    @ApiOperation("更新状态")
+    @PostMapping("/updateStatus")
     public Integer updateStatus(Long advertDetailId) {
         return null;
     }
 
     @Override
+    @ApiOperation("更新导航")
+    @PostMapping("/updateNavigationBar")
     public Integer updateNavigationBar(AdvertDetail advertDetail, String userName) {
         return null;
     }
 
     @Override
-    public Integer deleteByadvertDetailId(Long advertDetailId) {
+    @ApiOperation("删除广告")
+    @PostMapping("/deleteByAdvertDetailId")
+    public Integer deleteByAdvertDetailId(Long advertDetailId) {
         return null;
     }
 }

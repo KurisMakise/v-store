@@ -1,4 +1,4 @@
-package store.order.config;
+package store.online.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,7 @@ public class SwaggerConfig {
     @Bean
     public Docket platformApi() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("store-order-service")
+                .groupName("store-online-service")
                 .apiInfo(apiInfo())
                 .forCodeGeneration(true);
     }

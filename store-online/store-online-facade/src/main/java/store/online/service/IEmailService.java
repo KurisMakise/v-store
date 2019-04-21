@@ -1,5 +1,8 @@
 package store.online.service;
 
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import store.online.entity.Email;
 
 /**
@@ -7,10 +10,14 @@ import store.online.entity.Email;
  * @createTime 2019/2/27
  * @description
  */
+@FeignClient(name = "STORE-ONLINE-SERVICE/emailService")
 public interface IEmailService {
 
-    Email getEmailBySign(String emailSign);
+    @PostMapping("/getEmailBySign")
+    Email getEmailBySign(@RequestParam("emailSign") String emailSign);
 
-    Integer updateEmailStatus(Long emailId, Integer status);
+    @PostMapping("/updateEmailStatus")
+    Integer updateEmailStatus(@RequestParam("emailId") Long emailId,
+                              @RequestParam("status") Integer status);
 
 }

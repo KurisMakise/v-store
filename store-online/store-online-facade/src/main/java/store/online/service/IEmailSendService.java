@@ -1,5 +1,8 @@
 package store.online.service;
 
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import store.online.pojo.dto.EmailSendResultDTO;
 
 /**
@@ -7,6 +10,7 @@ import store.online.pojo.dto.EmailSendResultDTO;
  * createTime 2019/2/27
  * description 发送验证
  */
+@FeignClient(name = "store-online-service/emailSendService")
 public interface IEmailSendService {
 
     /**
@@ -16,5 +20,8 @@ public interface IEmailSendService {
      * @param type 邮箱类型
      * @return 邮件发送结果
      */
-    EmailSendResultDTO sendEmailWithVelocity(String email, String userName,Integer type);
+    @PostMapping("/sendEmailWithVelocity")
+    EmailSendResultDTO sendEmailWithVelocity(@RequestParam("email") String email,
+                                             @RequestParam("userName") String userName,
+                                             @RequestParam("type") Integer type);
 }

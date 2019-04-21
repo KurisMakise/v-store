@@ -1,7 +1,12 @@
 package store.online.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import store.common.enums.StatusEnum;
 import store.common.support.email.EmailMsg;
 import store.common.support.email.EmailSendManager;
@@ -25,7 +30,9 @@ import java.util.Map;
  * createTime 2019/2/27
  * description
  */
-@Service
+@RestController
+@Api(tags = {"邮件发送服务"})
+@RequestMapping("/emailSendService")
 public class EmailSendServiceImpl implements IEmailSendService {
 
     private final EmailMapper emailMapper;
@@ -35,6 +42,8 @@ public class EmailSendServiceImpl implements IEmailSendService {
     }
 
     @Override
+    @ApiOperation("发送验证码")
+    @PostMapping("/sendEmailWithVelocity")
     public EmailSendResultDTO sendEmailWithVelocity(String email, String userName, Integer type) {
         Date startTime = new Date(); // 发送时间
         Date endTime = DateUtils.getOffsiteDate(startTime, Calendar.MINUTE, EmailUtils.getCaptchaTime());// 验证时间向后偏移3分钟
