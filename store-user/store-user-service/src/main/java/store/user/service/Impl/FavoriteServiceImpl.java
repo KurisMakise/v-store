@@ -3,7 +3,12 @@ package store.user.service.Impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import store.common.base.BasePageDTO;
 import store.common.constant.CommonReturnCode;
 import store.common.exception.ValidationException;
@@ -23,7 +28,9 @@ import java.util.Date;
  * description
  * version 1.0
  */
-@Service
+@RestController
+@Api(tags = {"收藏商品"})
+@RequestMapping("/favoriteService")
 public class FavoriteServiceImpl implements IFavoriteService {
 
     private final FavoriteMapper favoriteMapper;
@@ -37,6 +44,8 @@ public class FavoriteServiceImpl implements IFavoriteService {
     }
 
     @Override
+    @ApiOperation("收藏分页列表")
+    @PostMapping("/listByUserId")
     public BasePageDTO<Favorite> listByUserId(Long userId, PageInfo pageInfo) {
         QueryWrapper<Favorite> favoriteQueryWrapper = new QueryWrapper<>();
         favoriteQueryWrapper.eq("user_id", userId);
@@ -49,12 +58,16 @@ public class FavoriteServiceImpl implements IFavoriteService {
     }
 
     @Override
+    @ApiOperation("删除收藏")
+    @PostMapping("/deleteByProductNumber")
     public Integer deleteByProductNumber(Long productNumber, Long userId) {
 
         return null;
     }
 
     @Override
+    @ApiOperation("商品是否存在")
+    @PostMapping("/exists")
     public boolean exists(Long productNumber, Long userId) {
         if (userId == null)
             return false;
@@ -65,6 +78,8 @@ public class FavoriteServiceImpl implements IFavoriteService {
     }
 
     @Override
+    @ApiOperation("添加收藏")
+    @PostMapping("/insert")
     public Integer insert(ProductVO productVO, Long userId) throws ValidationException {
         if (userId == null) {
             throw new ValidationException(CommonReturnCode.UNAUTHORIZED);
@@ -95,6 +110,8 @@ public class FavoriteServiceImpl implements IFavoriteService {
     }
 
     @Override
+    @ApiOperation("删除收藏")
+    @PostMapping("/delete")
     public Integer delete(Long productNumber, Long userId) throws ValidationException {
         if (productNumber == null) {
             throw new ValidationException(CommonReturnCode.BAD_PARAM);

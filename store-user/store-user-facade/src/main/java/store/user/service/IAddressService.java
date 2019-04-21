@@ -1,5 +1,9 @@
 package store.user.service;
 
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import store.common.base.BasePageDTO;
 import store.common.support.page.PageInfo;
 import store.user.entity.Address;
@@ -12,17 +16,29 @@ import java.util.List;
  * description
  * version 1.0
  */
+@FeignClient("store-user-service/addressService")
 public interface IAddressService {
 
-    int insertAddress(Address address, Long userId);
+    @PostMapping("/insertAddress")
+    int insertAddress(@RequestBody Address address,
+                      @RequestParam("userId") Long userId);
 
-    int updateAddress(Address address, Long userId);
+    @PostMapping("/updateAddress")
+    int updateAddress(@RequestBody Address address,
+                      @RequestParam("userId") Long userId);
 
-    int deleteByAddressId(Long addressId, Long userId);
+    @PostMapping("/deleteByAddressId")
+    int deleteByAddressId(@RequestParam("addressId") Long addressId,
+                          @RequestParam("userId") Long userId);
 
-    BasePageDTO<Address> listByUserId(Long userId, PageInfo pageInfo);
+    @PostMapping("/listByUserId")
+    BasePageDTO<Address> listByUserId(@RequestParam("userId") Long userId,
+                                      @RequestBody PageInfo pageInfo);
 
-    List<Address> listAddress(Long userId);
+    @PostMapping("/listAddress")
+    List<Address> listAddress(@RequestParam("userId") Long userId);
 
-    Address getAddress(Long addressId, Long userId);
+    @PostMapping("/getAddress")
+    Address getAddress(@RequestParam("addressId") Long addressId,
+                       @RequestParam("userId") Long userId);
 }

@@ -1,5 +1,9 @@
 package store.user.service;
 
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import store.common.base.BasePageDTO;
 import store.common.exception.ValidationException;
 import store.common.support.page.PageInfo;
@@ -12,15 +16,26 @@ import store.user.entity.Favorite;
  * description
  * version 1.0
  */
+@FeignClient(name = "STORE-USER-SERVICE/favoriteService")
 public interface IFavoriteService {
 
-    BasePageDTO<Favorite> listByUserId(Long userId, PageInfo pageInfo);
+    @PostMapping("/listByUserId")
+    BasePageDTO<Favorite> listByUserId(@RequestParam("userId") Long userId,
+                                       @RequestBody PageInfo pageInfo);
 
-    Integer deleteByProductNumber(Long productNumber, Long userId);
+    @PostMapping("/deleteByProductNumber")
+    Integer deleteByProductNumber(@RequestParam("productNumber") Long productNumber,
+                                  @RequestParam("userId") Long userId);
 
-    boolean exists(Long productNumber, Long userId);
+    @PostMapping("/exists")
+    boolean exists(@RequestParam("productNumber") Long productNumber,
+                   @RequestParam("userId") Long userId);
 
-    Integer insert(ProductVO productVO, Long userId) throws ValidationException;
+    @PostMapping("/insert")
+    Integer insert(@RequestBody ProductVO productVO,
+                   @RequestParam("userId") Long userId) throws ValidationException;
 
-    Integer delete(Long productNumber, Long userId) throws ValidationException;
+    @PostMapping("/delete")
+    Integer delete(@RequestParam("productNumber") Long productNumber,
+                   @RequestParam("userId") Long userId) throws ValidationException;
 }

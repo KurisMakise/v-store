@@ -2,8 +2,11 @@ package store.user.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import store.common.constant.CommonReturnCode;
 import store.common.enums.StatusEnum;
 import store.common.exception.ValidationException;
@@ -24,7 +27,9 @@ import java.util.Date;
  * description 用户管理服务
  * version 1.0
  */
-@Service
+@RestController
+@Api("用户服务")
+@RequestMapping("/userService")
 public class UserServiceImpl implements IUserService {
 
     private final UserMapper userMapper;
@@ -38,6 +43,8 @@ public class UserServiceImpl implements IUserService {
 
 
     @Override
+    @ApiOperation("完善个人信息")
+    @PostMapping("/perfectUser")
     public Integer perfectUser(String email, String realName, String telephone) throws ValidationException {
         User userByLoginName = userMapper.getByLoginName(email);
         if (telephone.equals(userByLoginName.getTelephone())) {
@@ -53,11 +60,15 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @ApiOperation("获取用户信息")
+    @PostMapping("/getByLoginName")
     public User getByLoginName(String loginName) {
         return userMapper.getByLoginName(loginName);
     }
 
     @Override
+    @ApiOperation("获取用户信息")
+    @PostMapping("/getUserVOById")
     public UserVO getUserVOById(Long userId) {
         UserVO userVO = userMapper.getUserVOById(userId);
         userVO.setEmail(UserUtils.encryptEmail(userVO.getEmail()));
@@ -66,12 +77,16 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @ApiOperation("更新密码")
+    @PostMapping("/updatePasswordByEmail")
     public Integer updatePasswordByEmail(String password, String email) {
 
         return null;
     }
 
     @Override
+    @ApiOperation("激活邮箱")
+    @PostMapping("/activeEmail")
     public Integer activeEmail(String email) {
         User user = new User();
         user.setEmailIsActive(StatusEnum.ACTIVATED.getStatus());
@@ -84,11 +99,15 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @ApiOperation("获取用户信息")
+    @PostMapping("/getUserByLoginName")
     public User getUserByLoginName(String loginName) {
         return userMapper.getByLoginName(loginName);
     }
 
     @Override
+    @ApiOperation("更新用户信息")
+    @PostMapping("/updateLogById")
     public Integer updateLogById(UserLoginLog userLoginLog) {
         User user = new User();
         user.setUserId(userLoginLog.getUserId());
@@ -99,6 +118,8 @@ public class UserServiceImpl implements IUserService {
     }
 
     @Override
+    @ApiOperation("新增用户")
+    @PostMapping("/insertUser")
     public Integer insertUser(User user) throws ValidationException {
         //验证邮箱是否存在或使用
         QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();

@@ -1,5 +1,10 @@
 package store.user.service;
 
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import store.common.exception.ValidationException;
 import store.user.entity.User;
 import store.user.entity.UserLoginLog;
@@ -11,21 +16,33 @@ import store.user.pojo.vo.UserVO;
  * description
  * version 1.0
  */
+@FeignClient(name = "STORE-USER-SERVICE/userService")
 public interface IUserService {
 
-    Integer perfectUser(String email, String realName, String telephone) throws ValidationException;
+    @PostMapping("/perfectUser")
+    Integer perfectUser(@RequestParam("email") String email,
+                        @RequestParam("realName") String realName,
+                        @RequestParam("telephone") String telephone) throws ValidationException;
 
-    User getByLoginName(String loginName);
+    @PostMapping("/getByLoginName")
+    User getByLoginName(@RequestParam("loginName") String loginName);
 
-    UserVO getUserVOById(Long userId);
+    @PostMapping("/getUserVOById")
+    UserVO getUserVOById(@RequestParam("userId") Long userId);
 
-    Integer updatePasswordByEmail(String password, String email);
+    @PostMapping("/updatePasswordByEmail")
+    Integer updatePasswordByEmail(@RequestParam("password") String password,
+                                  @RequestParam("email") String email);
 
-    Integer activeEmail(String email);
+    @PostMapping("/activeEmail")
+    Integer activeEmail(@RequestParam("email") String email);
 
-    User getUserByLoginName(String loginName);
+    @PostMapping("/getUserByLoginName")
+    User getUserByLoginName(@RequestParam("loginName") String loginName);
 
-    Integer updateLogById(UserLoginLog userLoginLog);
+    @PostMapping("/updateLogById")
+    Integer updateLogById(@RequestBody UserLoginLog userLoginLog);
 
-    Integer insertUser(User user);
+    @PostMapping("/insertUser")
+    Integer insertUser(@RequestBody User user);
 }
